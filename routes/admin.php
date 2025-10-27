@@ -7,12 +7,11 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\KontakController;
 
 // Admin Authentication Routes (tidak perlu middleware)
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Login routes
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-});
+// Login routes
+Route::get('/admin', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/admin', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 // Admin Protected Routes (perlu middleware admin)
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
