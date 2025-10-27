@@ -29,10 +29,13 @@ class AdminSeeder extends Seeder
                 'role' => 'admin',
                 'is_active' => true,
             ],
+            [
+                'name' => 'Fillah',
+                'email' => 'fillah@msa.com',
+                'password' => Hash::make('admin123'),
+                'role' => 'admin',
+                'is_active' => true,
+            ]
         ];
-
-        foreach ($admins as $admin) {
-            Admin::create($admin);
-        }
     }
 }
