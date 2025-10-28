@@ -436,10 +436,15 @@
         display: none;
     }
 
-    /* Loading state */
-    .loading {
-        opacity: 0.6;
-        pointer-events: none;
+    /* Text wrapping untuk semua deskripsi */
+    .card-text,
+    .program-description,
+    .system-description,
+    .facility-description {
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
     }
 </style>
 @endsection

@@ -388,6 +388,14 @@
         color: var(--gray-600);
     }
 
+    /* Text wrapping untuk deskripsi */
+    .card-text {
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
     /* Empty State */
     .empty-state {
         text-align: center;
