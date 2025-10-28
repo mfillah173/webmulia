@@ -19,13 +19,11 @@ class Berita extends Model
         'tanggal',
         'status',
         'kategori',
-        'meta_description',
-        'meta_keywords'
+        'urutan'
     ];
 
     protected $casts = [
-        'tanggal' => 'date',
-        'meta_keywords' => 'array'
+        'tanggal' => 'date'
     ];
 
     // Scope untuk berita yang aktif
@@ -50,7 +48,7 @@ class Berita extends Model
     public function getImageUrlAttribute()
     {
         if ($this->gambar) {
-            return asset('images/berita/' . $this->gambar);
+            return asset('storage/images/berita/' . $this->gambar);
         }
         return null;
     }

@@ -6,30 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Panel') - Mulia Special Academy</title>
     <meta name="description" content="Admin Panel Mulia Special Academy">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* Design System Variables */
         :root {
-            --primary-orange: #ff8c00;
-            --secondary-orange: #ff6b35;
-            --light-orange: #ffb366;
-            --dark-orange: #e67300;
-            --orange-gradient: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #06b6d4;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            --border-radius: 0.5rem;
+            --border-radius-lg: 0.75rem;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --sidebar-width: 280px;
+            --sidebar-collapsed-width: 80px;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--gray-50);
+            color: var(--gray-800);
             line-height: 1.6;
-            color: #2c3e50;
+            margin: 0;
+            padding: 0;
         }
 
         /* Sidebar */
@@ -37,403 +69,431 @@
             position: fixed;
             top: 0;
             left: 0;
+            width: var(--sidebar-width);
             height: 100vh;
-            width: 250px;
-            background: var(--orange-gradient);
-            background-size: 200% 200%;
-            animation: gradientShift 8s ease infinite;
+            background: white;
+            border-right: 1px solid var(--gray-200);
             transition: all 0.3s ease;
             z-index: 1000;
             overflow-y: auto;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Desktop collapsed sidebar */
         .sidebar.collapsed {
-            width: 70px;
+            width: var(--sidebar-collapsed-width);
         }
 
-        .sidebar.collapsed .nav-text {
+        .sidebar.collapsed .nav-text,
+        .sidebar.collapsed .sidebar-brand-text {
             opacity: 0;
             width: 0;
             overflow: hidden;
         }
 
-        .sidebar.collapsed .sidebar-brand .nav-text {
-            opacity: 0;
-            width: 0;
-            overflow: hidden;
+        .sidebar.collapsed .sidebar-brand {
+            justify-content: center;
         }
 
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+        .sidebar.collapsed .nav-item {
+            display: flex;
+            justify-content: center;
         }
 
+        /* Sidebar Header */
         .sidebar-header {
-            padding: 1.5rem 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            padding: var(--spacing-xl);
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-50);
         }
 
         .sidebar-brand {
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .sidebar-brand i {
-            color: white;
-            margin-right: 0.5rem;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-        }
-
-        .sidebar-nav {
-            padding: 1rem 0;
-        }
-
-        .nav-item {
-            margin-bottom: 0.25rem;
-        }
-
-        .nav-link {
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-weight: 500;
-            padding: 1rem 1.25rem !important;
-            margin: 0 0.25rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
             display: flex;
             align-items: center;
             text-decoration: none;
+            color: var(--gray-800);
+            font-weight: 700;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
         }
 
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+        .sidebar-brand:hover {
+            color: var(--primary-color);
+            text-decoration: none;
         }
 
-        .nav-link:hover::before {
-            left: 100%;
+        .sidebar-brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: var(--spacing-md);
+            font-size: 1.125rem;
+        }
+
+        .sidebar-brand-text {
+            transition: all 0.3s ease;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .nav-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .nav-section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0 var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar.collapsed .nav-section-title {
+            opacity: 0;
+            height: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-xl);
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-radius: 0;
+            position: relative;
         }
 
         .nav-link:hover {
-            color: white !important;
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.05);
+            text-decoration: none;
         }
 
         .nav-link.active {
-            color: white !important;
-            background: rgba(255, 255, 255, 0.2);
-            font-weight: 600;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+            font-weight: 500;
+        }
+
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary-color);
         }
 
         .nav-link i {
             width: 20px;
-            margin-right: 0.75rem;
+            margin-right: var(--spacing-md);
             text-align: center;
-            transition: transform 0.3s ease;
-            font-size: 1.2rem;
-        }
-
-        .nav-link:hover i {
-            transform: scale(1.1);
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         .nav-text {
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         /* Main Content */
         .main-content {
-            margin-left: 250px;
+            margin-left: var(--sidebar-width);
             transition: margin-left 0.3s ease;
             min-height: 100vh;
         }
 
         .main-content.expanded {
-            margin-left: 70px;
+            margin-left: var(--sidebar-collapsed-width);
         }
 
         /* Top Bar */
         .topbar {
             background: white;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--gray-200);
+            padding: var(--spacing-lg) var(--spacing-xl);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
         }
 
         .topbar-left {
             display: flex;
             align-items: center;
+            gap: var(--spacing-lg);
         }
 
         .sidebar-toggle {
             background: none;
             border: none;
-            font-size: 1.2rem;
-            color: #2c3e50;
-            margin-right: 1rem;
+            color: var(--gray-600);
+            font-size: 1.25rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: all 0.2s ease;
         }
 
         .sidebar-toggle:hover {
-            color: var(--primary-orange);
-            transform: scale(1.1);
+            color: var(--primary-color);
+            background: var(--gray-100);
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin: 0;
         }
 
         .topbar-right {
             display: flex;
             align-items: center;
-            margin-left: auto;
+            gap: var(--spacing-lg);
         }
 
-        .admin-info {
+        /* User Menu */
+        .user-menu {
             display: flex;
             align-items: center;
-            margin-right: 1rem;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: all 0.2s ease;
+            cursor: pointer;
         }
 
-        .admin-avatar {
-            width: 35px;
-            height: 35px;
-            background: var(--orange-gradient);
+        .user-menu:hover {
+            background: var(--gray-100);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 600;
-            margin-right: 0.5rem;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
-            transition: all 0.3s ease;
+            font-size: 0.875rem;
         }
 
-        .admin-avatar:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-800);
+            margin: 0;
+        }
+
+        .user-role {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin: 0;
         }
 
         /* Content Area */
         .content {
-            padding: 2rem;
+            padding: var(--spacing-xl);
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         /* Cards */
         .card {
-            border: none;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.2);
+            box-shadow: var(--shadow-md);
         }
 
         .card-header {
             background: white;
-            border-bottom: 1px solid #e9ecef;
-            font-weight: 600;
+            border-bottom: 1px solid var(--gray-200);
+            padding: var(--spacing-lg) var(--spacing-xl);
+        }
+
+        .card-body {
+            padding: var(--spacing-xl);
+        }
+
+        .card-footer {
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+            padding: var(--spacing-lg) var(--spacing-xl);
         }
 
         /* Buttons */
-        .btn-primary {
-            background: var(--orange-gradient);
+        .btn {
+            font-weight: 500;
+            border-radius: var(--border-radius);
+            transition: all 0.2s ease;
             border: none;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
-            transition: all 0.3s ease;
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c00 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .btn-outline-primary {
-            color: var(--primary-orange);
-            border-color: var(--primary-orange);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            background: white;
         }
 
         .btn-outline-primary:hover {
-            background-color: var(--primary-orange);
-            border-color: var(--primary-orange);
-        }
-
-        /* Stats Cards */
-        .stats-card {
-            background: var(--orange-gradient);
+            background: var(--primary-color);
             color: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
-            transition: all 0.3s ease;
         }
 
-        .stats-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+        .btn-sm {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: 0.875rem;
         }
 
-        .stats-card .stats-icon {
-            font-size: 2.5rem;
-            opacity: 0.8;
-        }
-
-        .stats-card .stats-number {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 0.5rem 0;
-        }
-
-        .stats-card .stats-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        /* Tables */
-        .table {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .table thead th {
-            background: #f8f9fa;
-            border: none;
-            font-weight: 600;
-            color: #2c3e50;
+        .btn-lg {
+            padding: var(--spacing-md) var(--spacing-xl);
+            font-size: 1.125rem;
         }
 
         /* Alerts */
         .alert {
             border: none;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md) var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
         }
 
-        /* Desktop - sidebar can be collapsed */
-        @media (min-width: 769px) {
-            .sidebar {
-                transform: translateX(0) !important;
-                width: 250px !important;
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            border-left: 4px solid var(--success-color);
+        }
+
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .alert-info {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--info-color);
+            border-left: 4px solid var(--info-color);
+        }
+
+        /* Loading States */
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
             }
 
-            .sidebar.collapsed {
-                width: 70px !important;
-            }
-
-            .main-content {
-                margin-left: 250px !important;
-            }
-
-            .main-content.expanded {
-                margin-left: 70px !important;
-            }
-
-            .sidebar-overlay {
-                display: none !important;
+            100% {
+                transform: rotate(360deg);
             }
         }
 
-        /* Mobile - sidebar hidden by default */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .sidebar {
-                transform: translateX(-100%) !important;
-                width: 250px !important;
-                transition: transform 0.3s ease !important;
-                z-index: 1001;
+                transform: translateX(-100%);
+                width: var(--sidebar-width);
             }
 
             .sidebar.show {
-                transform: translateX(0) !important;
-            }
-
-            .sidebar.collapsed {
-                width: 250px !important;
+                transform: translateX(0);
             }
 
             .main-content {
-                margin-left: 0 !important;
-                width: 100% !important;
+                margin-left: 0;
             }
 
             .main-content.expanded {
-                margin-left: 0 !important;
+                margin-left: 0;
             }
 
             .content {
-                padding: 1rem;
+                padding: var(--spacing-lg);
             }
 
             .topbar {
-                padding: 0.75rem 1rem;
+                padding: var(--spacing-md) var(--spacing-lg);
             }
 
-            .topbar h4 {
-                font-size: 1.1rem;
-            }
-
-            .stats-card {
-                margin-bottom: 0.75rem;
-            }
-
-            .stats-card .stats-number {
-                font-size: 1.5rem;
-            }
-
-            .stats-card .stats-icon {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .content {
-                padding: 0.75rem;
-            }
-
-            .stats-card {
-                padding: 1rem;
-            }
-
-            .stats-card .stats-number {
+            .page-title {
                 font-size: 1.25rem;
             }
 
-            .stats-card .stats-icon {
-                font-size: 1.75rem;
-            }
-
-            .card-body {
-                padding: 1rem;
+            .user-info {
+                display: none;
             }
         }
 
@@ -453,34 +513,62 @@
             display: block;
         }
 
-        /* Loading Animation */
-        .btn-loading {
-            position: relative;
-            pointer-events: none;
+        /* Scrollbar Styling */
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
         }
 
-        .btn-loading::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            top: 50%;
-            left: 50%;
-            margin-left: -8px;
-            margin-top: -8px;
-            border: 2px solid transparent;
-            border-top-color: #ffffff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 2px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
+        }
+
+        /* Focus States */
+        .btn:focus,
+        .form-control:focus,
+        .form-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
             }
 
-            100% {
-                transform: rotate(360deg);
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
             }
         }
     </style>
@@ -493,51 +581,123 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
-                <i class="fas fa-hands-helping"></i>
-                <span class="nav-text">Mulia Special Akademik</span>
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <span class="sidebar-brand-text">Mulia Special Academy</span>
             </a>
         </div>
 
         <nav class="sidebar-nav">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <span class="nav-text">Dashboard</span>
-                    </a>
-                </li>
+            <!-- Main Navigation -->
+            <div class="nav-section">
+                <div class="nav-section-title">Main</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-                <li class="nav-item">
-                    <a href="{{ route('admin.berita.index') }}" class="nav-link {{ request()->routeIs('admin.berita*') ? 'active' : '' }}">
-                        <i class="fas fa-newspaper"></i>
-                        <span class="nav-text">Berita</span>
-                    </a>
-                </li>
+            <!-- Content Management -->
+            <div class="nav-section">
+                <div class="nav-section-title">Content</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.berita.index') }}" class="nav-link {{ request()->routeIs('admin.berita*') ? 'active' : '' }}">
+                            <i class="fas fa-newspaper"></i>
+                            <span class="nav-text">Berita</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.program.index') }}" class="nav-link {{ request()->routeIs('admin.program*') ? 'active' : '' }}">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="nav-text">Program</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.sistem.index') }}" class="nav-link {{ request()->routeIs('admin.sistem*') ? 'active' : '' }}">
+                            <i class="fas fa-cogs"></i>
+                            <span class="nav-text">Sistem</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.fasilitas.index') }}" class="nav-link {{ request()->routeIs('admin.fasilitas*') ? 'active' : '' }}">
+                            <i class="fas fa-building"></i>
+                            <span class="nav-text">Fasilitas</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-                <li class="nav-item">
-                    <a href="{{ route('admin.kontak.index') }}" class="nav-link {{ request()->routeIs('admin.kontak*') ? 'active' : '' }}">
-                        <i class="fas fa-envelope"></i>
-                        <span class="nav-text">Kontak</span>
-                    </a>
-                </li>
+            <!-- Media & Gallery -->
+            <div class="nav-section">
+                <div class="nav-section-title">Media</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.galeri-program.index') }}" class="nav-link {{ request()->routeIs('admin.galeri-program*') ? 'active' : '' }}">
+                            <i class="fas fa-images"></i>
+                            <span class="nav-text">Galeri Program</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.galeri-sistem.index') }}" class="nav-link {{ request()->routeIs('admin.galeri-sistem*') ? 'active' : '' }}">
+                            <i class="fas fa-photo-video"></i>
+                            <span class="nav-text">Galeri Sistem</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.galeri-fasilitas.index') }}" class="nav-link {{ request()->routeIs('admin.galeri-fasilitas*') ? 'active' : '' }}">
+                            <i class="fas fa-camera"></i>
+                            <span class="nav-text">Galeri Fasilitas</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-                <li class="nav-item">
-                    <a href="{{ route('home') }}" class="nav-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i>
-                        <span class="nav-text">Lihat Website</span>
-                    </a>
-                </li>
+            <!-- Settings -->
+            <div class="nav-section">
+                <div class="nav-section-title">Settings</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.syarat-pendaftaran.index') }}" class="nav-link {{ request()->routeIs('admin.syarat-pendaftaran*') ? 'active' : '' }}">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="nav-text">Syarat Pendaftaran</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.kontak.index') }}" class="nav-link {{ request()->routeIs('admin.kontak*') ? 'active' : '' }}">
+                            <i class="fas fa-envelope"></i>
+                            <span class="nav-text">Kontak</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-                <li class="nav-item mt-3">
-                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                        @csrf
-                        <button type="submit" class="nav-link w-100 text-start" style="background: none; border: none;">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span class="nav-text">Logout</span>
-                        </button>
-                    </form>
-                </li>
-            </ul>
+            <!-- External Links -->
+            <div class="nav-section">
+                <div class="nav-section-title">External</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="nav-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span class="nav-text">Lihat Website</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline w-100">
+                            @csrf
+                            <button type="submit" class="nav-link w-100 text-start" style="background: none; border: none;">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span class="nav-text">Logout</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </div>
 
@@ -552,17 +712,17 @@
                 <button class="sidebar-toggle" id="sidebarToggle">
                     <i class="fas fa-bars"></i>
                 </button>
-                <h4 class="mb-0">@yield('page-title', 'Dashboard')</h4>
+                <h1 class="page-title">@yield('page-title', 'Dashboard')</h1>
             </div>
 
             <div class="topbar-right">
-                <div class="admin-info">
-                    <div class="admin-avatar">
+                <div class="user-menu">
+                    <div class="user-avatar">
                         {{ substr(auth('admin')->user()->name, 0, 1) }}
                     </div>
-                    <div>
-                        <div class="fw-semibold">{{ auth('admin')->user()->name }}</div>
-                        <small class="text-muted">{{ auth('admin')->user()->role }}</small>
+                    <div class="user-info">
+                        <p class="user-name">{{ auth('admin')->user()->name }}</p>
+                        <p class="user-role">{{ auth('admin')->user()->role }}</p>
                     </div>
                 </div>
             </div>
@@ -676,6 +836,9 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             initializeSidebar();
+
+            // Add fade-in animation to content
+            document.querySelector('.content').classList.add('fade-in');
         });
 
         // Auto-hide alerts
@@ -697,6 +860,12 @@
                 }
             });
         });
+
+        // CSRF Token Setup
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        if (token) {
+            window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+        }
     </script>
 
     @yield('scripts')

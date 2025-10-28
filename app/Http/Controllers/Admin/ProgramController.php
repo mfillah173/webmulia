@@ -3,51 +3,40 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Berita;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
-class BeritaController extends Controller
+class ProgramController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $berita = Berita::orderBy('urutan', 'asc')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-
-        return view('admin.berita.index', compact('berita'));
+        $programs = Program::orderBy('urutan', 'asc')->paginate(10);
+        return view('admin.program.index', compact('programs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('admin.berita.create');
+        return view('admin.program.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
-            'konten' => 'required|string',
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'tujuan' => 'required|string',
+            'metode' => 'required|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'tanggal' => 'required|date',
-            'kategori' => 'required|string|max:100',
             'status' => 'required|in:active,inactive'
         ]);
 
         $data = $request->all();
-        $data['slug'] = Str::slug($request->judul);
+        $data['slug'] = Str::slug($request->nama);
 
         // Auto generate urutan (berdasarkan jumlah data + 1)
-        $data['urutan'] = Berita::count() + 1;
+        $data['urutan'] = Program::count() + 1;
 
         // Handle gambar upload dengan cara yang lebih robust
         if ($request->hasFile('gambar')) {
@@ -56,7 +45,7 @@ class BeritaController extends Controller
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
 
                 // Pastikan directory ada
-                $directory = storage_path('app/public/images/berita');
+                $directory = storage_path('app/public/images/program');
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
                 }
@@ -76,43 +65,34 @@ class BeritaController extends Controller
             }
         }
 
-        $berita = Berita::create($data);
+        $program = Program::create($data);
 
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan.');
+        return redirect()->route('admin.program.index')->with('success', 'Program berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Berita $berita)
+    public function show(Program $program)
     {
-        return view('admin.berita.show', compact('berita'));
+        return view('admin.program.show', compact('program'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Berita $berita)
+    public function edit(Program $program)
     {
-        return view('admin.berita.edit', compact('berita'));
+        return view('admin.program.edit', compact('program'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Berita $berita)
+    public function update(Request $request, Program $program)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
-            'konten' => 'required|string',
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'tujuan' => 'required|string',
+            'metode' => 'required|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'tanggal' => 'required|date',
-            'kategori' => 'required|string|max:100',
             'status' => 'required|in:active,inactive'
         ]);
 
         $data = $request->all();
-        $data['slug'] = Str::slug($request->judul);
+        $data['slug'] = Str::slug($request->nama);
 
         // Urutan tidak diubah saat update (tetap menggunakan urutan yang sudah ada)
 
@@ -120,8 +100,8 @@ class BeritaController extends Controller
         if ($request->hasFile('gambar')) {
             try {
                 // Delete old gambar
-                if ($berita->gambar) {
-                    $oldPath = storage_path('app/public/images/berita/' . $berita->gambar);
+                if ($program->gambar) {
+                    $oldPath = storage_path('app/public/images/program/' . $program->gambar);
                     if (file_exists($oldPath)) {
                         unlink($oldPath);
                     }
@@ -131,7 +111,7 @@ class BeritaController extends Controller
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
 
                 // Pastikan directory ada
-                $directory = storage_path('app/public/images/berita');
+                $directory = storage_path('app/public/images/program');
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
                 }
@@ -151,39 +131,32 @@ class BeritaController extends Controller
             }
         }
 
-        $berita->update($data);
+        $program->update($data);
 
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui.');
+        return redirect()->route('admin.program.index')->with('success', 'Program berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Berita $berita)
+    public function destroy(Program $program)
     {
-        // Delete gambar jika ada
-        if ($berita->gambar) {
-            $imagePath = storage_path('app/public/images/berita/' . $berita->gambar);
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
+        // Delete gambar
+        if ($program->gambar) {
+            $oldPath = storage_path('app/public/images/program/' . $program->gambar);
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
             }
         }
 
-        $berita->delete();
+        $program->delete();
 
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus.');
+        return redirect()->route('admin.program.index')->with('success', 'Program berhasil dihapus.');
     }
 
-    /**
-     * Toggle status berita
-     */
-    public function toggleStatus(Berita $berita)
+    public function toggleStatus(Program $program)
     {
-        $berita->update([
-            'status' => $berita->status === 'active' ? 'inactive' : 'active'
+        $program->update([
+            'status' => $program->status === 'active' ? 'inactive' : 'active'
         ]);
 
-        $status = $berita->status === 'active' ? 'diaktifkan' : 'dinonaktifkan';
-        return redirect()->back()->with('success', "Berita berhasil {$status}.");
+        return redirect()->back()->with('success', 'Status program berhasil diubah.');
     }
 }

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Berita;
 use App\Models\Kontak;
 use App\Models\Admin;
+use App\Models\Program;
+use App\Models\Sistem;
+use App\Models\Fasilitas;
+use App\Models\GaleriProgram;
+use App\Models\GaleriSistem;
+use App\Models\GaleriFasilitas;
+use App\Models\SyaratPendaftaran;
 
 class DashboardController extends Controller
 {
@@ -14,32 +21,55 @@ class DashboardController extends Controller
     {
         // Statistik untuk dashboard
         $stats = [
+            // Berita
             'total_berita' => Berita::count(),
             'berita_aktif' => Berita::where('status', 'active')->count(),
-            'berita_draft' => Berita::where('status', 'draft')->count(),
+            'berita_draft' => Berita::where('status', 'inactive')->count(),
+
+            // Program
+            'total_program' => Program::count(),
+            'program_aktif' => Program::where('status', 'active')->count(),
+
+            // Sistem
+            'total_sistem' => Sistem::count(),
+            'sistem_aktif' => Sistem::where('status', 'active')->count(),
+
+            // Fasilitas
+            'total_fasilitas' => Fasilitas::count(),
+            'fasilitas_aktif' => Fasilitas::where('status', 'active')->count(),
+
+            // Galeri
+            'total_galeri_program' => GaleriProgram::count(),
+            'galeri_program_aktif' => GaleriProgram::where('status', 'active')->count(),
+
+            'total_galeri_sistem' => GaleriSistem::count(),
+            'galeri_sistem_aktif' => GaleriSistem::where('status', 'active')->count(),
+
+            'total_galeri_fasilitas' => GaleriFasilitas::count(),
+            'galeri_fasilitas_aktif' => GaleriFasilitas::where('status', 'active')->count(),
+
+            // Syarat Pendaftaran
+            'total_syarat' => SyaratPendaftaran::count(),
+            'syarat_aktif' => SyaratPendaftaran::where('status', 'active')->count(),
+
+            // Kontak
             'total_kontak' => Kontak::count(),
             'kontak_unread' => Kontak::where('status', 'unread')->count(),
             'kontak_replied' => Kontak::where('status', 'replied')->count(),
+
+            // Admin
             'total_admin' => Admin::count(),
             'admin_aktif' => Admin::where('is_active', true)->count(),
         ];
 
-        // Berita terbaru
-        $berita_terbaru = Berita::orderBy('created_at', 'desc')->limit(5)->get();
-
-        // Kontak terbaru
-        $kontak_terbaru = Kontak::orderBy('created_at', 'desc')->limit(5)->get();
-
-        // Statistik bulanan
-        $berita_bulanan = Berita::whereMonth('created_at', now()->month)->count();
-        $kontak_bulanan = Kontak::whereMonth('created_at', now()->month)->count();
+        // Data terbaru
+        $recentBerita = Berita::orderBy('created_at', 'desc')->limit(5)->get();
+        $recentKontak = Kontak::orderBy('created_at', 'desc')->limit(5)->get();
 
         return view('admin.dashboard', compact(
             'stats',
-            'berita_terbaru',
-            'kontak_terbaru',
-            'berita_bulanan',
-            'kontak_bulanan'
+            'recentBerita',
+            'recentKontak'
         ));
     }
 }

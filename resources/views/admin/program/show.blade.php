@@ -1,0 +1,142 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Detail Program')
+@section('page-title', 'Detail Program')
+
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="mb-0">Detail Program</h4>
+        <p class="text-muted mb-0">{{ $program->nama }}</p>
+    </div>
+    <div>
+        <a href="{{ route('admin.program.edit', $program) }}" class="btn btn-warning">
+            <i class="fas fa-edit me-2"></i>Edit
+        </a>
+        <a href="{{ route('admin.program.index') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Kembali
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Informasi Program</h5>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Nama Program:</label>
+                    <p class="mb-0">{{ $program->nama }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Slug:</label>
+                    <p class="mb-0"><code>{{ $program->slug }}</code></p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Deskripsi:</label>
+                    <p class="mb-0">{{ $program->deskripsi }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Tujuan Program:</label>
+                    <p class="mb-0">{{ $program->tujuan }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Metode Pembelajaran:</label>
+                    <p class="mb-0">{{ $program->metode }}</p>
+                </div>
+
+                @if($program->meta_description)
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Meta Description:</label>
+                    <p class="mb-0">{{ $program->meta_description }}</p>
+                </div>
+                @endif
+
+                @if($program->meta_keywords && count($program->meta_keywords) > 0)
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Meta Keywords:</label>
+                    <div class="mb-0">
+                        @foreach($program->meta_keywords as $keyword)
+                        <span class="badge bg-secondary me-1">{{ $keyword }}</span>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Detail</h5>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Status:</label>
+                    <div>
+                        <span class="badge {{ $program->status === 'active' ? 'bg-success' : 'bg-secondary' }}">
+                            {{ $program->status === 'active' ? 'Aktif' : 'Nonaktif' }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Urutan:</label>
+                    <p class="mb-0">{{ $program->urutan }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Tanggal Dibuat:</label>
+                    <p class="mb-0">{{ $program->created_at->format('d F Y, H:i') }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Terakhir Diupdate:</label>
+                    <p class="mb-0">{{ $program->updated_at->format('d F Y, H:i') }}</p>
+                </div>
+
+                @if($program->gambar)
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Gambar:</label>
+                    <div>
+                        <img src="{{ asset('storage/images/program/' . $program->gambar) }}"
+                            alt="{{ $program->nama }}"
+                            class="img-fluid rounded">
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Aksi</h5>
+
+                <div class="d-grid gap-2">
+                    <form action="{{ route('admin.program.toggle-status', $program) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn {{ $program->status === 'active' ? 'btn-warning' : 'btn-success' }} w-100">
+                            <i class="fas fa-toggle-{{ $program->status === 'active' ? 'off' : 'on' }} me-2"></i>
+                            {{ $program->status === 'active' ? 'Nonaktifkan' : 'Aktifkan' }}
+                        </button>
+                    </form>
+
+                    <form action="{{ route('admin.program.destroy', $program) }}" method="POST"
+                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus program ini?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="fas fa-trash me-2"></i>Hapus
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
