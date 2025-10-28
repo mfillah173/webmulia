@@ -33,13 +33,13 @@
                         <div class="card-body">
                             <h3 class="card-title">Ruang Belajar One-on-One</h3>
                             <p class="lead">Ruang pembelajaran individual yang dirancang khusus untuk pembelajaran one-on-one dengan fasilitas yang mendukung konsentrasi dan fokus anak.</p>
-                            <ul class="list-unstyled">
+                            <!-- <ul class="list-unstyled">
                                 <li><i class="fas fa-check text-success me-2"></i>Pencahayaan yang optimal</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Akustik yang terkontrol</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Furnitur yang dapat disesuaikan</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Area khusus untuk sensory break</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Teknologi pembelajaran interaktif</li>
-                            </ul>
+                            </ul> -->
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -63,13 +63,13 @@
                         <div class="card-body">
                             <h3 class="card-title">Ruang Terapi</h3>
                             <p class="lead">Fasilitas terapi lengkap dengan peralatan modern untuk berbagai jenis terapi yang dibutuhkan anak berkebutuhan khusus.</p>
-                            <ul class="list-unstyled">
+                            <!-- <ul class="list-unstyled">
                                 <li><i class="fas fa-check text-success me-2"></i>Ruang terapi okupasi</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Ruang fisioterapi</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Ruang terapi wicara</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Ruang terapi sensori</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Peralatan terapi modern</li>
-                            </ul>
+                            </ul> -->
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -93,13 +93,13 @@
                         <div class="card-body">
                             <h3 class="card-title">Playground</h3>
                             <p class="lead">Area bermain outdoor yang aman dan dirancang khusus untuk anak berkebutuhan khusus dengan berbagai alat bermain yang mendukung perkembangan motorik dan sosial.</p>
-                            <ul class="list-unstyled">
+                            <!-- <ul class="list-unstyled">
                                 <li><i class="fas fa-check text-success me-2"></i>Permukaan lunak anti-slip</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Pagar pengaman</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Alat bermain adaptif</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Area teduh</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Pengawasan penuh</li>
-                            </ul>
+                            </ul> -->
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -123,13 +123,13 @@
                         <div class="card-body">
                             <h3 class="card-title">Ruang Konsultasi</h3>
                             <p class="lead">Ruang konsultasi yang nyaman untuk sesi konsultasi dengan orang tua dan tim profesional.</p>
-                            <ul class="list-unstyled">
+                            <!-- <ul class="list-unstyled">
                                 <li><i class="fas fa-check text-success me-2"></i>Atmosfer yang menenangkan</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Privasi yang terjaga</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Alat permainan terapeutik</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Rekaman sesi (dengan izin)</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Konseling keluarga</li>
-                            </ul>
+                            </ul> -->
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -153,13 +153,13 @@
                         <div class="card-body">
                             <h3 class="card-title">Toilet</h3>
                             <p class="lead">Fasilitas toilet yang dirancang khusus untuk anak berkebutuhan khusus dengan ukuran dan fitur yang sesuai kebutuhan.</p>
-                            <ul class="list-unstyled">
+                            <!-- <ul class="list-unstyled">
                                 <li><i class="fas fa-check text-success me-2"></i>Ukuran yang sesuai untuk anak</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Pegangan pengaman</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Pencahayaan yang baik</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Kebersihan terjaga</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Aksesibilitas penuh</li>
-                            </ul>
+                            </ul> -->
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -183,13 +183,13 @@
                         <div class="card-body">
                             <h3 class="card-title">Kolam Renang</h3>
                             <p class="lead">Kolam renang khusus untuk terapi air dan aktivitas fisik yang mendukung perkembangan motorik anak berkebutuhan khusus.</p>
-                            <ul class="list-unstyled">
+                            <!-- <ul class="list-unstyled">
                                 <li><i class="fas fa-check text-success me-2"></i>Kedalaman yang aman</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Suhu air yang nyaman</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Peralatan keselamatan lengkap</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Pengawasan instruktur</li>
                                 <li><i class="fas fa-check text-success me-2"></i>Terapi air terintegrasi</li>
-                            </ul>
+                            </ul> -->
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail

@@ -59,21 +59,19 @@
             @foreach($berita as $item)
             <div class="col-lg-4 col-md-6 mb-4 news-item" data-category="{{ $item['kategori'] ?? 'all' }}" data-title="{{ strtolower($item['judul']) }}" data-content="{{ strtolower($item['konten']) }}">
                 <div class="card news-card h-100">
-                    <div class="card-img-top bg-primary d-flex align-items-center justify-content-center" style="height: 200px;">
-                        @if($item['id'] == 1)
-                            <i class="fas fa-user-plus fa-3x text-white"></i>
-                        @elseif($item['id'] == 2)
-                            <i class="fas fa-toilet fa-3x text-white"></i>
-                        @elseif($item['id'] == 3)
-                            <i class="fas fa-palette fa-3x text-white"></i>
-                        @else
-                            <i class="fas fa-hand-holding-heart fa-3x text-white"></i>
-                        @endif
-                    </div>
+                    @if($item['id'] == 1)
+                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Siswa+Baru" alt="{{ $item['judul'] }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    @elseif($item['id'] == 2)
+                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Toilet+Training" alt="{{ $item['judul'] }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    @elseif($item['id'] == 3)
+                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Kegiatan+Seni" alt="{{ $item['judul'] }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    @else
+                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Berita+Mulia" alt="{{ $item['judul'] }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    @endif
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <span class="news-date">{{ \Carbon\Carbon::parse($item['tanggal'])->format('d M Y') }}</span>
-                            <span class="badge bg-primary">{{ $item['kategori'] ?? 'General' }}</span>
+                            
                         </div>
                         <h5 class="card-title">{{ $item['judul'] }}</h5>
                         <p class="card-text">{{ Str::limit($item['konten'], 120) }}</p>

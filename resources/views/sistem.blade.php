@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="section-title">Sistem Pembelajaran</h1>
+                <h1 class="section-title">Sistem Pembelajaran MSA</h1>
                 <p class="section-subtitle">Pendekatan pembelajaran yang holistik dan terintegrasi untuk mengoptimalkan perkembangan anak berkebutuhan khusus</p>
             </div>
         </div>
@@ -17,7 +17,7 @@
 </section>
 
 <!-- Learning Philosophy -->
-<section class="py-5">
+<!-- <section class="py-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
@@ -40,14 +40,11 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Sistem Pembelajaran MSA -->
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="section-title">Sistem Pembelajaran MSA</h2>
-        <p class="section-subtitle">Pendekatan pembelajaran yang komprehensif dan terintegrasi</p>
-        
         <div class="row">
             <div class="col-lg-6 mb-4">
                 <a href="{{ route('sistem.show', 'one-on-one') }}" class="text-decoration-none">
@@ -60,13 +57,8 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">One-on-One</h4>
-                            <p>Pembelajaran individual yang disesuaikan dengan kebutuhan dan kemampuan setiap anak untuk memastikan perhatian penuh dan perkembangan optimal.</p>
-                            <ul class="list-unstyled text-start">
-                                <li><i class="fas fa-check text-success me-2"></i>Rasio guru-siswa 1:1</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Program pembelajaran personal</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Monitoring perkembangan individual</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Penyesuaian metode pembelajaran</li>
-                            </ul>
+                            <p>Pembelajaran individual yang disesuaikan dengan kebutuhan dan kemampuan setiap anak untuk memastikan perhatian penuh dan perkembangan optimal. Program ini menerapkan rasio guru-siswa 1:1 dengan program pembelajaran personal, monitoring perkembangan individual, dan penyesuaian metode pembelajaran sesuai kebutuhan masing-masing anak.</p>
+                            
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -88,13 +80,8 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">Stimulasi Bertahap</h4>
-                            <p>Sistem stimulasi yang terstruktur dan bertahap sesuai dengan tahap perkembangan anak untuk memastikan pembelajaran yang efektif.</p>
-                            <ul class="list-unstyled text-start">
-                                <li><i class="fas fa-check text-success me-2"></i>Assessment awal kemampuan</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Perencanaan tahap pembelajaran</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Progres bertahap sesuai kemampuan</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Evaluasi dan penyesuaian berkala</li>
-                            </ul>
+                            <p>Sistem stimulasi yang terstruktur dan bertahap sesuai dengan tahap perkembangan anak untuk memastikan pembelajaran yang efektif. Program ini dimulai dengan assessment awal kemampuan, dilanjutkan dengan perencanaan tahap pembelajaran, progres bertahap sesuai kemampuan, serta evaluasi dan penyesuaian berkala untuk hasil optimal.</p>
+                            
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -116,13 +103,8 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">Prompting System</h4>
-                            <p>Sistem prompting yang sistematis untuk membantu anak belajar dengan memberikan bantuan yang tepat pada waktu yang tepat.</p>
-                            <ul class="list-unstyled text-start">
-                                <li><i class="fas fa-check text-success me-2"></i>Visual prompting</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Verbal prompting</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Physical prompting</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Fading prompts secara bertahap</li>
-                            </ul>
+                            <p>Sistem prompting yang sistematis untuk membantu anak belajar dengan memberikan bantuan yang tepat pada waktu yang tepat. Program ini menerapkan visual prompting, verbal prompting, physical prompting, dan fading prompts secara bertahap untuk mengembangkan kemandirian anak dalam belajar.</p>
+                            
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -144,13 +126,8 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">Evaluasi Harian, Bulanan, Semester</h4>
-                            <p>Sistem evaluasi yang komprehensif untuk memantau kemajuan pembelajaran dan menyesuaikan program sesuai kebutuhan anak.</p>
-                            <ul class="list-unstyled text-start">
-                                <li><i class="fas fa-check text-success me-2"></i>Evaluasi harian perkembangan</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Laporan bulanan kemajuan</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Assessment semester komprehensif</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Penyesuaian program pembelajaran</li>
-                            </ul>
+                            <p>Sistem evaluasi yang komprehensif untuk memantau kemajuan pembelajaran dan menyesuaikan program sesuai kebutuhan anak. Program ini mencakup evaluasi harian perkembangan, laporan bulanan kemajuan, assessment semester komprehensif, dan penyesuaian program pembelajaran berdasarkan hasil evaluasi yang dilakukan secara berkala.</p>
+                            
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -172,23 +149,8 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">Kolaborasi Orang Tua</h4>
-                            <p>Kerjasama erat dengan orang tua untuk memastikan konsistensi pembelajaran di rumah dan sekolah, serta memberikan dukungan optimal bagi perkembangan anak.</p>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <ul class="list-unstyled text-start">
-                                        <li><i class="fas fa-check text-success me-2"></i>Konsultasi rutin dengan orang tua</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Pelatihan teknik pembelajaran di rumah</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Sharing progress dan perkembangan</li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-6">
-                                    <ul class="list-unstyled text-start">
-                                        <li><i class="fas fa-check text-success me-2"></i>Workshop parenting khusus</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Dukungan psikologis keluarga</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Komunikasi terbuka dan transparan</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p>Kerjasama erat dengan orang tua untuk memastikan konsistensi pembelajaran di rumah dan sekolah, serta memberikan dukungan optimal bagi perkembangan anak. Program ini meliputi konsultasi rutin dengan orang tua, pelatihan teknik pembelajaran di rumah, sharing progress dan perkembangan, workshop parenting khusus, dukungan psikologis keluarga, dan komunikasi terbuka dan transparan antara sekolah dan keluarga.</p>
+                            
                             <div class="mt-3 text-center">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -203,7 +165,7 @@
 </section>
 
 <!-- Daily Schedule -->
-<section class="py-5">
+<!-- <section class="py-5">
     <div class="container">
         <h2 class="section-title">Jadwal Harian</h2>
         <p class="section-subtitle">Struktur pembelajaran yang terorganisir untuk memaksimalkan efektivitas</p>
@@ -278,10 +240,10 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Teaching Methods -->
-<section class="py-5 bg-light">
+<!-- <section class="py-5 bg-light">
     <div class="container">
         <h2 class="section-title">Metode Pengajaran</h2>
         <p class="section-subtitle">Berbagai pendekatan pembelajaran yang disesuaikan dengan kebutuhan setiap anak</p>
@@ -336,10 +298,10 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Assessment & Evaluation -->
-<section class="py-5">
+<!-- <section class="py-5">
     <div class="container">
         <h2 class="section-title">Penilaian & Evaluasi</h2>
         <p class="section-subtitle">Sistem penilaian yang komprehensif untuk memantau kemajuan pembelajaran</p>
@@ -386,23 +348,16 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Parent Involvement -->
-<section class="py-5 bg-light">
+<!-- <section class="py-5 bg-light">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h2 class="mb-4">Keterlibatan Orang Tua</h2>
                 <p class="lead">Orang tua adalah mitra penting dalam proses pembelajaran anak</p>
-                <p>Kami melibatkan orang tua secara aktif dalam:</p>
-                <ul class="list-unstyled">
-                    <li><i class="fas fa-check text-success me-2"></i>Perencanaan program pembelajaran</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Monitoring kemajuan anak</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Konsultasi dan konseling</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Pelatihan keterampilan parenting</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Kegiatan sekolah bersama</li>
-                </ul>
+                <p>Kami melibatkan orang tua secara aktif dalam perencanaan program pembelajaran, monitoring kemajuan anak, konsultasi dan konseling, pelatihan keterampilan parenting, serta kegiatan sekolah bersama untuk memastikan perkembangan anak yang optimal dan berkelanjutan.</p>
             </div>
             <div class="col-lg-6">
                 <div class="text-center">
@@ -413,7 +368,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Call to Action -->
 <section class="py-5 bg-primary text-white">

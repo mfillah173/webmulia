@@ -44,7 +44,7 @@
                     <p class="program-description">{{ $program['description'] }}</p>
                     
                     <!-- Program Details -->
-                    <div class="program-details">
+                    <!-- <div class="program-details">
                         <div class="detail-item">
                             <i class="fas fa-clock text-primary me-3"></i>
                             <span class="detail-label">Durasi:</span>
@@ -60,7 +60,7 @@
                             <span class="detail-label">Frekuensi:</span>
                             <span class="detail-value">{{ $program['frequency'] }}</span>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div class="program-actions mt-4">
                         <a href="{{ route('kontak') }}" class="btn btn-primary btn-lg me-3">
@@ -77,7 +77,7 @@
 </section>
 
 <!-- Program Objectives & Methods -->
-<section class="py-5 bg-light">
+<!-- <section class="py-5 bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-5">
@@ -92,9 +92,9 @@
                         @endforeach
                     </ul>
                 </div>
-            </div>
+            </div> -->
             
-            <div class="col-lg-6 mb-5">
+            <!-- <div class="col-lg-6 mb-5">
                 <div class="program-section">
                     <h3 class="section-title">Metode Pembelajaran</h3>
                     <ul class="methods-list">
@@ -109,7 +109,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Program Gallery -->
 <section class="py-5">

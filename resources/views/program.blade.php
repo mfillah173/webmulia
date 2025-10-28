@@ -31,21 +31,8 @@
                         </div>
                         <div class="card-body">
                             <h4>Tujuan Program:</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-check text-success me-2"></i>Mengembangkan kemandirian dalam menggunakan toilet</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Meningkatkan kesadaran tubuh anak</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Membangun rutinitas yang konsisten</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Meningkatkan kepercayaan diri anak</li>
-                            </ul>
+                            <p>Program ini bertujuan untuk mengembangkan kemandirian anak dalam menggunakan toilet, meningkatkan kesadaran tubuh, membangun rutinitas yang konsisten, dan meningkatkan kepercayaan diri anak dalam melakukan aktivitas toileting secara mandiri.</p>
                             
-                            <h4 class="mt-4">Metode Pelatihan:</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-star text-warning me-2"></i>Pendekatan bertahap dan konsisten</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Penggunaan visual aids dan reward system</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Kolaborasi dengan orang tua</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Monitoring dan evaluasi berkala</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Dukungan psikologis untuk anak dan keluarga</li>
-                            </ul>
                             
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
@@ -68,21 +55,8 @@
                         </div>
                         <div class="card-body">
                             <h4>Tujuan Program:</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-check text-success me-2"></i>Menanamkan nilai-nilai Islam dalam kehidupan sehari-hari</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Mengembangkan akhlak mulia</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Membangun karakter yang baik</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Mengenalkan konsep dasar agama Islam</li>
-                            </ul>
+                            <p>Program ini bertujuan untuk menanamkan nilai-nilai Islam dalam kehidupan sehari-hari, mengembangkan akhlak mulia, membangun karakter yang baik, dan mengenalkan konsep dasar agama Islam kepada anak dengan cara yang mudah dipahami dan diaplikasikan.</p>
                             
-                            <h4 class="mt-4">Aktivitas Pembelajaran:</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-star text-warning me-2"></i>Pembelajaran doa-doa harian</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Kisah-kisah teladan Nabi dan Rasul</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Praktik adab dan sopan santun</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Kegiatan amal dan sedekah</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Pembelajaran nilai-nilai kebaikan</li>
-                            </ul>
                             
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
@@ -105,22 +79,9 @@
                         </div>
                         <div class="card-body">
                             <h4>Tujuan Program:</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-check text-success me-2"></i>Mengurangi perilaku yang tidak diinginkan</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Meningkatkan perilaku positif</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Mengembangkan keterampilan sosial</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Meningkatkan kemampuan adaptasi</li>
-                            </ul>
+                            <p>Program ini dirancang untuk mengurangi perilaku yang tidak diinginkan, meningkatkan perilaku positif, mengembangkan keterampilan sosial, dan meningkatkan kemampuan adaptasi anak dalam berbagai situasi dan lingkungan.</p>
                             
-                            <h4 class="mt-4">Metode Terapi:</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-star text-warning me-2"></i>Applied Behavior Analysis (ABA)</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Positive reinforcement</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Token economy system</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Social skills training</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Behavior modification techniques</li>
-                            </ul>
-                            
+                           
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -142,22 +103,9 @@
                         </div>
                         <div class="card-body">
                             <h4>Tujuan Program:</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-check text-success me-2"></i>Meningkatkan kemampuan memproses informasi sensorik</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Mengurangi sensitivitas berlebihan</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Meningkatkan toleransi terhadap stimulus</li>
-                                <li><i class="fas fa-check text-success me-2"></i>Mengembangkan kemampuan regulasi diri</li>
-                            </ul>
+                            <p>Program ini bertujuan untuk meningkatkan kemampuan anak dalam memproses informasi sensorik, mengurangi sensitivitas berlebihan, meningkatkan toleransi terhadap berbagai stimulus, dan mengembangkan kemampuan regulasi diri yang lebih baik.</p>
                             
-                            <h4 class="mt-4">Aktivitas Terapi:</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-star text-warning me-2"></i>Stimulasi vestibular dan proprioceptive</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Aktivitas tactile dan visual</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Deep pressure dan compression</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Sensory diet dan routine</li>
-                                <li><i class="fas fa-star text-warning me-2"></i>Environmental modifications</li>
-                            </ul>
-                            
+                           
                             <div class="mt-3">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -178,28 +126,10 @@
                             <p class="mb-0">Program Stimulasi Komprehensif</p>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h4>Tujuan Program:</h4>
-                                    <ul class="list-unstyled">
-                                        <li><i class="fas fa-check text-success me-2"></i>Mengoptimalkan perkembangan sesuai tahap usia</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Mengidentifikasi dan mengatasi keterlambatan</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Meningkatkan kemampuan kognitif dan motorik</li>
-                                        <li><i class="fas fa-check text-success me-2"></i>Mempersiapkan transisi ke tahap berikutnya</li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-6">
-                                    <h4>Aspek Perkembangan:</h4>
-                                    <ul class="list-unstyled">
-                                        <li><i class="fas fa-star text-warning me-2"></i>Perkembangan kognitif dan bahasa</li>
-                                        <li><i class="fas fa-star text-warning me-2"></i>Perkembangan motorik kasar dan halus</li>
-                                        <li><i class="fas fa-star text-warning me-2"></i>Perkembangan sosial dan emosional</li>
-                                        <li><i class="fas fa-star text-warning me-2"></i>Perkembangan kemandirian</li>
-                                        <li><i class="fas fa-star text-warning me-2"></i>Perkembangan komunikasi</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <h4>Tujuan Program:</h4>
+                            <p>Program ini bertujuan untuk mengoptimalkan perkembangan anak sesuai dengan tahap usianya, mengidentifikasi dan mengatasi keterlambatan perkembangan, meningkatkan kemampuan kognitif dan motorik, serta mempersiapkan anak untuk transisi ke tahap perkembangan berikutnya dengan lancar.</p>
                             
+                           
                             <div class="mt-3 text-center">
                                 <span class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle me-2"></i>Lihat Detail
@@ -214,13 +144,13 @@
 </section>
 
 <!-- Specialized Programs -->
-<section class="py-5 bg-light">
+<!-- <section class="py-5 bg-light">
     <div class="container">
         <h2 class="section-title">Program Khusus</h2>
         <p class="section-subtitle">Program tambahan yang mendukung perkembangan optimal anak</p>
         
         <div class="row">
-            <!-- Sensory Integration -->
+           
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
                     <div class="card-header text-center">
@@ -228,17 +158,12 @@
                         <h4>Sensory Integration</h4>
                     </div>
                     <div class="card-body">
-                        <p>Program untuk mengintegrasikan informasi sensorik dan meningkatkan kemampuan anak dalam memproses stimulus dari lingkungan.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Terapi sensorik</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Aktivitas vestibular</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Stimulasi proprioceptive</li>
-                        </ul>
+                        <p>Program untuk mengintegrasikan informasi sensorik dan meningkatkan kemampuan anak dalam memproses stimulus dari lingkungan melalui terapi sensorik, aktivitas vestibular, dan stimulasi proprioceptive yang terstruktur dan terprogram.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Communication Therapy -->
+            
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
                     <div class="card-header text-center">
@@ -246,17 +171,12 @@
                         <h4>Terapi Komunikasi</h4>
                     </div>
                     <div class="card-body">
-                        <p>Program untuk mengembangkan kemampuan komunikasi verbal dan non-verbal anak.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Terapi wicara</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Augmentative communication</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Social communication</li>
-                        </ul>
+                        <p>Program untuk mengembangkan kemampuan komunikasi verbal dan non-verbal anak melalui terapi wicara, augmentative communication, dan social communication yang disesuaikan dengan kebutuhan komunikasi masing-masing anak.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Behavioral Support -->
+            
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
                     <div class="card-header text-center">
@@ -264,21 +184,16 @@
                         <h4>Dukungan Perilaku</h4>
                     </div>
                     <div class="card-body">
-                        <p>Program untuk mengelola dan mengubah perilaku yang tidak diinginkan menjadi perilaku yang positif.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Applied Behavior Analysis (ABA)</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Positive reinforcement</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Behavior modification</li>
-                        </ul>
+                        <p>Program untuk mengelola dan mengubah perilaku yang tidak diinginkan menjadi perilaku yang positif melalui pendekatan Applied Behavior Analysis (ABA), positive reinforcement, dan behavior modification yang sistematis dan terukur.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Learning Methods -->
-<section class="py-5">
+<!-- <section class="py-5">
     <div class="container">
         <h2 class="section-title">Metode Pembelajaran</h2>
         <p class="section-subtitle">Pendekatan pembelajaran yang disesuaikan dengan kebutuhan setiap anak</p>
@@ -333,7 +248,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 
 

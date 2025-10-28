@@ -58,7 +58,7 @@
 </section>
 
 <!-- System Features & Benefits -->
-<section class="py-5 bg-light">
+<!-- <section class="py-5 bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-5">
@@ -73,9 +73,9 @@
                         @endforeach
                     </ul>
                 </div>
-            </div>
+            </div> -->
             
-            <div class="col-lg-6 mb-5">
+            <!-- <div class="col-lg-6 mb-5">
                 <div class="system-section">
                     <h3 class="section-title">Manfaat</h3>
                     <ul class="benefits-list">
@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- System Gallery -->
 <section class="py-5">
