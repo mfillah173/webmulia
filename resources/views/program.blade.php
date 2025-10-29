@@ -22,122 +22,77 @@
         <div class="row">
             <!-- Toilet Training Program -->
             <div class="col-lg-6 mb-5">
-                <a href="{{ route('program.show', 'toilet-training-program') }}" class="text-decoration-none">
-                    <div class="card h-100 program-card">
-                        <div class="card-header text-center">
-                            <i class="fas fa-toilet fa-3x mb-3"></i>
-                            <h2>Toilet Training Program</h2>
-                            <p class="mb-0">Program Pelatihan Toilet</p>
-                        </div>
-                        <div class="card-body">
-                            <h4>Tujuan Program:</h4>
-                            <p>Program ini bertujuan untuk mengembangkan kemandirian anak dalam menggunakan toilet, meningkatkan kesadaran tubuh, membangun rutinitas yang konsisten, dan meningkatkan kepercayaan diri anak dalam melakukan aktivitas toileting secara mandiri.</p>
-                            
-                            
-                            <div class="mt-3">
-                                <span class="btn btn-outline-primary btn-sm">
-                                    <i class="fas fa-info-circle me-2"></i>Lihat Detail
-                                </span>
-                            </div>
-                        </div>
+                <div class="card h-100 program-card">
+                    <div class="card-header text-center">
+                        <i class="fas fa-toilet fa-3x mb-3"></i>
+                        <h2>Toilet Training Program</h2>
+                        <p class="mb-0">Program Pelatihan Toilet</p>
                     </div>
-                </a>
+                    <div class="card-body">
+                        <h4>Tujuan Program:</h4>
+                        <p>Program ini bertujuan untuk mengembangkan kemandirian anak dalam menggunakan toilet, meningkatkan kesadaran tubuh, membangun rutinitas yang konsisten, dan meningkatkan kepercayaan diri anak dalam melakukan aktivitas toileting secara mandiri.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Pengembangan Akidah Akhlaq -->
             <div class="col-lg-6 mb-5">
-                <a href="{{ route('program.show', 'pengembangan-akidah-akhlaq') }}" class="text-decoration-none">
-                    <div class="card h-100 program-card">
-                        <div class="card-header text-center">
-                            <i class="fas fa-mosque fa-3x mb-3"></i>
-                            <h2>Pengembangan Akidah Akhlaq</h2>
-                            <p class="mb-0">Program Pembentukan Karakter Islami</p>
-                        </div>
-                        <div class="card-body">
-                            <h4>Tujuan Program:</h4>
-                            <p>Program ini bertujuan untuk menanamkan nilai-nilai Islam dalam kehidupan sehari-hari, mengembangkan akhlak mulia, membangun karakter yang baik, dan mengenalkan konsep dasar agama Islam kepada anak dengan cara yang mudah dipahami dan diaplikasikan.</p>
-                            
-                            
-                            <div class="mt-3">
-                                <span class="btn btn-outline-primary btn-sm">
-                                    <i class="fas fa-info-circle me-2"></i>Lihat Detail
-                                </span>
-                            </div>
-                        </div>
+                <div class="card h-100 program-card">
+                    <div class="card-header text-center">
+                        <i class="fas fa-mosque fa-3x mb-3"></i>
+                        <h2>Pengembangan Akidah Akhlaq</h2>
+                        <p class="mb-0">Program Pembentukan Karakter Islami</p>
                     </div>
-                </a>
+                    <div class="card-body">
+                        <h4>Tujuan Program:</h4>
+                        <p>Program ini bertujuan untuk menanamkan nilai-nilai Islam dalam kehidupan sehari-hari, mengembangkan akhlak mulia, membangun karakter yang baik, dan mengenalkan konsep dasar agama Islam kepada anak dengan cara yang mudah dipahami dan diaplikasikan.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Terapi Perilaku -->
             <div class="col-lg-6 mb-5">
-                <a href="{{ route('program.show', 'terapi-perilaku') }}" class="text-decoration-none">
-                    <div class="card h-100 program-card">
-                        <div class="card-header text-center">
-                            <i class="fas fa-brain fa-3x mb-3"></i>
-                            <h2>Terapi Perilaku</h2>
-                            <p class="mb-0">Program Modifikasi Perilaku</p>
-                        </div>
-                        <div class="card-body">
-                            <h4>Tujuan Program:</h4>
-                            <p>Program ini dirancang untuk mengurangi perilaku yang tidak diinginkan, meningkatkan perilaku positif, mengembangkan keterampilan sosial, dan meningkatkan kemampuan adaptasi anak dalam berbagai situasi dan lingkungan.</p>
-                            
-                           
-                            <div class="mt-3">
-                                <span class="btn btn-outline-primary btn-sm">
-                                    <i class="fas fa-info-circle me-2"></i>Lihat Detail
-                                </span>
-                            </div>
-                        </div>
+                <div class="card h-100 program-card">
+                    <div class="card-header text-center">
+                        <i class="fas fa-brain fa-3x mb-3"></i>
+                        <h2>Terapi Perilaku</h2>
+                        <p class="mb-0">Program Modifikasi Perilaku</p>
                     </div>
-                </a>
+                    <div class="card-body">
+                        <h4>Tujuan Program:</h4>
+                        <p>Program ini dirancang untuk mengurangi perilaku yang tidak diinginkan, meningkatkan perilaku positif, mengembangkan keterampilan sosial, dan meningkatkan kemampuan adaptasi anak dalam berbagai situasi dan lingkungan.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Terapi Sensori -->
             <div class="col-lg-6 mb-5">
-                <a href="{{ route('program.show', 'terapi-sensori') }}" class="text-decoration-none">
-                    <div class="card h-100 program-card">
-                        <div class="card-header text-center">
-                            <i class="fas fa-hand-holding-heart fa-3x mb-3"></i>
-                            <h2>Terapi Sensori</h2>
-                            <p class="mb-0">Program Integrasi Sensorik</p>
-                        </div>
-                        <div class="card-body">
-                            <h4>Tujuan Program:</h4>
-                            <p>Program ini bertujuan untuk meningkatkan kemampuan anak dalam memproses informasi sensorik, mengurangi sensitivitas berlebihan, meningkatkan toleransi terhadap berbagai stimulus, dan mengembangkan kemampuan regulasi diri yang lebih baik.</p>
-                            
-                           
-                            <div class="mt-3">
-                                <span class="btn btn-outline-primary btn-sm">
-                                    <i class="fas fa-info-circle me-2"></i>Lihat Detail
-                                </span>
-                            </div>
-                        </div>
+                <div class="card h-100 program-card">
+                    <div class="card-header text-center">
+                        <i class="fas fa-hand-holding-heart fa-3x mb-3"></i>
+                        <h2>Terapi Sensori</h2>
+                        <p class="mb-0">Program Integrasi Sensorik</p>
                     </div>
-                </a>
+                    <div class="card-body">
+                        <h4>Tujuan Program:</h4>
+                        <p>Program ini bertujuan untuk meningkatkan kemampuan anak dalam memproses informasi sensorik, mengurangi sensitivitas berlebihan, meningkatkan toleransi terhadap berbagai stimulus, dan mengembangkan kemampuan regulasi diri yang lebih baik.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Stimulasi Tahap Perkembangan -->
             <div class="col-lg-12 mb-5">
-                <a href="{{ route('program.show', 'stimulasi-tahap-perkembangan') }}" class="text-decoration-none">
-                    <div class="card h-100 program-card">
-                        <div class="card-header text-center">
-                            <i class="fas fa-chart-line fa-3x mb-3"></i>
-                            <h2>Stimulasi Tahap Perkembangan</h2>
-                            <p class="mb-0">Program Stimulasi Komprehensif</p>
-                        </div>
-                        <div class="card-body">
-                            <h4>Tujuan Program:</h4>
-                            <p>Program ini bertujuan untuk mengoptimalkan perkembangan anak sesuai dengan tahap usianya, mengidentifikasi dan mengatasi keterlambatan perkembangan, meningkatkan kemampuan kognitif dan motorik, serta mempersiapkan anak untuk transisi ke tahap perkembangan berikutnya dengan lancar.</p>
-                            
-                           
-                            <div class="mt-3 text-center">
-                                <span class="btn btn-outline-primary btn-sm">
-                                    <i class="fas fa-info-circle me-2"></i>Lihat Detail
-                                </span>
-                            </div>
-                        </div>
+                <div class="card h-100 program-card">
+                    <div class="card-header text-center">
+                        <i class="fas fa-chart-line fa-3x mb-3"></i>
+                        <h2>Stimulasi Tahap Perkembangan</h2>
+                        <p class="mb-0">Program Stimulasi Komprehensif</p>
                     </div>
-                </a>
+                    <div class="card-body">
+                        <h4>Tujuan Program:</h4>
+                        <p>Program ini bertujuan untuk mengoptimalkan perkembangan anak sesuai dengan tahap usianya, mengidentifikasi dan mengatasi keterlambatan perkembangan, meningkatkan kemampuan kognitif dan motorik, serta mempersiapkan anak untuk transisi ke tahap perkembangan berikutnya dengan lancar.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -2439,27 +2439,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom {{ request()->routeIs('fasilitas') ? 'active' : '' }}" href="{{ route('fasilitas') }}">
-                            <i class="fas fa-building"></i>
-                            <span>Fasilitas</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link nav-link-custom {{ request()->routeIs('program') ? 'active' : '' }}" href="{{ route('program') }}">
                             <i class="fas fa-graduation-cap"></i>
                             <span>Program Pembelajaran</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom {{ request()->routeIs('sistem') ? 'active' : '' }}" href="{{ route('sistem') }}">
-                            <i class="fas fa-cogs"></i>
-                            <span>Sistem Pembelajaran</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-custom {{ request()->routeIs('berita*') ? 'active' : '' }}" href="{{ route('berita.index') }}">
-                            <i class="fas fa-newspaper"></i>
-                            <span>Berita</span>
+                        <a class="nav-link nav-link-custom {{ request()->routeIs('fasilitas') ? 'active' : '' }}" href="{{ route('fasilitas') }}">
+                            <i class="fas fa-building"></i>
+                            <span>Fasilitas</span>
                         </a>
                     </li>
                     <li class="nav-item">

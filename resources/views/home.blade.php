@@ -34,457 +34,183 @@
     </div>
 </section>
 
-<!-- What is MSA & Core Principles Section -->
-<section class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); position: relative; overflow: hidden;">
-    <div class="container">
-        <!-- What is MSA Part -->
-        <div class="row align-items-center mb-5">
-            <div class="col-lg-6">
-                <div class="msa-content">
-                    <div class="msa-badge">
-                        <span class="badge-text">What is</span>
-                    </div>
-                    <h1 class="msa-title">MSA</h1>
-                    <p class="msa-description">Mulia Special Academy (MSA) adalah sekolah dan pusat terapi yang dirancang khusus untuk anak berkebutuhan khusus mulai usia 2-6 tahun.</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="msa-visual">
-                    <div class="visual-container">
-                        <div class="main-circle">
-                            <div class="inner-circle">
-                                <i class="fas fa-user"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="floating-icons">
-                            <div class="icon-item icon-1">
-                                <i class="fas fa-cog"></i>
-                            </div>
-                            <div class="icon-item icon-2">
-                                <i class="fas fa-question"></i>
-                            </div>
-                            <div class="icon-item icon-3">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <div class="icon-item icon-4">
-                                <i class="fas fa-question"></i>
-                            </div>
-                            <div class="icon-item icon-5">
-                                <div class="pill"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Core Principles Part -->
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="principles-container">
-                    <div class="main-principle">
-                        <div class="paperclip-icon">
-                            <i class="fas fa-paperclip"></i>
-                        </div>
-                        <h2 class="principle-title">MULIA SPECIAL ACADEMY</h2>
-                    </div>
-                    
-                    <div class="principles-grid">
-                        <div class="principle-card card-1">
-                            <div class="card-icon">
-                                <i class="fas fa-brain"></i>
-                            </div>
-                            <h4>Stimulation Centered School</h4>
-                            <p>Pendekatan pembelajaran berbasis stimulasi untuk mengoptimalkan perkembangan anak</p>
-                        </div>
-                        
-                        <div class="principle-card card-2">
-                            <div class="card-icon">
-                                <i class="fas fa-seedling"></i>
-                            </div>
-                            <h4>Optimization of growth and development of children with special needs</h4>
-                            <p>Mengoptimalkan pertumbuhan dan perkembangan anak berkebutuhan khusus secara holistik</p>
-                        </div>
-                        
-                        <div class="principle-card card-3">
-                            <div class="card-icon">
-                                <i class="fas fa-user-friends"></i>
-                            </div>
-                            <h4>Personal & Holistic Approach</h4>
-                            <p>Pendekatan personal dan holistik yang disesuaikan dengan kebutuhan setiap anak</p>
-                        </div>
-                        
-                        <div class="principle-card card-4">
-                            <div class="card-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h4>Development of each child's potential</h4>
-                            <p>Mengembangkan potensi unik setiap anak untuk mencapai kemampuan terbaiknya</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Syarat Pendaftaran Section -->
+<!-- Testimonials Section -->
 <section class="py-5 bg-light">
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 mx-auto">
-                <h2 class="section-title text-center mb-5">SYARAT PENDAFTARAN</h2>
-                
-                <div class="row">
-                    <!-- Kindergarten Column -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                            <div class="card-header bg-primary text-white text-center">
-                                <h4 class="mb-0 fw-bold">Kindergarten</h4>
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="list-group list-group-flush">
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-child text-primary me-3"></i>
-                                            <span class="fw-medium">Children with Special Needs</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-calendar-alt text-primary me-3"></i>
-                                            <span class="fw-medium">4 tahun (TK A)</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-calendar-alt text-primary me-3"></i>
-                                            <span class="fw-medium">5 tahun (TK B)</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-file-alt text-primary me-3"></i>
-                                            <span class="fw-medium">Akta Kelahiran</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-id-card text-primary me-3"></i>
-                                            <span class="fw-medium">Kartu Keluarga</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-camera text-primary me-3"></i>
-                                            <span class="fw-medium">Foto</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Primary School Column -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                            <div class="card-header bg-primary text-white text-center">
-                                <h4 class="mb-0 fw-bold">Primary School</h4>
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="list-group list-group-flush">
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-child text-primary me-3"></i>
-                                            <span class="fw-medium">Children with Special Needs</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-calendar-alt text-primary me-3"></i>
-                                            <span class="fw-medium">6 tahun</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-file-alt text-primary me-3"></i>
-                                            <span class="fw-medium">Akta Kelahiran</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-id-card text-primary me-3"></i>
-                                            <span class="fw-medium">Kartu Keluarga</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item border-0 bg-light">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-camera text-primary me-3"></i>
-                                            <span class="fw-medium">Foto</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-4">
-                    <a href="{{ route('kontak') }}" class="btn btn-primary btn-lg">
-                        <i class="fas fa-info-circle me-2"></i>Informasi Lebih Lanjut
-                    </a>
-                </div>
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="section-title">Apa Kata Mereka</h2>
+                <p class="section-subtitle">Testimoni dari orang tua siswa Mulia Special Academy</p>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- Daftar Harga Section -->
-<section class="py-5" style="background: linear-gradient(135deg, rgba(255, 140, 0, 0.05) 0%, rgba(255, 107, 53, 0.05) 100%);">
-    <div class="container">
         <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="section-title text-center mb-5">BIAYA PENDAFTARAN DAN LAINNYA</h2>
-                
-                <div class="pricing-container">
-                    <!-- Pendaftaran -->
-                    <div class="pricing-item">
-                        <div class="pricing-label">
-                            <span class="pricing-text">Pendaftaran</span>
-                        </div>
-                        <div class="pricing-price">
-                            <span class="price-text">Rp. 350.000</span>
+            <!-- Testimonial Card 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card testimonial-card h-100">
+                    <!-- Photo Section (Top Half) -->
+                    <div class="testimonial-photo-section">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user"></i>
                         </div>
                     </div>
-                    
-                    <!-- Uang Pangkal -->
-                    <div class="pricing-item">
-                        <div class="pricing-label">
-                            <span class="pricing-text">Uang Pangkal</span>
+                    <!-- Content Section (Bottom Half) -->
+                    <div class="card-body text-center">
+                        <div class="testimonial-quote mb-3">
+                            <i class="fas fa-quote-left"></i>
                         </div>
-                        <div class="pricing-price">
-                            <span class="price-text">Rp. 5.000.000</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Daftar Ulang -->
-                    <div class="pricing-item">
-                        <div class="pricing-label">
-                            <span class="pricing-text">Daftar Ulang</span>
-                        </div>
-                        <div class="pricing-price">
-                            <span class="price-text">Rp. 1.350.000</span>
-                        </div>
-                    </div>
-                    
-                    <!-- SPP Kindergarten -->
-                    <div class="pricing-item">
-                        <div class="pricing-label">
-                            <span class="pricing-text">S P P</span>
-                            <span class="pricing-subtitle">Equivalent to Kindergarten</span>
-                        </div>
-                        <div class="pricing-price">
-                            <span class="price-text">Rp. 1.650.000</span>
-                        </div>
-                    </div>
-                    
-                    <!-- SPP Primary -->
-                    <div class="pricing-item">
-                        <div class="pricing-label">
-                            <span class="pricing-text">S P P</span>
-                            <span class="pricing-subtitle">Equivalent to Primary</span>
-                        </div>
-                        <div class="pricing-price">
-                            <span class="price-text">Rp. 2.250.000</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-4">
-                    <a href="{{ route('kontak') }}" class="btn btn-primary btn-lg">
-                        <i class="fas fa-info-circle me-2"></i>Informasi Lebih Lanjut
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Important Links Section -->
-<section class="py-5" style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="text-center text-white mb-5">LINK PENDAFTARAN DAN INFOMASI TERKAIT</h2>
-                
-                <div class="links-container">
-                    <!-- Link Pendaftaran -->
-                    <a href="https://bit.ly/PendaftaranSiswaBaruMuliaSpecialAcademy2025-2026" target="_blank" class="link-item">
-                        <div class="link-icon">
-                            <i class="fas fa-link"></i>
-                        </div>
-                        <div class="link-content">
-                            <h5 class="link-title">Link Pendaftaran Siswa Baru 2025-2026</h5>
-                            <p class="link-url">bit.ly/PendaftaranSiswaBaruMuliaSpecialAcademy2025-2026</p>
-                        </div>
-                    </a>
-                    
-                    <!-- Divider -->
-                    <div class="link-divider"></div>
-                    
-                    <!-- Link Informasi Biaya -->
-                    <a href="https://heyzine.com/flip-book/9a89e78d26.html" target="_blank" class="link-item">
-                        <div class="link-icon">
-                            <i class="fas fa-link"></i>
-                        </div>
-                        <div class="link-content">
-                            <h5 class="link-title">Informasi Biaya Pendidikan Mulia Special Academy 2025-2026</h5>
-                            <p class="link-url">heyzine.com/flip-book/9a89e78d26.html</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Programs Preview -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <h2 class="section-title">Program Unggulan Kami</h2>
-        <p class="section-subtitle">Program pembelajaran yang dirancang khusus untuk anak berkebutuhan khusus</p>
-        
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-header text-center">
-                        <i class="fas fa-baby fa-2x mb-2"></i>
-                        <h4 class="mb-0">Program Kindergarten</h4>
-                    </div>
-                    <div class="card-body">
-                        <p>Program khusus untuk anak usia 3-6 tahun dengan pendekatan stimulasi sensorik dan motorik yang menyenangkan.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Stimulasi sensorik</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Pengembangan motorik</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Komunikasi dan bahasa</li>
-                        </ul>
+                        <p class="testimonial-text">"Alhamdulillah, sejak bergabung dengan MSA, anak saya menunjukkan perkembangan yang sangat pesat. Tim pengajar sangat sabar dan profesional dalam menangani anak berkebutuhan khusus."</p>
+                        <h5 class="testimonial-name">Ibu Sarah</h5>
+                        <p class="testimonial-role text-muted">Orang Tua Siswa</p>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-header text-center">
-                        <i class="fas fa-school fa-2x mb-2"></i>
-                        <h4 class="mb-0">Program Primary School</h4>
+            <!-- Testimonial Card 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card testimonial-card h-100">
+                    <!-- Photo Section (Top Half) -->
+                    <div class="testimonial-photo-section">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user"></i>
                     </div>
-                    <div class="card-body">
-                        <p>Program untuk anak usia 6-12 tahun dengan kurikulum yang disesuaikan dengan kemampuan dan kebutuhan khusus.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Kurikulum adaptif</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Life skills training</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Terapi integrasi</li>
-                        </ul>
+                    </div>
+                    <!-- Content Section (Bottom Half) -->
+                    <div class="card-body text-center">
+                        <div class="testimonial-quote mb-3">
+                            <i class="fas fa-quote-left"></i>
+                </div>
+                        <p class="testimonial-text">"Program one-on-one di MSA sangat membantu anak saya dalam meningkatkan kemampuan sosial dan komunikasi. Terima kasih MSA!"</p>
+                        <h5 class="testimonial-name">Bapak Ahmad</h5>
+                        <p class="testimonial-role text-muted">Orang Tua Siswa</p>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-header text-center">
-                        <i class="fas fa-hands-helping fa-2x mb-2"></i>
-                        <h4 class="mb-0">Program Terapi</h4>
+            <!-- Testimonial Card 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card testimonial-card h-100">
+                    <!-- Photo Section (Top Half) -->
+                    <div class="testimonial-photo-section">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user"></i>
                     </div>
-                    <div class="card-body">
-                        <p>Program terapi komprehensif termasuk okupasi, fisioterapi, dan terapi wicara untuk mendukung perkembangan optimal.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Terapi okupasi</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Fisioterapi</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Terapi wicara</li>
-                        </ul>
+                    </div>
+                    <!-- Content Section (Bottom Half) -->
+                    <div class="card-body text-center">
+                        <div class="testimonial-quote mb-3">
+                            <i class="fas fa-quote-left"></i>
+                </div>
+                        <p class="testimonial-text">"Fasilitas di MSA sangat lengkap dan mendukung kebutuhan anak berkebutuhan khusus. Saya sangat merekomendasikan MSA untuk orang tua yang mencari sekolah terbaik."</p>
+                        <h5 class="testimonial-name">Ibu Fitri</h5>
+                        <p class="testimonial-role text-muted">Orang Tua Siswa</p>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="text-center mt-4">
-            <a href="{{ route('program') }}" class="btn btn-primary btn-lg">
-                <i class="fas fa-info-circle me-2"></i>Pelajari Lebih Lanjut
-            </a>
-        </div>
     </div>
 </section>
 
-<!-- Latest News -->
+<!-- FAQ Section -->
 <section class="py-5">
     <div class="container">
-        <h2 class="section-title">Berita Terbaru</h2>
-        <p class="section-subtitle">Informasi terkini tentang kegiatan dan program di Mulia Special Academy</p>
-        
         <div class="row">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card news-card h-100">
-                    <div class="card-img-top bg-primary d-flex align-items-center justify-content-center" style="height: 200px;">
-                        <i class="fas fa-user-plus fa-3x text-white"></i>
-                    </div>
-                    <div class="card-body">
-                        <span class="news-date">15 Desember 2024</span>
-                        <h5 class="card-title">Pendaftaran Siswa Baru 2025-2026</h5>
-                        <p class="card-text">Mulia Special Academy membuka pendaftaran siswa baru untuk tahun ajaran 2025-2026.</p>
-                        <a href="{{ route('berita.show', 1) }}" class="btn btn-outline-primary btn-sm">Baca Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card news-card h-100">
-                    <div class="card-img-top bg-success d-flex align-items-center justify-content-center" style="height: 200px;">
-                        <i class="fas fa-toilet fa-3x text-white"></i>
-                    </div>
-                    <div class="card-body">
-                        <span class="news-date">10 Desember 2024</span>
-                        <h5 class="card-title">Manfaat Toilet Training Sejak Dini</h5>
-                        <p class="card-text">Pelajari pentingnya toilet training untuk anak berkebutuhan khusus.</p>
-                        <a href="{{ route('berita.show', 2) }}" class="btn btn-outline-primary btn-sm">Baca Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card news-card h-100">
-                    <div class="card-img-top bg-warning d-flex align-items-center justify-content-center" style="height: 200px;">
-                        <i class="fas fa-palette fa-3x text-white"></i>
-                    </div>
-                    <div class="card-body">
-                        <span class="news-date">5 Desember 2024</span>
-                        <h5 class="card-title">Manfaat Bermain Play Dough</h5>
-                        <p class="card-text">Temukan manfaat bermain play dough untuk perkembangan anak.</p>
-                        <a href="{{ route('berita.show', 3) }}" class="btn btn-outline-primary btn-sm">Baca Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card news-card h-100">
-                    <div class="card-img-top bg-info d-flex align-items-center justify-content-center" style="height: 200px;">
-                        <i class="fas fa-hand-holding-heart fa-3x text-white"></i>
-                    </div>
-                    <div class="card-body">
-                        <span class="news-date">28 November 2024</span>
-                        <h5 class="card-title">Mitos vs Fakta: Sensory Play</h5>
-                        <p class="card-text">Mengungkap kebenaran tentang sensory play untuk anak berkebutuhan khusus.</p>
-                        <a href="{{ route('berita.show', 4) }}" class="btn btn-outline-primary btn-sm">Baca Selengkapnya</a>
-                    </div>
-                </div>
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+                <p class="section-subtitle">Temukan jawaban atas pertanyaan umum tentang Mulia Special Academy</p>
             </div>
         </div>
         
-        <div class="text-center mt-4">
-            <a href="{{ route('berita.index') }}" class="btn btn-primary btn-lg">
-                <i class="fas fa-newspaper me-2"></i>Lihat Semua Berita
-            </a>
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="accordion" id="faqAccordion">
+                    <!-- FAQ 1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                Bagaimana cara mendaftarkan anak saya di Mulia Special Academy?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Anda dapat mendaftarkan anak melalui link pendaftaran online yang tersedia di halaman kontak kami, atau datang langsung ke sekolah untuk konsultasi dan pendaftaran. Tim kami akan membantu Anda dengan proses pendaftaran yang mudah dan cepat.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                Apa saja program yang tersedia di MSA?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                MSA menyediakan berbagai program seperti Toilet Training Program, Pengembangan Akidah Akhlaq, Terapi Perilaku, Terapi Sensori, dan Stimulasi Tahap Perkembangan. Semua program dirancang khusus untuk memenuhi kebutuhan anak berkebutuhan khusus usia 2-6 tahun.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                Bagaimana sistem pembelajaran di Mulia Special Academy?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Sistem pembelajaran kami menggunakan pendekatan one-on-one (1:1) dengan stimulasi bertahap yang disesuaikan dengan kebutuhan setiap anak. Kami menggabungkan pendidikan akademik, terapi perkembangan, dan pembentukan karakter dalam program yang terintegrasi.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                Apakah ada program konsultasi untuk orang tua?
+                            </button>
+                        </h2>
+                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Ya, kami menyediakan program konsultasi rutin untuk orang tua, termasuk konseling keluarga, pelatihan keterampilan parenting, dan dukungan emosional. Kolaborasi dengan orang tua adalah kunci keberhasilan pembelajaran anak.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq5">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                Berapa biaya pendidikan di Mulia Special Academy?
+                            </button>
+                        </h2>
+                        <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Untuk informasi detail mengenai biaya pendidikan, silakan kunjungi halaman kontak kami atau hubungi langsung tim MSA. Kami juga menyediakan brosur digital yang berisi informasi lengkap tentang biaya pendidikan tahun ajaran 2025-2026.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 6 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq6">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                Apa saja fasilitas yang tersedia di MSA?
+                            </button>
+                        </h2>
+                        <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                MSA dilengkapi dengan fasilitas lengkap seperti Ruang Belajar One-on-One, Ruang Terapi, Playground, Ruang Konsultasi, Toilet khusus anak, dan Kolam Renang. Semua fasilitas dirancang khusus untuk mendukung kebutuhan anak berkebutuhan khusus.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
         </div>
     </div>
 </section>
@@ -505,4 +231,124 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('styles')
+<style>
+/* Testimonial Card Styles */
+.testimonial-card {
+    border: 4px solid #FF6B6B;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    background: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(255, 140, 0, 0.2);
+}
+
+.testimonial-photo-section {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: white;
+}
+
+.testimonial-quote {
+    font-size: 2rem;
+    color: var(--primary-orange);
+    opacity: 0.3;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    min-height: 120px;
+}
+
+.testimonial-name {
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
+.testimonial-role {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .testimonial-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .testimonial-text {
+        min-height: auto;
+    }
+}
+
+/* FAQ Section Styles */
+.accordion-item {
+    border: 2px solid #f0f0f0;
+    border-radius: 10px !important;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.accordion-button {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--dark-color);
+    background-color: white;
+    padding: 1.25rem 1.5rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+    color: white;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: var(--primary-orange);
+}
+
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23333'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-body {
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #666;
+    background-color: #fafafa;
+}
+</style>
 @endsection

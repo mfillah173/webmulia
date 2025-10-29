@@ -16,88 +16,50 @@
     </div>
 </section>
 
-
+<!-- Important Links Section -->
+<section class="py-5" style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="text-center text-white mb-5">LINK PENDAFTARAN DAN INFOMASI TERKAIT</h2>
+                
+                <div class="links-container">
+                    <!-- Link Pendaftaran -->
+                    <a href="https://bit.ly/PendaftaranSiswaBaruMuliaSpecialAcademy2025-2026" target="_blank" class="link-item">
+                        <div class="link-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <div class="link-content">
+                            <h5 class="link-title">Link Pendaftaran Siswa Baru 2025-2026</h5>
+                            <p class="link-url">bit.ly/PendaftaranSiswaBaruMuliaSpecialAcademy2025-2026</p>
+                        </div>
+                    </a>
+                    
+                    <!-- Divider -->
+                    <div class="link-divider"></div>
+                    
+                    <!-- Link Informasi Biaya -->
+                    <a href="https://heyzine.com/flip-book/9a89e78d26.html" target="_blank" class="link-item">
+                        <div class="link-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <div class="link-content">
+                            <h5 class="link-title">Informasi Biaya Pendidikan Mulia Special Academy 2025-2026</h5>
+                            <p class="link-url">heyzine.com/flip-book/9a89e78d26.html</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Contact Information -->
 <section class="py-5">
     <div class="container">
         <div class="row">
-            <!-- Contact Form -->
-            <div class="col-lg-8 mb-5">
-                <div class="contact-form">
-                    <h3 class="mb-4">Kirim Pesan</h3>
-                    
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    @endif
-
-                    <form action="{{ route('kontak.store') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="nama" class="form-label">Nama Lengkap *</label>
-                                <input type="text" class="form-control @error('nama') is-invalid @enderror" 
-                                       id="nama" name="nama" value="{{ old('nama') }}" required>
-                                @error('nama')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">Email *</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                       id="email" name="email" value="{{ old('email') }}" required>
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="telepon" class="form-label">Nomor Telepon *</label>
-                                <input type="tel" class="form-control @error('telepon') is-invalid @enderror" 
-                                       id="telepon" name="telepon" value="{{ old('telepon') }}" required>
-                                @error('telepon')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="subjek" class="form-label">Subjek *</label>
-                                <select class="form-select @error('subjek') is-invalid @enderror" id="subjek" name="subjek" required>
-                                    <option value="">Pilih Subjek</option>
-                                    <option value="Informasi Program" {{ old('subjek') == 'Informasi Program' ? 'selected' : '' }}>Informasi Program</option>
-                                    <option value="Pendaftaran Siswa" {{ old('subjek') == 'Pendaftaran Siswa' ? 'selected' : '' }}>Pendaftaran Siswa</option>
-                                    <option value="Konsultasi" {{ old('subjek') == 'Konsultasi' ? 'selected' : '' }}>Konsultasi</option>
-                                    <option value="Kunjungan Sekolah" {{ old('subjek') == 'Kunjungan Sekolah' ? 'selected' : '' }}>Kunjungan Sekolah</option>
-                                    <option value="Lainnya" {{ old('subjek') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
-                                </select>
-                                @error('subjek')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="pesan" class="form-label">Pesan *</label>
-                            <textarea class="form-control @error('pesan') is-invalid @enderror" 
-                                      id="pesan" name="pesan" rows="5" required>{{ old('pesan') }}</textarea>
-                            @error('pesan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
-                        </button>
-                    </form>
-                </div>
-            </div>
-
             <!-- Contact Details -->
-            <div class="col-lg-4">
+            <div class="col-lg-6 mx-auto">
                 <div class="contact-info">
                     <h3 class="mb-4">Informasi Kontak</h3>
                     
@@ -183,69 +145,7 @@
     </div>
 </section>
 
-<!-- FAQ Section -->
-<section class="py-5">
-    <div class="container">
-        <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="accordion" id="faqAccordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq1">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
-                                Bagaimana cara mendaftarkan anak saya?
-                            </button>
-                        </h2>
-                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Anda dapat mendaftarkan anak melalui link pendaftaran online yang tersedia di website kami, atau datang langsung ke sekolah untuk konsultasi dan pendaftaran. Tim kami akan membantu Anda dengan proses pendaftaran yang mudah dan cepat.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq2">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
-                                Apakah ada program konsultasi untuk orang tua?
-                            </button>
-                        </h2>
-                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Ya, kami menyediakan program konsultasi rutin untuk orang tua, termasuk konseling keluarga, pelatihan keterampilan parenting, dan dukungan emosional. Tim konselor kami siap membantu Anda menghadapi berbagai tantangan dalam mengasuh anak berkebutuhan khusus.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq3">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
-                                Bagaimana sistem pembelajaran di Mulia Special Academy?
-                            </button>
-                        </h2>
-                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Sistem pembelajaran kami menggunakan pendekatan Individualized Education Plan (IEP) yang disesuaikan dengan kebutuhan setiap anak. Kami menggabungkan pembelajaran akademik, terapi, dan life skills dalam program yang terintegrasi dan komprehensif.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq4">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
-                                Apakah sekolah menyediakan transportasi?
-                            </button>
-                        </h2>
-                        <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Ya, kami menyediakan layanan transportasi sekolah dengan armada yang aman dan nyaman. Sopir dan pendamping yang berpengalaman akan memastikan anak Anda sampai di sekolah dengan selamat dan tepat waktu.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 @endsection
 
 @section('styles')
