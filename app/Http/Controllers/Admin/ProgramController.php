@@ -12,7 +12,7 @@ class ProgramController extends Controller
 {
     public function index()
     {
-        $programs = Program::orderBy('urutan', 'asc')->paginate(10);
+        $programs = Program::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.program.index', compact('programs'));
     }
 
@@ -26,39 +26,26 @@ class ProgramController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'tujuan' => 'required|string',
-            'metode' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive'
+            'tujuan_program' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->nama);
 
-        // Auto generate urutan (berdasarkan jumlah data + 1)
-        $data['urutan'] = Program::count() + 1;
-
-        // Handle gambar upload dengan cara yang lebih robust
+        // Handle gambar upload
         if ($request->hasFile('gambar')) {
             try {
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-
-                // Pastikan directory ada
                 $directory = storage_path('app/public/images/program');
+
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
                 }
 
-                // Upload file
                 $gambar->move($directory, $gambarName);
-
                 $data['gambar'] = $gambarName;
-
-                \Log::info('File uploaded successfully:', [
-                    'filename' => $gambarName,
-                    'path' => $directory . '/' . $gambarName
-                ]);
             } catch (\Exception $e) {
                 \Log::error('File upload failed:', ['error' => $e->getMessage()]);
                 return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage());
@@ -85,18 +72,14 @@ class ProgramController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'tujuan' => 'required|string',
-            'metode' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive'
+            'tujuan_program' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->nama);
 
-        // Urutan tidak diubah saat update (tetap menggunakan urutan yang sudah ada)
-
-        // Handle gambar upload dengan cara yang lebih robust
+        // Handle gambar upload
         if ($request->hasFile('gambar')) {
             try {
                 // Delete old gambar
@@ -109,22 +92,14 @@ class ProgramController extends Controller
 
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-
-                // Pastikan directory ada
                 $directory = storage_path('app/public/images/program');
+
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
                 }
 
-                // Upload file
                 $gambar->move($directory, $gambarName);
-
                 $data['gambar'] = $gambarName;
-
-                \Log::info('File updated successfully:', [
-                    'filename' => $gambarName,
-                    'path' => $directory . '/' . $gambarName
-                ]);
             } catch (\Exception $e) {
                 \Log::error('File update failed:', ['error' => $e->getMessage()]);
                 return redirect()->back()->with('error', 'Gagal mengupdate gambar: ' . $e->getMessage());
@@ -149,14 +124,5 @@ class ProgramController extends Controller
         $program->delete();
 
         return redirect()->route('admin.program.index')->with('success', 'Program berhasil dihapus.');
-    }
-
-    public function toggleStatus(Program $program)
-    {
-        $program->update([
-            'status' => $program->status === 'active' ? 'inactive' : 'active'
-        ]);
-
-        return redirect()->back()->with('success', 'Status program berhasil diubah.');
     }
 }

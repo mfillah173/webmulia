@@ -14,24 +14,8 @@ class Fasilitas extends Model
     protected $fillable = [
         'nama',
         'slug',
-        'deskripsi',
-        'fitur',
-        'gambar',
-        'status',
-        'urutan'
+        'gambar'
     ];
-
-    // Scope untuk fasilitas yang aktif
-    public function scopeActive($query)
-    {
-        return $query->where('status', 'active');
-    }
-
-    // Scope untuk urutan
-    public function scopeOrdered($query)
-    {
-        return $query->orderBy('urutan', 'asc');
-    }
 
     // Accessor untuk URL gambar
     public function getImageUrlAttribute()
@@ -40,17 +24,5 @@ class Fasilitas extends Model
             return asset('storage/images/fasilitas/' . $this->gambar);
         }
         return null;
-    }
-
-    // Relationship dengan galeri
-    public function galeri()
-    {
-        return $this->hasMany(GaleriFasilitas::class);
-    }
-
-    // Method untuk mendapatkan galeri aktif
-    public function getActiveGaleri()
-    {
-        return $this->galeri()->where('status', 'active')->orderBy('urutan', 'asc')->get();
     }
 }

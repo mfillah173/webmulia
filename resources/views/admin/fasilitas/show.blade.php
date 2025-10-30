@@ -4,129 +4,93 @@
 @section('page-title', 'Detail Fasilitas')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h4 class="mb-0">Detail Fasilitas</h4>
-        <p class="text-muted mb-0">{{ $fasilitas->nama }}</p>
-    </div>
-    <div>
-        <a href="{{ route('admin.fasilitas.edit', $fasilitas) }}" class="btn btn-warning">
-            <i class="fas fa-edit me-2"></i>Edit
-        </a>
-        <a href="{{ route('admin.fasilitas.index') }}" class="btn btn-outline-secondary">
-            <i class="fas fa-arrow-left me-2"></i>Kembali
-        </a>
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.fasilitas.index') }}">Fasilitas</a></li>
+        <li class="breadcrumb-item active">Detail</li>
+    </ol>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Detail Fasilitas</h1>
+            <p class="page-subtitle">{{ $fasilitasItem->nama }}</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{{ route('admin.fasilitas.edit', $fasilitasItem) }}" class="btn btn-primary">
+                <i class="fas fa-edit me-2"></i>Edit
+            </a>
+            <a href="{{ route('admin.fasilitas.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Kembali
+            </a>
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-8">
         <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Informasi Fasilitas</h5>
+            </div>
             <div class="card-body">
-                <h5 class="card-title">Informasi Fasilitas</h5>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Nama Fasilitas:</label>
-                    <p class="mb-0">{{ $fasilitas->nama }}</p>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Slug:</label>
-                    <p class="mb-0"><code>{{ $fasilitas->slug }}</code></p>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Deskripsi:</label>
-                    <p class="mb-0">{{ $fasilitas->deskripsi }}</p>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Fitur:</label>
-                    <p class="mb-0">{{ $fasilitas->fitur }}</p>
-                </div>
-
-                @if($fasilitas->meta_description)
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Meta Description:</label>
-                    <p class="mb-0">{{ $fasilitas->meta_description }}</p>
-                </div>
-                @endif
-
-                @if($fasilitas->meta_keywords && count($fasilitas->meta_keywords) > 0)
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Meta Keywords:</label>
-                    <div class="mb-0">
-                        @foreach($fasilitas->meta_keywords as $keyword)
-                        <span class="badge bg-secondary me-1">{{ $keyword }}</span>
-                        @endforeach
-                    </div>
-                </div>
-                @endif
+                <table class="table table-borderless">
+                    <tr>
+                        <th width="200">Nama Fasilitas:</th>
+                        <td>{{ $fasilitasItem->nama }}</td>
+                    </tr>
+                    <tr>
+                        <th>Slug:</th>
+                        <td><code>{{ $fasilitasItem->slug }}</code></td>
+                    </tr>
+                    <tr>
+                        <th>Dibuat:</th>
+                        <td>{{ $fasilitasItem->created_at->format('d M Y H:i') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Terakhir Diubah:</th>
+                        <td>{{ $fasilitasItem->updated_at->format('d M Y H:i') }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
 
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Detail</h5>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Status:</label>
-                    <div>
-                        <span class="badge {{ $fasilitas->status === 'active' ? 'bg-success' : 'bg-secondary' }}">
-                            {{ $fasilitas->status === 'active' ? 'Aktif' : 'Nonaktif' }}
-                        </span>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Urutan:</label>
-                    <p class="mb-0">{{ $fasilitas->urutan }}</p>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Tanggal Dibuat:</label>
-                    <p class="mb-0">{{ $fasilitas->created_at->format('d F Y, H:i') }}</p>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Terakhir Diupdate:</label>
-                    <p class="mb-0">{{ $fasilitas->updated_at->format('d F Y, H:i') }}</p>
-                </div>
-
-                @if($fasilitas->gambar)
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Gambar:</label>
-                    <div>
-                        <img src="{{ asset('storage/images/fasilitas/' . $fasilitas->gambar) }}"
-                            alt="{{ $fasilitas->nama }}"
-                            class="img-fluid rounded">
-                    </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-image me-2"></i>Gambar</h5>
+            </div>
+            <div class="card-body text-center">
+                @if($fasilitasItem->gambar)
+                <img src="{{ asset('storage/images/fasilitas/' . $fasilitasItem->gambar) }}"
+                    alt="{{ $fasilitasItem->nama }}"
+                    class="img-fluid rounded">
+                @else
+                <div class="bg-light p-5 rounded">
+                    <i class="fas fa-building fa-5x text-muted"></i>
+                    <p class="text-muted mt-3">Tidak ada gambar</p>
                 </div>
                 @endif
             </div>
         </div>
 
-        <div class="card mt-3">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-cogs me-2"></i>Aksi</h5>
+            </div>
             <div class="card-body">
-                <h5 class="card-title">Aksi</h5>
-
                 <div class="d-grid gap-2">
-                    <form action="{{ route('admin.fasilitas.toggle-status', $fasilitas) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn {{ $fasilitas->status === 'active' ? 'btn-warning' : 'btn-success' }} w-100">
-                            <i class="fas fa-toggle-{{ $fasilitas->status === 'active' ? 'off' : 'on' }} me-2"></i>
-                            {{ $fasilitas->status === 'active' ? 'Nonaktifkan' : 'Aktifkan' }}
-                        </button>
-                    </form>
-
-                    <form action="{{ route('admin.fasilitas.destroy', $fasilitas) }}" method="POST"
+                    <form action="{{ route('admin.fasilitas.destroy', $fasilitasItem) }}" method="POST"
                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus fasilitas ini?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger w-100">
-                            <i class="fas fa-trash me-2"></i>Hapus
+                            <i class="fas fa-trash me-2"></i>Hapus Fasilitas
                         </button>
                     </form>
                 </div>

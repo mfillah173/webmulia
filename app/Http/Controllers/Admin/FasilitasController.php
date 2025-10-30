@@ -12,7 +12,7 @@ class FasilitasController extends Controller
 {
     public function index()
     {
-        $fasilitas = Fasilitas::orderBy('urutan', 'asc')->paginate(10);
+        $fasilitas = Fasilitas::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.fasilitas.index', compact('fasilitas'));
     }
 
@@ -25,45 +25,29 @@ class FasilitasController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'fitur' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive',
-            'meta_description' => 'nullable|string|max:160',
-            'meta_keywords' => 'nullable|string'
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->nama);
 
-        // Auto generate urutan (berdasarkan jumlah data + 1)
-        $data['urutan'] = Fasilitas::count() + 1;
-
-        // Handle gambar upload dengan cara yang lebih robust
+        // Handle gambar upload
         if ($request->hasFile('gambar')) {
             try {
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-
-                // Pastikan directory ada
                 $directory = storage_path('app/public/images/fasilitas');
+
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
                 }
 
-                // Upload file
                 $gambar->move($directory, $gambarName);
-
                 $data['gambar'] = $gambarName;
             } catch (\Exception $e) {
                 \Log::error('File upload failed:', ['error' => $e->getMessage()]);
                 return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage());
             }
-        }
-
-        // Handle meta keywords
-        if ($request->meta_keywords) {
-            $data['meta_keywords'] = array_map('trim', explode(',', $request->meta_keywords));
         }
 
         Fasilitas::create($data);
@@ -85,20 +69,13 @@ class FasilitasController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'fitur' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive',
-            'meta_description' => 'nullable|string|max:160',
-            'meta_keywords' => 'nullable|string'
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->nama);
 
-        // Urutan tidak diubah saat update (tetap menggunakan urutan yang sudah ada)
-
-        // Handle gambar upload dengan cara yang lebih robust
+        // Handle gambar upload
         if ($request->hasFile('gambar')) {
             try {
                 // Delete old gambar
@@ -111,26 +88,18 @@ class FasilitasController extends Controller
 
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-
-                // Pastikan directory ada
                 $directory = storage_path('app/public/images/fasilitas');
+
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
                 }
 
-                // Upload file
                 $gambar->move($directory, $gambarName);
-
                 $data['gambar'] = $gambarName;
             } catch (\Exception $e) {
                 \Log::error('File update failed:', ['error' => $e->getMessage()]);
                 return redirect()->back()->with('error', 'Gagal mengupdate gambar: ' . $e->getMessage());
             }
-        }
-
-        // Handle meta keywords
-        if ($request->meta_keywords) {
-            $data['meta_keywords'] = array_map('trim', explode(',', $request->meta_keywords));
         }
 
         $fasilitas->update($data);
@@ -151,14 +120,5 @@ class FasilitasController extends Controller
         $fasilitas->delete();
 
         return redirect()->route('admin.fasilitas.index')->with('success', 'Fasilitas berhasil dihapus.');
-    }
-
-    public function toggleStatus(Fasilitas $fasilitas)
-    {
-        $fasilitas->update([
-            'status' => $fasilitas->status === 'active' ? 'inactive' : 'active'
-        ]);
-
-        return redirect()->back()->with('success', 'Status fasilitas berhasil diubah.');
     }
 }

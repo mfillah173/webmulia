@@ -607,21 +607,9 @@
                 <div class="nav-section-title">Content</div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="{{ route('admin.berita.index') }}" class="nav-link {{ request()->routeIs('admin.berita*') ? 'active' : '' }}">
-                            <i class="fas fa-newspaper"></i>
-                            <span class="nav-text">Berita</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ route('admin.program.index') }}" class="nav-link {{ request()->routeIs('admin.program*') ? 'active' : '' }}">
                             <i class="fas fa-graduation-cap"></i>
                             <span class="nav-text">Program</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.sistem.index') }}" class="nav-link {{ request()->routeIs('admin.sistem*') ? 'active' : '' }}">
-                            <i class="fas fa-cogs"></i>
-                            <span class="nav-text">Sistem</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -630,29 +618,16 @@
                             <span class="nav-text">Fasilitas</span>
                         </a>
                     </li>
-                </ul>
-            </div>
-
-            <!-- Media & Gallery -->
-            <div class="nav-section">
-                <div class="nav-section-title">Media</div>
-                <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="{{ route('admin.galeri-program.index') }}" class="nav-link {{ request()->routeIs('admin.galeri-program*') ? 'active' : '' }}">
-                            <i class="fas fa-images"></i>
-                            <span class="nav-text">Galeri Program</span>
+                        <a href="{{ route('admin.testimoni.index') }}" class="nav-link {{ request()->routeIs('admin.testimoni*') ? 'active' : '' }}">
+                            <i class="fas fa-comments"></i>
+                            <span class="nav-text">Testimoni</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.galeri-sistem.index') }}" class="nav-link {{ request()->routeIs('admin.galeri-sistem*') ? 'active' : '' }}">
-                            <i class="fas fa-photo-video"></i>
-                            <span class="nav-text">Galeri Sistem</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.galeri-fasilitas.index') }}" class="nav-link {{ request()->routeIs('admin.galeri-fasilitas*') ? 'active' : '' }}">
-                            <i class="fas fa-camera"></i>
-                            <span class="nav-text">Galeri Fasilitas</span>
+                        <a href="{{ route('admin.faq.index') }}" class="nav-link {{ request()->routeIs('admin.faq*') ? 'active' : '' }}">
+                            <i class="fas fa-question-circle"></i>
+                            <span class="nav-text">FAQ</span>
                         </a>
                     </li>
                 </ul>
@@ -662,12 +637,6 @@
             <div class="nav-section">
                 <div class="nav-section-title">Settings</div>
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="{{ route('admin.syarat-pendaftaran.index') }}" class="nav-link {{ request()->routeIs('admin.syarat-pendaftaran*') ? 'active' : '' }}">
-                            <i class="fas fa-clipboard-list"></i>
-                            <span class="nav-text">Syarat Pendaftaran</span>
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a href="{{ route('admin.kontak.index') }}" class="nav-link {{ request()->routeIs('admin.kontak*') ? 'active' : '' }}">
                             <i class="fas fa-envelope"></i>

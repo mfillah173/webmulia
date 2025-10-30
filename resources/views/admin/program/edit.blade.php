@@ -4,14 +4,26 @@
 @section('page-title', 'Edit Program')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h4 class="mb-0">Edit Program</h4>
-        <p class="text-muted mb-0">Edit program: {{ $program->nama }}</p>
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.program.index') }}">Program</a></li>
+        <li class="breadcrumb-item active">Edit Program</li>
+    </ol>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Edit Program</h1>
+            <p class="page-subtitle">Perbarui informasi program: {{ $program->nama }}</p>
+        </div>
+        <a href="{{ route('admin.program.index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Kembali
+        </a>
     </div>
-    <a href="{{ route('admin.program.index') }}" class="btn btn-outline-secondary">
-        <i class="fas fa-arrow-left me-2"></i>Kembali
-    </a>
 </div>
 
 <div class="card">
@@ -41,19 +53,10 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="tujuan" class="form-label">Tujuan Program <span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('tujuan') is-invalid @enderror"
-                            id="tujuan" name="tujuan" rows="4" required>{{ old('tujuan', $program->tujuan) }}</textarea>
-                        @error('tujuan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="metode" class="form-label">Metode Pembelajaran <span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('metode') is-invalid @enderror"
-                            id="metode" name="metode" rows="4" required>{{ old('metode', $program->metode) }}</textarea>
-                        @error('metode')
+                        <label for="tujuan_program" class="form-label">Tujuan Program <span class="text-danger">*</span></label>
+                        <textarea class="form-control @error('tujuan_program') is-invalid @enderror"
+                            id="tujuan_program" name="tujuan_program" rows="4" required>{{ old('tujuan_program', $program->tujuan_program) }}</textarea>
+                        @error('tujuan_program')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -76,63 +79,18 @@
                         @error('gambar')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        <div class="form-text">Format: JPG, PNG, GIF. Maksimal 2MB</div>
+                        <div class="form-text">Format: JPG, PNG, GIF. Maksimal 2MB. Kosongkan jika tidak ingin mengubah gambar.</div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
-                        <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
-                            <option value="">Pilih Status</option>
-                            <option value="active" {{ old('status', $program->status) === 'active' ? 'selected' : '' }}>Aktif</option>
-                            <option value="inactive" {{ old('status', $program->status) === 'inactive' ? 'selected' : '' }}>Nonaktif</option>
-                        </select>
-                        @error('status')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
-                        <select class="form-control @error('status') is-invalid @enderror" id="status" name="status" required>
-                            <option value="active" {{ old('status', $program->status) == 'active' ? 'selected' : '' }}>Aktif</option>
-                            <option value="inactive" {{ old('status', $program->status) == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
-                        </select>
-                        @error('status')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                        <div class="form-text">Urutan: {{ $program->urutan }} (otomatis berdasarkan waktu pembuatan)</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="meta_description" class="form-label">Meta Description</label>
-                        <textarea class="form-control @error('meta_description') is-invalid @enderror"
-                            id="meta_description" name="meta_description" rows="3">{{ old('meta_description', $program->meta_description) }}</textarea>
-                        @error('meta_description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                        <div class="form-text">Maksimal 160 karakter</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="meta_keywords" class="form-label">Meta Keywords</label>
-                        <input type="text" class="form-control @error('meta_keywords') is-invalid @enderror"
-                            id="meta_keywords" name="meta_keywords"
-                            value="{{ old('meta_keywords', is_array($program->meta_keywords) ? implode(', ', $program->meta_keywords) : $program->meta_keywords) }}"
-                            placeholder="keyword1, keyword2, keyword3">
-                        @error('meta_keywords')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                        <div class="form-text">Pisahkan dengan koma</div>
-                    </div>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-end gap-2">
+            <div class="d-flex justify-content-end gap-2 mt-4">
                 <a href="{{ route('admin.program.index') }}" class="btn btn-secondary">
                     <i class="fas fa-times me-2"></i>Batal
                 </a>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-save me-2"></i>Update
+                    <i class="fas fa-save me-2"></i>Update Program
                 </button>
             </div>
         </form>

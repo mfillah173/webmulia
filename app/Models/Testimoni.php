@@ -5,27 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Program extends Model
+class Testimoni extends Model
 {
     use HasFactory;
 
-    protected $table = 'programs';
+    protected $table = 'testimoni';
 
     protected $fillable = [
-        'nama',
-        'slug',
+        'gambar',
         'deskripsi',
-        'tujuan_program',
-        'gambar'
+        'nama_narasumber',
+        'jabatan'
     ];
 
     // Accessor untuk URL gambar
     public function getImageUrlAttribute()
     {
         if ($this->gambar) {
-            return asset('storage/images/program/' . $this->gambar);
+            return asset('storage/images/testimoni/' . $this->gambar);
         }
-        return null;
+        return asset('images/default-avatar.png');
     }
 
     // Accessor untuk excerpt deskripsi

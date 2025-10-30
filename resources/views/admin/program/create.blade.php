@@ -82,36 +82,19 @@
                         @enderror
                     </div>
 
-                    <!-- Tujuan -->
+                    <!-- Tujuan Program -->
                     <div class="form-group">
-                        <label for="tujuan" class="form-label">
+                        <label for="tujuan_program" class="form-label required">
                             <i class="fas fa-bullseye me-1"></i>Tujuan Program
                         </label>
-                        <textarea class="form-control @error('tujuan') is-invalid @enderror"
-                            id="tujuan"
-                            name="tujuan"
+                        <textarea class="form-control @error('tujuan_program') is-invalid @enderror"
+                            id="tujuan_program"
+                            name="tujuan_program"
                             rows="3"
-                            placeholder="Apa tujuan dari program ini?">{{ old('tujuan') }}</textarea>
+                            placeholder="Apa tujuan dari program ini?"
+                            required>{{ old('tujuan_program') }}</textarea>
                         <div class="form-help">Tujuan dan manfaat program pembelajaran</div>
-                        @error('tujuan')
-                        <div class="invalid-feedback">
-                            <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-
-                    <!-- Metode -->
-                    <div class="form-group">
-                        <label for="metode" class="form-label">
-                            <i class="fas fa-cogs me-1"></i>Metode Pembelajaran
-                        </label>
-                        <textarea class="form-control @error('metode') is-invalid @enderror"
-                            id="metode"
-                            name="metode"
-                            rows="3"
-                            placeholder="Bagaimana metode pembelajaran yang digunakan?">{{ old('metode') }}</textarea>
-                        <div class="form-help">Metode dan pendekatan pembelajaran yang digunakan</div>
-                        @error('metode')
+                        @error('tujuan_program')
                         <div class="invalid-feedback">
                             <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
                         </div>
@@ -132,24 +115,6 @@
 
                         <div class="form-help">Gambar utama program yang akan ditampilkan di website. Format: JPG, PNG, GIF. Maksimal 2MB</div>
                         @error('gambar')
-                        <div class="invalid-feedback">
-                            <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-
-                    <!-- Status -->
-                    <div class="form-group">
-                        <label for="status" class="form-label required">
-                            <i class="fas fa-toggle-on me-1"></i>Status
-                        </label>
-                        <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
-                            <option value="">Pilih Status</option>
-                            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Aktif</option>
-                            <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
-                        </select>
-                        <div class="form-help">Status tampil di website. Urutan akan diatur otomatis berdasarkan waktu pembuatan.</div>
-                        @error('status')
                         <div class="invalid-feedback">
                             <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
                         </div>
@@ -197,8 +162,8 @@
                 </div>
 
                 <div class="help-item">
-                    <h6 class="help-item-title">SEO</h6>
-                    <p class="help-item-text">Isi meta description dan keywords untuk optimasi mesin pencari.</p>
+                    <h6 class="help-item-title">Tujuan Program</h6>
+                    <p class="help-item-text">Jelaskan tujuan pembelajaran yang ingin dicapai dari program ini.</p>
                 </div>
             </div>
         </div>
