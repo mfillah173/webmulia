@@ -21,12 +21,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Kontak Management
+    // Kontak (Informasi Kontak) Management
     Route::get('kontak', [KontakController::class, 'index'])->name('kontak.index');
-    Route::get('kontak/{kontak}', [KontakController::class, 'show'])->name('kontak.show');
-    Route::post('kontak/{kontak}/mark-read', [KontakController::class, 'markAsRead'])->name('kontak.mark-read');
-    Route::post('kontak/{kontak}/reply', [KontakController::class, 'reply'])->name('kontak.reply');
-    Route::delete('kontak/{kontak}', [KontakController::class, 'destroy'])->name('kontak.destroy');
+    Route::post('kontak/update', [KontakController::class, 'update'])->name('kontak.update');
 
     // Program Management
     Route::resource('program', ProgramController::class);

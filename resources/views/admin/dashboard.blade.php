@@ -101,23 +101,6 @@
         </div>
     </div>
 
-    <!-- Kontak -->
-    <div class="col-xl-3 col-lg-6 col-md-6">
-        <div class="card border-left-secondary shadow h-100">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Kontak</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['total_kontak'] }}</div>
-                        <div class="text-xs text-muted mt-1">{{ $stats['kontak_unread'] }} belum dibaca</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-envelope fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Quick Actions -->
