@@ -206,8 +206,7 @@ function showNotification(message, type = 'success') {
 function createBackToTopButton() {
     const button = document.createElement('button');
     button.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    button.className = 'btn btn-primary position-fixed';
-    button.style.cssText = 'bottom: 20px; right: 20px; z-index: 999; width: 50px; height: 50px; border-radius: 50%; display: none;';
+    button.className = 'back-to-top-btn';
     button.setAttribute('aria-label', 'Kembali ke atas');
 
     button.addEventListener('click', () => {
@@ -219,13 +218,70 @@ function createBackToTopButton() {
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
-            button.style.display = 'block';
+            button.style.display = 'flex';
         } else {
             button.style.display = 'none';
         }
     });
 
     document.body.appendChild(button);
+    
+    // Add CSS for back to top button
+    if (!document.getElementById('back-to-top-style')) {
+        const style = document.createElement('style');
+        style.id = 'back-to-top-style';
+        style.textContent = `
+            .back-to-top-btn {
+                position: fixed;
+                width: 60px;
+                height: 60px;
+                bottom: 30px;
+                right: 30px;
+                background: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+                z-index: 999;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                line-height: 1;
+            }
+            
+            .back-to-top-btn:hover {
+                background: linear-gradient(135deg, #ff6b35 0%, #ff8c00 100%);
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
+                color: white;
+            }
+            
+            .back-to-top-btn i {
+                color: white !important;
+                font-size: 24px;
+                display: inline-block;
+                line-height: 1;
+                vertical-align: middle;
+            }
+            
+            @media (max-width: 768px) {
+                .back-to-top-btn {
+                    width: 55px;
+                    height: 55px;
+                    bottom: 20px;
+                    right: 20px;
+                }
+                
+                .back-to-top-btn i {
+                    font-size: 22px;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 }
 
 // Initialize back to top button

@@ -17,6 +17,14 @@ class Fasilitas extends Model
         'gambar'
     ];
 
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+
     // Accessor untuk URL gambar
     public function getImageUrlAttribute()
     {

@@ -7,6 +7,8 @@ use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class FasilitasController extends Controller
 {
@@ -31,8 +33,39 @@ class FasilitasController extends Controller
         $data = $request->all();
         $data['slug'] = Str::slug($request->nama);
 
-        // Handle gambar upload
-        if ($request->hasFile('gambar')) {
+        // Handle gambar upload (cropped or original)
+        if ($request->filled('gambar_cropped')) {
+            // Handle cropped image (base64)
+            try {
+                $base64Image = $request->input('gambar_cropped');
+                // Remove data:image/png;base64, or data:image/jpeg;base64, prefix
+                if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $type)) {
+                    $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
+                    $type = strtolower($type[1]); // jpg, png, gif
+                } else {
+                    $type = 'jpg';
+                }
+
+                $imageData = base64_decode($base64Image);
+                if ($imageData === false) {
+                    throw new \Exception('Invalid base64 image data');
+                }
+
+                $gambarName = time() . '_' . Str::slug($request->nama) . '.' . $type;
+                $directory = storage_path('app/public/images/fasilitas');
+
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0755, true);
+                }
+
+                file_put_contents($directory . '/' . $gambarName, $imageData);
+                $data['gambar'] = $gambarName;
+            } catch (\Exception $e) {
+                Log::error('Cropped image upload failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal menyimpan gambar yang di-crop: ' . $e->getMessage())->withInput();
+            }
+        } elseif ($request->hasFile('gambar')) {
+            // Handle original file upload
             try {
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
@@ -45,8 +78,8 @@ class FasilitasController extends Controller
                 $gambar->move($directory, $gambarName);
                 $data['gambar'] = $gambarName;
             } catch (\Exception $e) {
-                \Log::error('File upload failed:', ['error' => $e->getMessage()]);
-                return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage());
+                Log::error('File upload failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage())->withInput();
             }
         }
 
@@ -55,70 +88,179 @@ class FasilitasController extends Controller
         return redirect()->route('admin.fasilitas.index')->with('success', 'Fasilitas berhasil ditambahkan.');
     }
 
-    public function show(Fasilitas $fasilitas)
+    public function show($id)
     {
+        $fasilitas = Fasilitas::findOrFail($id);
         return view('admin.fasilitas.show', compact('fasilitas'));
     }
 
-    public function edit(Fasilitas $fasilitas)
+    public function edit($id)
     {
+        $fasilitas = Fasilitas::findOrFail($id);
         return view('admin.fasilitas.edit', compact('fasilitas'));
     }
 
-    public function update(Request $request, Fasilitas $fasilitas)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
+        try {
+            // Find fasilitas by ID
+            $fasilitas = Fasilitas::findOrFail($id);
 
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->nama);
+            $request->validate([
+                'nama' => 'required|string|max:255',
+                'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
 
-        // Handle gambar upload
-        if ($request->hasFile('gambar')) {
-            try {
-                // Delete old gambar
-                if ($fasilitas->gambar) {
-                    $oldPath = storage_path('app/public/images/fasilitas/' . $fasilitas->gambar);
-                    if (file_exists($oldPath)) {
-                        unlink($oldPath);
+            $data = $request->all();
+            $data['slug'] = Str::slug($request->nama);
+
+            // Handle gambar upload (cropped or original)
+            if ($request->filled('gambar_cropped')) {
+                // Handle cropped image (base64)
+                try {
+                    // Delete old gambar
+                    if ($fasilitas->gambar) {
+                        $oldPath = storage_path('app/public/images/fasilitas/' . $fasilitas->gambar);
+                        if (file_exists($oldPath)) {
+                            @unlink($oldPath);
+                        }
                     }
+
+                    $base64Image = $request->input('gambar_cropped');
+                    // Remove data:image/png;base64, or data:image/jpeg;base64, prefix
+                    if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $type)) {
+                        $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
+                        $type = strtolower($type[1]); // jpg, png, gif
+                    } else {
+                        $type = 'jpg';
+                    }
+
+                    $imageData = base64_decode($base64Image);
+                    if ($imageData === false) {
+                        throw new \Exception('Invalid base64 image data');
+                    }
+
+                    $gambarName = time() . '_' . Str::slug($request->nama) . '.' . $type;
+                    $directory = storage_path('app/public/images/fasilitas');
+
+                    if (!file_exists($directory)) {
+                        mkdir($directory, 0755, true);
+                    }
+
+                    file_put_contents($directory . '/' . $gambarName, $imageData);
+                    $data['gambar'] = $gambarName;
+                } catch (\Exception $e) {
+                    Log::error('Cropped image update failed:', ['error' => $e->getMessage()]);
+                    return redirect()->back()->with('error', 'Gagal menyimpan gambar yang di-crop: ' . $e->getMessage())->withInput();
                 }
+            } elseif ($request->hasFile('gambar')) {
+                // Handle original file upload
+                try {
+                    // Delete old gambar
+                    if ($fasilitas->gambar) {
+                        $oldPath = storage_path('app/public/images/fasilitas/' . $fasilitas->gambar);
+                        if (file_exists($oldPath)) {
+                            @unlink($oldPath);
+                        }
+                    }
 
-                $gambar = $request->file('gambar');
-                $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-                $directory = storage_path('app/public/images/fasilitas');
+                    $gambar = $request->file('gambar');
+                    $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
+                    $directory = storage_path('app/public/images/fasilitas');
 
-                if (!file_exists($directory)) {
-                    mkdir($directory, 0755, true);
+                    if (!file_exists($directory)) {
+                        mkdir($directory, 0755, true);
+                    }
+
+                    $gambar->move($directory, $gambarName);
+                    $data['gambar'] = $gambarName;
+                } catch (\Exception $e) {
+                    Log::error('File update failed:', ['error' => $e->getMessage()]);
+                    return redirect()->back()->with('error', 'Gagal mengupdate gambar: ' . $e->getMessage())->withInput();
                 }
-
-                $gambar->move($directory, $gambarName);
-                $data['gambar'] = $gambarName;
-            } catch (\Exception $e) {
-                \Log::error('File update failed:', ['error' => $e->getMessage()]);
-                return redirect()->back()->with('error', 'Gagal mengupdate gambar: ' . $e->getMessage());
             }
+
+            $fasilitas->update($data);
+
+            return redirect()->route('admin.fasilitas.index')->with('success', 'Fasilitas berhasil diperbarui.');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::warning('Fasilitas not found for update:', ['id' => $id, 'error' => $e->getMessage()]);
+            return redirect()->route('admin.fasilitas.index')->with('error', 'Fasilitas tidak ditemukan.');
+        } catch (\Exception $e) {
+            Log::error('Fasilitas update failed:', [
+                'error' => $e->getMessage(),
+                'fasilitas_id' => $id,
+                'trace' => $e->getTraceAsString()
+            ]);
+            return redirect()->back()->with('error', 'Gagal memperbarui fasilitas: ' . $e->getMessage())->withInput();
         }
-
-        $fasilitas->update($data);
-
-        return redirect()->route('admin.fasilitas.index')->with('success', 'Fasilitas berhasil diperbarui.');
     }
 
-    public function destroy(Fasilitas $fasilitas)
+    public function destroy($id)
     {
-        // Delete gambar
-        if ($fasilitas->gambar) {
-            $oldPath = storage_path('app/public/images/fasilitas/' . $fasilitas->gambar);
-            if (file_exists($oldPath)) {
-                unlink($oldPath);
+        try {
+            // Find fasilitas by ID
+            $fasilitas = Fasilitas::findOrFail($id);
+
+            Log::info('Fasilitas destroy method called:', [
+                'fasilitas_id' => $fasilitas->id,
+                'nama' => $fasilitas->nama,
+                'request_method' => request()->method(),
+                'route' => request()->route()->getName()
+            ]);
+
+            // Store nama for success message before delete
+            $nama = $fasilitas->nama;
+            $fasilitasId = $fasilitas->id;
+
+            // Delete gambar if exists
+            if ($fasilitas->gambar) {
+                $oldPath = storage_path('app/public/images/fasilitas/' . $fasilitas->gambar);
+                if (file_exists($oldPath)) {
+                    @unlink($oldPath);
+                }
             }
+
+            // Use DB query directly to ensure deletion
+            $deleted = DB::table('fasilitas')->where('id', $fasilitasId)->delete();
+
+            if ($deleted) {
+                Log::info('Fasilitas deleted successfully using DB query:', [
+                    'fasilitas_id' => $fasilitasId,
+                    'nama' => $nama,
+                    'rows_deleted' => $deleted
+                ]);
+
+                // Double check deletion
+                $verify = DB::table('fasilitas')->where('id', $fasilitasId)->first();
+                if (!$verify) {
+                    return redirect()->route('admin.fasilitas.index')->with('success', 'Fasilitas "' . $nama . '" berhasil dihapus.');
+                } else {
+                    Log::error('Fasilitas still exists after DB delete:', ['fasilitas_id' => $fasilitasId]);
+                    return redirect()->route('admin.fasilitas.index')->with('error', 'Gagal menghapus fasilitas. Silakan hubungi administrator.');
+                }
+            } else {
+                Log::error('DB delete returned 0 rows:', ['fasilitas_id' => $fasilitasId]);
+                return redirect()->route('admin.fasilitas.index')->with('error', 'Gagal menghapus fasilitas. Data tidak ditemukan.');
+            }
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::warning('Fasilitas not found for delete:', ['id' => $id, 'error' => $e->getMessage()]);
+            return redirect()->route('admin.fasilitas.index')->with('error', 'Fasilitas tidak ditemukan.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Log::error('Fasilitas delete query failed:', [
+                'error' => $e->getMessage(),
+                'fasilitas_id' => $id,
+                'sql' => $e->getSql(),
+                'bindings' => $e->getBindings()
+            ]);
+            return redirect()->route('admin.fasilitas.index')->with('error', 'Gagal menghapus fasilitas. Mungkin masih ada data terkait.');
+        } catch (\Exception $e) {
+            Log::error('Fasilitas delete failed:', [
+                'error' => $e->getMessage(),
+                'fasilitas_id' => $id,
+                'trace' => $e->getTraceAsString()
+            ]);
+            return redirect()->route('admin.fasilitas.index')->with('error', 'Gagal menghapus fasilitas: ' . $e->getMessage());
         }
-
-        $fasilitas->delete();
-
-        return redirect()->route('admin.fasilitas.index')->with('success', 'Fasilitas berhasil dihapus.');
     }
 }

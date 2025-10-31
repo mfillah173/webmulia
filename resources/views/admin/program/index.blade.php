@@ -34,14 +34,6 @@
         </div>
     </div>
 </div>
-
-@if(session('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-@endif
-
 @if(session('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
@@ -67,21 +59,23 @@
             @endif
             <div class="card-body">
                 <h5 class="card-title">{{ $program->nama }}</h5>
-                <p class="card-text">{{ Str::limit($program->deskripsi, 100) }}</p>
+                @if($program->tujuan_program)
+                <p class="card-text">{{ \Str::limit($program->tujuan_program, 80) }}</p>
+                @endif
             </div>
             <div class="card-footer bg-transparent">
                 <div class="d-flex gap-2 justify-content-center">
                     <a href="{{ route('admin.program.show', $program) }}" class="btn btn-sm btn-outline-info">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye"></i> Lihat
                     </a>
                     <a href="{{ route('admin.program.edit', $program) }}" class="btn btn-sm btn-outline-primary">
-                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-edit"></i> Edit
                     </a>
                     <form action="{{ route('admin.program.destroy', $program) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus program ini?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-outline-danger">
-                            <i class="fas fa-trash"></i>
+                            <i class="fas fa-trash"></i> Hapus
                         </button>
                     </form>
                 </div>
@@ -98,7 +92,7 @@
 <div class="card">
     <div class="card-body text-center py-5">
         <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
-        <p class="text-muted">Belum ada program. <a href="{{ route('admin.program.create') }}">Tambah program</a></p>
+        <p class="text-muted">Belum ada program.</p>
     </div>
 </div>
 @endif

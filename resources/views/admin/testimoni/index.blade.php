@@ -14,16 +14,14 @@
 
 <!-- Page Header -->
 <div class="page-header mb-4">
-    <div class="page-header-content">
-        <div class="page-header-text">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
             <h1 class="page-title">Kelola Testimoni</h1>
             <p class="page-subtitle">Kelola testimoni dari pengguna website</p>
         </div>
-        <div class="page-header-actions">
-            <a href="{{ route('admin.testimoni.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus me-2"></i>Tambah Testimoni
-            </a>
-        </div>
+        <a href="{{ route('admin.testimoni.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Tambah Testimoni
+        </a>
     </div>
 </div>
 
@@ -36,13 +34,6 @@
         </div>
     </div>
 </div>
-
-@if(session('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-@endif
 
 @if(session('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -76,16 +67,16 @@
             <div class="card-footer bg-transparent">
                 <div class="d-flex gap-2 justify-content-center">
                     <a href="{{ route('admin.testimoni.show', $item) }}" class="btn btn-sm btn-outline-info">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye"></i> Lihat
                     </a>
                     <a href="{{ route('admin.testimoni.edit', $item) }}" class="btn btn-sm btn-outline-primary">
-                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-edit"></i> Edit
                     </a>
                     <form action="{{ route('admin.testimoni.destroy', $item) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus testimoni ini?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-outline-danger">
-                            <i class="fas fa-trash"></i>
+                            <i class="fas fa-trash"></i> Hapus
                         </button>
                     </form>
                 </div>
@@ -102,7 +93,7 @@
 <div class="card">
     <div class="card-body text-center py-5">
         <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
-        <p class="text-muted">Belum ada testimoni. <a href="{{ route('admin.testimoni.create') }}">Tambah testimoni</a></p>
+        <p class="text-muted">Belum ada testimoni.</p>
     </div>
 </div>
 @endif

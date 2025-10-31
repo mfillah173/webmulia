@@ -14,16 +14,14 @@
 
 <!-- Page Header -->
 <div class="page-header mb-4">
-    <div class="page-header-content">
-        <div class="page-header-text">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
             <h1 class="page-title">Kelola FAQ</h1>
             <p class="page-subtitle">Kelola pertanyaan yang sering ditanyakan</p>
         </div>
-        <div class="page-header-actions">
-            <a href="{{ route('admin.faq.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus me-2"></i>Tambah FAQ
-            </a>
-        </div>
+        <a href="{{ route('admin.faq.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Tambah FAQ
+        </a>
     </div>
 </div>
 
@@ -36,13 +34,6 @@
         </div>
     </div>
 </div>
-
-@if(session('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-@endif
 
 @if(session('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -88,7 +79,7 @@
 <div class="card">
     <div class="card-body text-center py-5">
         <i class="fas fa-question-circle fa-3x text-muted mb-3"></i>
-        <p class="text-muted">Belum ada FAQ. <a href="{{ route('admin.faq.create') }}">Tambah FAQ</a></p>
+        <p class="text-muted">Belum ada FAQ.</p>
     </div>
 </div>
 @endif

@@ -63,25 +63,6 @@
                         @enderror
                     </div>
 
-                    <!-- Deskripsi -->
-                    <div class="form-group">
-                        <label for="deskripsi" class="form-label required">
-                            <i class="fas fa-align-left me-1"></i>Deskripsi Program
-                        </label>
-                        <textarea class="form-control @error('deskripsi') is-invalid @enderror"
-                            id="deskripsi"
-                            name="deskripsi"
-                            rows="4"
-                            placeholder="Jelaskan program pembelajaran secara detail..."
-                            required>{{ old('deskripsi') }}</textarea>
-                        <div class="form-help">Deskripsi lengkap tentang program pembelajaran</div>
-                        @error('deskripsi')
-                        <div class="invalid-feedback">
-                            <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-
                     <!-- Tujuan Program -->
                     <div class="form-group">
                         <label for="tujuan_program" class="form-label required">
@@ -112,13 +93,26 @@
                             id="gambar"
                             name="gambar"
                             accept="image/*">
+                        <input type="hidden" id="gambar_cropped" name="gambar_cropped">
 
-                        <div class="form-help">Gambar utama program yang akan ditampilkan di website. Format: JPG, PNG, GIF. Maksimal 2MB</div>
+                        <div class="form-help">Gambar utama program yang akan ditampilkan di website. Format: JPG, PNG, GIF</div>
                         @error('gambar')
                         <div class="invalid-feedback">
                             <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
                         </div>
                         @enderror
+                        <div id="imagePreview" class="mt-3" style="display: none;">
+                            <div class="card">
+                                <div class="card-body p-2">
+                                    <img id="previewImg" src="" alt="Preview" style="max-width: 100%; height: auto; border-radius: 4px;">
+                                    <div class="mt-2">
+                                        <button type="button" class="btn btn-sm btn-outline-danger" id="removeImageBtn">
+                                            <i class="fas fa-trash me-1"></i>Hapus
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -152,11 +146,6 @@
                 </div>
 
                 <div class="help-item">
-                    <h6 class="help-item-title">Deskripsi</h6>
-                    <p class="help-item-text">Jelaskan program secara detail agar orang tua memahami manfaatnya.</p>
-                </div>
-
-                <div class="help-item">
                     <h6 class="help-item-title">Gambar</h6>
                     <p class="help-item-text">Gunakan gambar berkualitas tinggi yang relevan dengan program.</p>
                 </div>
@@ -183,7 +172,6 @@
                     </div>
                     <div class="preview-text">
                         <h5 class="preview-title" id="previewTitle">Nama Program</h5>
-                        <p class="preview-description" id="previewDescription">Deskripsi program akan muncul di sini...</p>
                     </div>
                 </div>
             </div>
@@ -196,8 +184,8 @@
 <style>
     /* Form Design System */
     :root {
-        --primary-color: #3b82f6;
-        --primary-dark: #2563eb;
+        --primary-color: #ff8c00;
+        --primary-dark: #ff6b35;
         --success-color: #10b981;
         --warning-color: #f59e0b;
         --danger-color: #ef4444;
@@ -628,9 +616,7 @@
 
         // Live preview
         const namaInput = document.getElementById('nama');
-        const deskripsiInput = document.getElementById('deskripsi');
         const previewTitle = document.getElementById('previewTitle');
-        const previewDescription = document.getElementById('previewDescription');
 
         if (namaInput && previewTitle) {
             namaInput.addEventListener('input', function() {
@@ -638,9 +624,159 @@
             });
         }
 
-        if (deskripsiInput && previewDescription) {
-            deskripsiInput.addEventListener('input', function() {
-                previewDescription.textContent = this.value || 'Deskripsi program akan muncul di sini...';
+        // Image Cropper
+        const imageInput = document.getElementById('gambar');
+        const imageCroppedInput = document.getElementById('gambar_cropped');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+        const removeImageBtn = document.getElementById('removeImageBtn');
+        let cropper = null;
+        let cropperModal = null;
+
+        // Initialize modal
+        if (typeof bootstrap !== 'undefined') {
+            cropperModal = new bootstrap.Modal(document.getElementById('imageCropperModal'));
+        }
+
+        // Handle file input change
+        if (imageInput) {
+            imageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (!file.type.match('image.*')) {
+                        alert('Silakan pilih file gambar!');
+                        imageInput.value = '';
+                        return;
+                    }
+
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Show cropper modal
+                        const cropperImage = document.getElementById('cropperImage');
+                        cropperImage.src = e.target.result;
+
+                        if (cropperModal) {
+                            cropperModal.show();
+                        }
+
+                        // Initialize cropper
+                        cropperImage.onload = function() {
+                            if (cropper) {
+                                cropper.destroy();
+                            }
+                            cropper = new Cropper(cropperImage, {
+                                aspectRatio: NaN,
+                                viewMode: 1,
+                                preview: '#preview',
+                                guides: true,
+                                center: true,
+                                highlight: false,
+                                cropBoxMovable: true,
+                                cropBoxResizable: true,
+                                toggleDragModeOnDblclick: false,
+                                responsive: true,
+                                ready: function() {
+                                    updateDimensions();
+                                },
+                                crop: function() {
+                                    updateDimensions();
+                                }
+                            });
+
+                            // Aspect ratio change
+                            document.getElementById('aspectRatio').addEventListener('change', function() {
+                                const value = this.value;
+                                if (value === 'NaN') {
+                                    cropper.setAspectRatio(NaN);
+                                } else {
+                                    cropper.setAspectRatio(eval(value));
+                                }
+                            });
+
+                            // Rotate buttons
+                            document.getElementById('rotateLeftBtn').addEventListener('click', function() {
+                                cropper.rotate(-90);
+                            });
+
+                            document.getElementById('rotateRightBtn').addEventListener('click', function() {
+                                cropper.rotate(90);
+                            });
+
+                            // Flip buttons
+                            document.getElementById('flipHorizontalBtn').addEventListener('click', function() {
+                                cropper.scaleX(-cropper.imageData.scaleX);
+                            });
+
+                            document.getElementById('flipVerticalBtn').addEventListener('click', function() {
+                                cropper.scaleY(-cropper.imageData.scaleY);
+                            });
+
+                            // Reset button
+                            document.getElementById('resetBtn').addEventListener('click', function() {
+                                cropper.reset();
+                                document.getElementById('aspectRatio').value = 'NaN';
+                            });
+
+                            // Crop button
+                            document.getElementById('cropImageBtn').addEventListener('click', function() {
+                                if (cropper) {
+                                    const canvas = cropper.getCroppedCanvas({
+                                        width: 1200,
+                                        height: 1200,
+                                        imageSmoothingEnabled: true,
+                                        imageSmoothingQuality: 'high',
+                                    });
+
+                                    canvas.toBlob(function(blob) {
+                                        const reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            const base64 = e.target.result;
+                                            imageCroppedInput.value = base64;
+                                            previewImg.src = base64;
+                                            imagePreview.style.display = 'block';
+
+                                            if (cropperModal) {
+                                                cropperModal.hide();
+                                            }
+                                        };
+                                        reader.readAsDataURL(blob);
+                                    }, 'image/jpeg', 0.9);
+                                }
+                            });
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Remove image
+            removeImageBtn.addEventListener('click', function() {
+                imageInput.value = '';
+                imageCroppedInput.value = '';
+                imagePreview.style.display = 'none';
+                previewImg.src = '';
+                if (cropper) {
+                    cropper.destroy();
+                    cropper = null;
+                }
+            });
+
+            // Update dimensions
+            function updateDimensions() {
+                if (cropper) {
+                    const cropBoxData = cropper.getCropBoxData();
+                    document.getElementById('dimensions').textContent =
+                        Math.round(cropBoxData.width) + ' x ' + Math.round(cropBoxData.height);
+                }
+            }
+
+            // Handle form submit - ensure cropped image is sent
+            document.querySelector('form').addEventListener('submit', function(e) {
+                if (imageCroppedInput.value) {
+                    // Remove original file input so only cropped data is sent
+                    imageInput.disabled = true;
+                }
             });
         }
 

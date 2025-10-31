@@ -14,12 +14,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Cropper.js CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.1/dist/cropper.min.css" rel="stylesheet">
 
     <style>
         /* Design System Variables */
         :root {
-            --primary-color: #3b82f6;
-            --primary-dark: #2563eb;
+            --primary-color: #ff8c00;
+            --primary-dark: #ff6b35;
             --success-color: #10b981;
             --warning-color: #f59e0b;
             --danger-color: #ef4444;
@@ -182,13 +184,13 @@
 
         .nav-link:hover {
             color: var(--primary-color);
-            background: rgba(59, 130, 246, 0.05);
+            background: rgba(255, 140, 0, 0.05);
             text-decoration: none;
         }
 
         .nav-link.active {
             color: var(--primary-color);
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(255, 140, 0, 0.1);
             font-weight: 500;
         }
 
@@ -388,6 +390,25 @@
             color: white;
         }
 
+        /* Override Bootstrap primary color */
+        .bg-primary {
+            background: var(--primary-color) !important;
+            background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+        }
+
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+
+        /* Breadcrumb link color */
+        .breadcrumb-item a {
+            color: var(--primary-color) !important;
+        }
+
+        .breadcrumb-item a:hover {
+            color: var(--primary-dark) !important;
+        }
+
         .btn-sm {
             padding: var(--spacing-xs) var(--spacing-sm);
             font-size: 0.875rem;
@@ -488,6 +509,20 @@
                 padding: var(--spacing-md) var(--spacing-lg);
             }
 
+            /* Make card button icons and buttons smaller on mobile */
+            .card-footer .btn i,
+            .card-body .btn i {
+                font-size: 0.875rem !important;
+            }
+            
+            /* Make buttons compact on mobile */
+            .card-footer .btn,
+            .card-body .btn {
+                padding: 0.375rem 0.5rem !important;
+                font-size: 0.75rem !important;
+                gap: 0.25rem;
+            }
+
             .page-title {
                 font-size: 1.25rem;
             }
@@ -536,7 +571,7 @@
         .form-control:focus,
         .form-select:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
         }
 
         /* Animation Classes */
@@ -733,6 +768,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Cropper.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.1/dist/cropper.min.js"></script>
 
     <script>
         // Initialize sidebar state
@@ -832,10 +869,80 @@
 
         // CSRF Token Setup
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        if (token) {
+        if (token && typeof window !== 'undefined' && window.axios) {
             window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
         }
     </script>
+
+    <!-- Cropper Modal -->
+    <div class="modal fade" id="imageCropperModal" tabindex="-1" aria-labelledby="imageCropperModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="background-color: #1f2937;">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-white" id="imageCropperModalLabel">
+                        <i class="fas fa-crop me-2"></i>Edit & Crop Gambar
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="cropper-container" style="max-width: 100%; background: #000; padding: 10px; border-radius: 8px;">
+                                <img id="cropperImage" src="" style="max-width: 100%; display: block;">
+                            </div>
+                            <div class="mt-3 d-flex gap-2 justify-content-center">
+                                <button type="button" class="btn btn-sm btn-outline-light" id="rotateLeftBtn">
+                                    <i class="fas fa-undo"></i> Rotate Left
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-light" id="rotateRightBtn">
+                                    <i class="fas fa-redo"></i> Rotate Right
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-light" id="flipHorizontalBtn">
+                                    <i class="fas fa-arrows-alt-h"></i> Flip H
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-light" id="flipVerticalBtn">
+                                    <i class="fas fa-arrows-alt-v"></i> Flip V
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-light" id="resetBtn">
+                                    <i class="fas fa-sync"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-white">
+                                <h6 class="mb-3">Preview</h6>
+                                <div class="preview-container" style="width: 100%; max-width: 200px; height: 200px; overflow: hidden; background: #000; border-radius: 8px; margin-bottom: 15px;">
+                                    <div id="preview"></div>
+                                </div>
+                                <div class="preview-info mb-3">
+                                    <small class="text-muted">Dimensions:</small>
+                                    <div id="dimensions" class="text-white">-</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-white small">Aspect Ratio</label>
+                                    <select class="form-select form-select-sm bg-dark text-white border-secondary" id="aspectRatio">
+                                        <option value="NaN">Free</option>
+                                        <option value="1">1:1</option>
+                                        <option value="16/9">16:9</option>
+                                        <option value="4/3">4:3</option>
+                                        <option value="3/2">3:2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="cropImageBtn">
+                        <i class="fas fa-check me-2"></i>Crop & Apply
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @yield('scripts')
 </body>

@@ -7,6 +7,7 @@ use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ProgramController extends Controller
 {
@@ -25,16 +26,46 @@ class ProgramController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
             'tujuan_program' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
         $data = $request->all();
-        $data['slug'] = Str::slug($request->nama);
+        unset($data['slug']);
 
-        // Handle gambar upload
-        if ($request->hasFile('gambar')) {
+        // Handle gambar upload (cropped or original)
+        if ($request->filled('gambar_cropped')) {
+            // Handle cropped image (base64)
+            try {
+                $base64Image = $request->input('gambar_cropped');
+                // Remove data:image/png;base64, or data:image/jpeg;base64, prefix
+                if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $type)) {
+                    $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
+                    $type = strtolower($type[1]); // jpg, png, gif
+                } else {
+                    $type = 'jpg';
+                }
+
+                $imageData = base64_decode($base64Image);
+                if ($imageData === false) {
+                    throw new \Exception('Invalid base64 image data');
+                }
+
+                $gambarName = time() . '_' . Str::slug($request->nama) . '.' . $type;
+                $directory = storage_path('app/public/images/program');
+
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0755, true);
+                }
+
+                file_put_contents($directory . '/' . $gambarName, $imageData);
+                $data['gambar'] = $gambarName;
+            } catch (\Exception $e) {
+                Log::error('Cropped image upload failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal menyimpan gambar yang di-crop: ' . $e->getMessage())->withInput();
+            }
+        } elseif ($request->hasFile('gambar')) {
+            // Handle original file upload
             try {
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
@@ -47,8 +78,8 @@ class ProgramController extends Controller
                 $gambar->move($directory, $gambarName);
                 $data['gambar'] = $gambarName;
             } catch (\Exception $e) {
-                \Log::error('File upload failed:', ['error' => $e->getMessage()]);
-                return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage());
+                Log::error('File upload failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage())->withInput();
             }
         }
 
@@ -71,22 +102,60 @@ class ProgramController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
             'tujuan_program' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
         $data = $request->all();
-        $data['slug'] = Str::slug($request->nama);
+        unset($data['slug']);
 
-        // Handle gambar upload
-        if ($request->hasFile('gambar')) {
+        // Handle gambar upload (cropped or original)
+        if ($request->filled('gambar_cropped')) {
+            // Handle cropped image (base64)
             try {
                 // Delete old gambar
                 if ($program->gambar) {
                     $oldPath = storage_path('app/public/images/program/' . $program->gambar);
                     if (file_exists($oldPath)) {
-                        unlink($oldPath);
+                        @unlink($oldPath);
+                    }
+                }
+
+                $base64Image = $request->input('gambar_cropped');
+                // Remove data:image/png;base64, or data:image/jpeg;base64, prefix
+                if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $type)) {
+                    $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
+                    $type = strtolower($type[1]); // jpg, png, gif
+                } else {
+                    $type = 'jpg';
+                }
+
+                $imageData = base64_decode($base64Image);
+                if ($imageData === false) {
+                    throw new \Exception('Invalid base64 image data');
+                }
+
+                $gambarName = time() . '_' . Str::slug($request->nama) . '.' . $type;
+                $directory = storage_path('app/public/images/program');
+
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0755, true);
+                }
+
+                file_put_contents($directory . '/' . $gambarName, $imageData);
+                $data['gambar'] = $gambarName;
+            } catch (\Exception $e) {
+                Log::error('Cropped image update failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal menyimpan gambar yang di-crop: ' . $e->getMessage())->withInput();
+            }
+        } elseif ($request->hasFile('gambar')) {
+            // Handle original file upload
+            try {
+                // Delete old gambar
+                if ($program->gambar) {
+                    $oldPath = storage_path('app/public/images/program/' . $program->gambar);
+                    if (file_exists($oldPath)) {
+                        @unlink($oldPath);
                     }
                 }
 
@@ -101,8 +170,8 @@ class ProgramController extends Controller
                 $gambar->move($directory, $gambarName);
                 $data['gambar'] = $gambarName;
             } catch (\Exception $e) {
-                \Log::error('File update failed:', ['error' => $e->getMessage()]);
-                return redirect()->back()->with('error', 'Gagal mengupdate gambar: ' . $e->getMessage());
+                Log::error('File update failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal mengupdate gambar: ' . $e->getMessage())->withInput();
             }
         }
 

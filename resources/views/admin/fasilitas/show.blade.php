@@ -18,10 +18,10 @@
     <div class="d-flex justify-content-between align-items-center">
         <div>
             <h1 class="page-title">Detail Fasilitas</h1>
-            <p class="page-subtitle">{{ $fasilitasItem->nama }}</p>
+            <p class="page-subtitle">{{ $fasilitas->nama }}</p>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('admin.fasilitas.edit', $fasilitasItem) }}" class="btn btn-primary">
+            <a href="{{ route('admin.fasilitas.edit', $fasilitas) }}" class="btn btn-primary">
                 <i class="fas fa-edit me-2"></i>Edit
             </a>
             <a href="{{ route('admin.fasilitas.index') }}" class="btn btn-secondary">
@@ -41,19 +41,19 @@
                 <table class="table table-borderless">
                     <tr>
                         <th width="200">Nama Fasilitas:</th>
-                        <td>{{ $fasilitasItem->nama }}</td>
+                        <td>{{ $fasilitas->nama }}</td>
                     </tr>
                     <tr>
                         <th>Slug:</th>
-                        <td><code>{{ $fasilitasItem->slug }}</code></td>
+                        <td><code>{{ $fasilitas->slug }}</code></td>
                     </tr>
                     <tr>
                         <th>Dibuat:</th>
-                        <td>{{ $fasilitasItem->created_at->format('d M Y H:i') }}</td>
+                        <td>{{ $fasilitas->created_at->format('d M Y H:i') }}</td>
                     </tr>
                     <tr>
                         <th>Terakhir Diubah:</th>
-                        <td>{{ $fasilitasItem->updated_at->format('d M Y H:i') }}</td>
+                        <td>{{ $fasilitas->updated_at->format('d M Y H:i') }}</td>
                     </tr>
                 </table>
             </div>
@@ -66,9 +66,9 @@
                 <h5 class="mb-0"><i class="fas fa-image me-2"></i>Gambar</h5>
             </div>
             <div class="card-body text-center">
-                @if($fasilitasItem->gambar)
-                <img src="{{ asset('storage/images/fasilitas/' . $fasilitasItem->gambar) }}"
-                    alt="{{ $fasilitasItem->nama }}"
+                @if($fasilitas->gambar)
+                <img src="{{ asset('storage/images/fasilitas/' . $fasilitas->gambar) }}"
+                    alt="{{ $fasilitas->nama }}"
                     class="img-fluid rounded">
                 @else
                 <div class="bg-light p-5 rounded">
@@ -85,7 +85,7 @@
             </div>
             <div class="card-body">
                 <div class="d-grid gap-2">
-                    <form action="{{ route('admin.fasilitas.destroy', $fasilitasItem) }}" method="POST"
+                    <form action="{{ route('admin.fasilitas.destroy', $fasilitas->id) }}" method="POST"
                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus fasilitas ini?')">
                         @csrf
                         @method('DELETE')

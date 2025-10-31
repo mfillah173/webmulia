@@ -36,8 +36,8 @@
                     
                     <div class="card-body">
                         <h3 class="program-title">{{ $program->nama }}</h3>
-                        @if($program->deskripsi)
-                        <p class="program-subtitle">{{ \Str::limit($program->deskripsi, 80) }}</p>
+                        @if($program->tujuan_program)
+                        <p class="program-subtitle">{{ \Str::limit($program->tujuan_program, 80) }}</p>
                         @endif
                     </div>
                 </div>

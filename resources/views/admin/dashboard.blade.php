@@ -145,72 +145,9 @@
     </div>
 </div>
 
-<!-- Recent Activity -->
-<div class="row">
-    <div class="col-lg-6">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-graduation-cap me-2"></i>Program Terbaru</h6>
-                <a href="{{ route('admin.program.index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
-            </div>
-            <div class="card-body">
-                @if($recentProgram->count() > 0)
-                <div class="list-group list-group-flush">
-                    @foreach($recentProgram as $program)
-                    <div class="list-group-item">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="mb-1">{{ $program->nama }}</h6>
-                                <small class="text-muted">{{ $program->created_at->diffForHumans() }}</small>
-                            </div>
-                            <a href="{{ route('admin.program.show', $program) }}" class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                @else
-                <p class="text-center text-muted mb-0">Belum ada program</p>
-                @endif
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-6">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                <h6 class="m-0 font-weight-bold text-info"><i class="fas fa-comments me-2"></i>Testimoni Terbaru</h6>
-                <a href="{{ route('admin.testimoni.index') }}" class="btn btn-sm btn-info">Lihat Semua</a>
-            </div>
-            <div class="card-body">
-                @if($recentTestimoni->count() > 0)
-                <div class="list-group list-group-flush">
-                    @foreach($recentTestimoni as $testimoni)
-                    <div class="list-group-item">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="mb-1">{{ $testimoni->nama_narasumber }}</h6>
-                                <small class="text-muted">{{ $testimoni->jabatan }} • {{ $testimoni->created_at->diffForHumans() }}</small>
-                            </div>
-                            <a href="{{ route('admin.testimoni.show', $testimoni) }}" class="btn btn-sm btn-outline-info">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                @else
-                <p class="text-center text-muted mb-0">Belum ada testimoni</p>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-
 <style>
     .border-left-primary {
-        border-left: 4px solid #4e73df !important;
+        border-left: 4px solid #ff8c00 !important;
     }
 
     .border-left-success {

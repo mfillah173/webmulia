@@ -29,7 +29,13 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::resource('program', ProgramController::class);
 
     // Fasilitas Management
-    Route::resource('fasilitas', FasilitasController::class);
+    Route::get('fasilitas', [FasilitasController::class, 'index'])->name('fasilitas.index');
+    Route::get('fasilitas/create', [FasilitasController::class, 'create'])->name('fasilitas.create');
+    Route::post('fasilitas', [FasilitasController::class, 'store'])->name('fasilitas.store');
+    Route::get('fasilitas/{id}', [FasilitasController::class, 'show'])->name('fasilitas.show');
+    Route::get('fasilitas/{id}/edit', [FasilitasController::class, 'edit'])->name('fasilitas.edit');
+    Route::put('fasilitas/{id}', [FasilitasController::class, 'update'])->name('fasilitas.update');
+    Route::delete('fasilitas/{id}', [FasilitasController::class, 'destroy'])->name('fasilitas.destroy');
 
     // Testimoni Management
     Route::resource('testimoni', TestimoniController::class);

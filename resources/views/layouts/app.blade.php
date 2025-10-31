@@ -2647,5 +2647,86 @@
             }
         }
     </style>
+    
+    @php
+        use App\Models\Setting;
+        $setting = Setting::getSetting();
+        $telepon = $setting->telepon ?? '';
+        
+        // Format nomor untuk WhatsApp: hapus spasi dan karakter non-numeric
+        $teleponWhatsApp = preg_replace('/[^0-9]/', '', $telepon);
+        
+        // Jika nomor dimulai dengan 0, ganti dengan 62 (kode negara Indonesia)
+        if (strlen($teleponWhatsApp) > 0 && $teleponWhatsApp[0] === '0') {
+            $teleponWhatsApp = '62' . substr($teleponWhatsApp, 1);
+        }
+    @endphp
+    
+    @if($teleponWhatsApp)
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/{{ $teleponWhatsApp }}" 
+       target="_blank" 
+       class="whatsapp-float" 
+       title="Chat via WhatsApp"
+       aria-label="Chat via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    @endif
+    
+    <style>
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 100px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .whatsapp-float:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float i {
+            color: white !important;
+            font-size: 32px;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Responsive untuk mobile */
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 85px;
+                right: 20px;
+            }
+            
+            .whatsapp-float i {
+                font-size: 28px;
+            }
+        }
+    </style>
 </body>
 </html>

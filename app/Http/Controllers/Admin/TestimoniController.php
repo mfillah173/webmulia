@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class TestimoniController extends Controller
 {
@@ -32,7 +33,39 @@ class TestimoniController extends Controller
 
         $data = $request->all();
 
-        if ($request->hasFile('gambar')) {
+        // Handle gambar upload (cropped or original)
+        if ($request->filled('gambar_cropped')) {
+            // Handle cropped image (base64)
+            try {
+                $base64Image = $request->input('gambar_cropped');
+                // Remove data:image/png;base64, or data:image/jpeg;base64, prefix
+                if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $type)) {
+                    $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
+                    $type = strtolower($type[1]); // jpg, png, gif
+                } else {
+                    $type = 'jpg';
+                }
+
+                $imageData = base64_decode($base64Image);
+                if ($imageData === false) {
+                    throw new \Exception('Invalid base64 image data');
+                }
+
+                $gambarName = time() . '_' . Str::slug($request->nama_narasumber) . '.' . $type;
+                $directory = storage_path('app/public/images/testimoni');
+
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0755, true);
+                }
+
+                file_put_contents($directory . '/' . $gambarName, $imageData);
+                $data['gambar'] = $gambarName;
+            } catch (\Exception $e) {
+                Log::error('Cropped image upload failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal menyimpan gambar yang di-crop: ' . $e->getMessage())->withInput();
+            }
+        } elseif ($request->hasFile('gambar')) {
+            // Handle original file upload
             try {
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
@@ -45,8 +78,8 @@ class TestimoniController extends Controller
                 $gambar->move($directory, $gambarName);
                 $data['gambar'] = $gambarName;
             } catch (\Exception $e) {
-                \Log::error('File upload failed:', ['error' => $e->getMessage()]);
-                return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage());
+                Log::error('File upload failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage())->withInput();
             }
         }
 
@@ -76,13 +109,53 @@ class TestimoniController extends Controller
 
         $data = $request->all();
 
-        if ($request->hasFile('gambar')) {
+        // Handle gambar upload (cropped or original)
+        if ($request->filled('gambar_cropped')) {
+            // Handle cropped image (base64)
             try {
                 // Delete old image
                 if ($testimoni->gambar) {
                     $oldImagePath = storage_path('app/public/images/testimoni/' . $testimoni->gambar);
                     if (file_exists($oldImagePath)) {
-                        unlink($oldImagePath);
+                        @unlink($oldImagePath);
+                    }
+                }
+
+                $base64Image = $request->input('gambar_cropped');
+                // Remove data:image/png;base64, or data:image/jpeg;base64, prefix
+                if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $type)) {
+                    $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
+                    $type = strtolower($type[1]); // jpg, png, gif
+                } else {
+                    $type = 'jpg';
+                }
+
+                $imageData = base64_decode($base64Image);
+                if ($imageData === false) {
+                    throw new \Exception('Invalid base64 image data');
+                }
+
+                $gambarName = time() . '_' . Str::slug($request->nama_narasumber) . '.' . $type;
+                $directory = storage_path('app/public/images/testimoni');
+
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0755, true);
+                }
+
+                file_put_contents($directory . '/' . $gambarName, $imageData);
+                $data['gambar'] = $gambarName;
+            } catch (\Exception $e) {
+                Log::error('Cropped image update failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal menyimpan gambar yang di-crop: ' . $e->getMessage())->withInput();
+            }
+        } elseif ($request->hasFile('gambar')) {
+            // Handle original file upload
+            try {
+                // Delete old image
+                if ($testimoni->gambar) {
+                    $oldImagePath = storage_path('app/public/images/testimoni/' . $testimoni->gambar);
+                    if (file_exists($oldImagePath)) {
+                        @unlink($oldImagePath);
                     }
                 }
 
@@ -98,8 +171,8 @@ class TestimoniController extends Controller
                 $gambar->move($directory, $gambarName);
                 $data['gambar'] = $gambarName;
             } catch (\Exception $e) {
-                \Log::error('File upload failed:', ['error' => $e->getMessage()]);
-                return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage());
+                Log::error('File upload failed:', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Gagal mengupload gambar: ' . $e->getMessage())->withInput();
             }
         }
 
