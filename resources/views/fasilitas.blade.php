@@ -20,137 +20,39 @@
 <section class="py-5">
     <div class="container">
         <div class="row">
-            <!-- Ruang Belajar One-on-One -->
+            @forelse($fasilitas as $item)
+            <!-- Facility Card -->
             <div class="col-lg-6 mb-5">
                 <div class="card h-100 facility-card">
+                    @if($item->gambar)
                     <div class="facility-image">
-                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Ruang+Belajar+One-on-One" alt="Ruang Belajar One-on-One" class="img-fluid">
-                        <div class="image-overlay">
-                            <i class="fas fa-user fa-3x"></i>
-                        </div>
+                        <img src="{{ asset('storage/images/fasilitas/' . $item->gambar) }}" alt="{{ $item->nama }}">
                     </div>
+                    @else
+                    <div class="facility-image facility-image-placeholder">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    @endif
+                    
                     <div class="card-body">
-                        <h3 class="card-title">Ruang Belajar One-on-One</h3>
-                        <!-- <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Pencahayaan yang optimal</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Akustik yang terkontrol</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Furnitur yang dapat disesuaikan</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Area khusus untuk sensory break</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Teknologi pembelajaran interaktif</li>
-                        </ul> -->
+                        <h3 class="facility-title">{{ $item->nama }}</h3>
                     </div>
                 </div>
             </div>
-
-            <!-- Ruang Terapi -->
+            @empty
+            <!-- Default Facilities jika database kosong -->
             <div class="col-lg-6 mb-5">
                 <div class="card h-100 facility-card">
-                    <div class="facility-image">
-                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Ruang+Terapi" alt="Ruang Terapi" class="img-fluid">
-                        <div class="image-overlay">
-                            <i class="fas fa-hands-helping fa-3x"></i>
-                        </div>
+                    <div class="facility-image facility-image-placeholder">
+                        <i class="fas fa-building"></i>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Ruang Terapi</h3>
-                        <!-- <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Ruang terapi okupasi</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Ruang fisioterapi</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Ruang terapi wicara</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Ruang terapi sensori</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Peralatan terapi modern</li>
-                        </ul> -->
+                        <h3 class="facility-title">BELUM ADA FASILITAS</h3>
+                        <p class="facility-subtitle">Silakan tambahkan fasilitas dari panel admin</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Playground -->
-            <div class="col-lg-6 mb-5">
-                <div class="card h-100 facility-card">
-                    <div class="facility-image">
-                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Playground" alt="Playground" class="img-fluid">
-                        <div class="image-overlay">
-                            <i class="fas fa-child fa-3x"></i>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Playground</h3>
-                        <!-- <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Permukaan lunak anti-slip</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Pagar pengaman</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Alat bermain adaptif</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Area teduh</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Pengawasan penuh</li>
-                        </ul> -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ruang Konsultasi -->
-            <div class="col-lg-6 mb-5">
-                <div class="card h-100 facility-card">
-                    <div class="facility-image">
-                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Ruang+Konsultasi" alt="Ruang Konsultasi" class="img-fluid">
-                        <div class="image-overlay">
-                            <i class="fas fa-user-friends fa-3x"></i>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Ruang Konsultasi</h3>
-                        <!-- <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Atmosfer yang menenangkan</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Privasi yang terjaga</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Alat permainan terapeutik</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Rekaman sesi (dengan izin)</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Konseling keluarga</li>
-                        </ul> -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Toilet -->
-            <div class="col-lg-6 mb-5">
-                <div class="card h-100 facility-card">
-                    <div class="facility-image">
-                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Toilet" alt="Toilet" class="img-fluid">
-                        <div class="image-overlay">
-                            <i class="fas fa-toilet fa-3x"></i>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Toilet</h3>
-                        <!-- <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Ukuran yang sesuai untuk anak</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Pegangan pengaman</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Pencahayaan yang baik</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Kebersihan terjaga</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Aksesibilitas penuh</li>
-                        </ul> -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kolam Renang -->
-            <div class="col-lg-6 mb-5">
-                <div class="card h-100 facility-card">
-                    <div class="facility-image">
-                        <img src="https://via.placeholder.com/400x250/ff8c00/ffffff?text=Kolam+Renang" alt="Kolam Renang" class="img-fluid">
-                        <div class="image-overlay">
-                            <i class="fas fa-swimming-pool fa-3x"></i>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Kolam Renang</h3>
-                        <!-- <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Kedalaman yang aman</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Suhu air yang nyaman</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Peralatan keselamatan lengkap</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Pengawasan instruktur</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Terapi air terintegrasi</li>
-                        </ul> -->
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -158,4 +60,129 @@
 
 
 
+@endsection
+
+@section('styles')
+<style>
+/* Facility Card Styling - Simple & Clean seperti Program */
+.facility-card {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.facility-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Facility Card Image - Auto Height untuk gambar full */
+.facility-image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #f5f5f5;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.facility-image img {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.facility-card:hover .facility-image img {
+    transform: scale(1.05);
+}
+
+/* Placeholder jika tidak ada gambar */
+.facility-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+}
+
+.facility-image-placeholder i {
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Card Body - Simple & Clean */
+.facility-card .card-body {
+    padding: 2rem 1.5rem;
+    background: #fff;
+}
+
+/* Facility Title - Bold seperti Program */
+.facility-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+}
+
+/* Facility Subtitle - Warna orange */
+.facility-subtitle {
+    font-size: 1rem;
+    color: var(--primary-orange);
+    font-weight: 500;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 991.98px) {
+    .facility-image {
+        min-height: 250px;
+    }
+    
+    .facility-image img {
+        max-height: 500px;
+    }
+    
+    .facility-title {
+        font-size: 0.95rem;
+    }
+    
+    .facility-card .card-body {
+        padding: 1.5rem 1.25rem;
+    }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 767.98px) {
+    .facility-image {
+        min-height: 350px;
+    }
+    
+    .facility-image img {
+        max-height: 600px;
+        width: 100%;
+    }
+    
+    .facility-title {
+        font-size: 0.9rem;
+    }
+    
+    .facility-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .facility-card .card-body {
+        padding: 1.25rem 1rem;
+    }
+}
+</style>
 @endsection

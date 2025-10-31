@@ -45,68 +45,51 @@
         </div>
 
         <div class="row">
-            <!-- Testimonial Card 1 -->
+            @forelse($testimoni as $item)
+            <!-- Testimonial Card -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card testimonial-card h-100">
                     <!-- Photo Section (Top Half) -->
                     <div class="testimonial-photo-section">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user"></i>
-                        </div>
+                        @if($item->gambar)
+                            <img src="{{ asset('storage/images/testimoni/' . $item->gambar) }}" alt="{{ $item->nama_narasumber }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        @else
+                            <div class="photo-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        @endif
                     </div>
                     <!-- Content Section (Bottom Half) -->
                     <div class="card-body text-center">
                         <div class="testimonial-quote mb-3">
                             <i class="fas fa-quote-left"></i>
                         </div>
-                        <p class="testimonial-text">"Alhamdulillah, sejak bergabung dengan MSA, anak saya menunjukkan perkembangan yang sangat pesat. Tim pengajar sangat sabar dan profesional dalam menangani anak berkebutuhan khusus."</p>
-                        <h5 class="testimonial-name">Ibu Sarah</h5>
-                        <p class="testimonial-role text-muted">Orang Tua Siswa</p>
+                        <p class="testimonial-text">"{{ $item->deskripsi }}"</p>
+                        <h5 class="testimonial-name">{{ $item->nama_narasumber }}</h5>
+                        <p class="testimonial-role text-muted">{{ $item->jabatan }}</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Testimonial Card 2 -->
+            @empty
+            <!-- Default Testimonials jika database kosong -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card testimonial-card h-100">
-                    <!-- Photo Section (Top Half) -->
                     <div class="testimonial-photo-section">
                         <div class="photo-placeholder">
                             <i class="fas fa-user"></i>
+                        </div>
                     </div>
-                    </div>
-                    <!-- Content Section (Bottom Half) -->
                     <div class="card-body text-center">
                         <div class="testimonial-quote mb-3">
                             <i class="fas fa-quote-left"></i>
-                </div>
-                        <p class="testimonial-text">"Program one-on-one di MSA sangat membantu anak saya dalam meningkatkan kemampuan sosial dan komunikasi. Terima kasih MSA!"</p>
-                        <h5 class="testimonial-name">Bapak Ahmad</h5>
-                        <p class="testimonial-role text-muted">Orang Tua Siswa</p>
+                        </div>
+                        <p class="testimonial-text">"Belum ada testimoni. Silakan tambahkan dari panel admin."</p>
+                        <h5 class="testimonial-name">Admin</h5>
+                        <p class="testimonial-role text-muted">Mulia Special Academy</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Testimonial Card 3 -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card testimonial-card h-100">
-                    <!-- Photo Section (Top Half) -->
-                    <div class="testimonial-photo-section">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user"></i>
-                    </div>
-                    </div>
-                    <!-- Content Section (Bottom Half) -->
-                    <div class="card-body text-center">
-                        <div class="testimonial-quote mb-3">
-                            <i class="fas fa-quote-left"></i>
-                </div>
-                        <p class="testimonial-text">"Fasilitas di MSA sangat lengkap dan mendukung kebutuhan anak berkebutuhan khusus. Saya sangat merekomendasikan MSA untuk orang tua yang mencari sekolah terbaik."</p>
-                        <h5 class="testimonial-name">Ibu Fitri</h5>
-                        <p class="testimonial-role text-muted">Orang Tua Siswa</p>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -124,7 +107,22 @@
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <div class="accordion" id="faqAccordion">
-                    <!-- FAQ 1 -->
+                    @forelse($faqs as $index => $faq)
+                    <!-- FAQ {{ $index + 1 }} -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq{{ $faq->id }}">
+                            <button class="accordion-button {{ $index == 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $faq->id }}" aria-expanded="{{ $index == 0 ? 'true' : 'false' }}" aria-controls="collapse{{ $faq->id }}">
+                                {{ $faq->pertanyaan }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ $faq->id }}" class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}" aria-labelledby="faq{{ $faq->id }}" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                {{ $faq->jawaban }}
+                            </div>
+                        </div>
+                    </div>
+                    @empty
+                    <!-- Default FAQ jika database kosong -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="faq1">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
@@ -133,80 +131,11 @@
                         </h2>
                         <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Anda dapat mendaftarkan anak melalui link pendaftaran online yang tersedia di halaman kontak kami, atau datang langsung ke sekolah untuk konsultasi dan pendaftaran. Tim kami akan membantu Anda dengan proses pendaftaran yang mudah dan cepat.
+                                Belum ada FAQ. Silakan tambahkan dari panel admin.
                             </div>
                         </div>
                     </div>
-
-                    <!-- FAQ 2 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq2">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                Apa saja program yang tersedia di MSA?
-                            </button>
-                        </h2>
-                        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                MSA menyediakan berbagai program seperti Toilet Training Program, Pengembangan Akidah Akhlaq, Terapi Perilaku, Terapi Sensori, dan Stimulasi Tahap Perkembangan. Semua program dirancang khusus untuk memenuhi kebutuhan anak berkebutuhan khusus usia 2-6 tahun.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ 3 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq3">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                Bagaimana sistem pembelajaran di Mulia Special Academy?
-                            </button>
-                        </h2>
-                        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Sistem pembelajaran kami menggunakan pendekatan one-on-one (1:1) dengan stimulasi bertahap yang disesuaikan dengan kebutuhan setiap anak. Kami menggabungkan pendidikan akademik, terapi perkembangan, dan pembentukan karakter dalam program yang terintegrasi.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ 4 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq4">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                Apakah ada program konsultasi untuk orang tua?
-                            </button>
-                        </h2>
-                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Ya, kami menyediakan program konsultasi rutin untuk orang tua, termasuk konseling keluarga, pelatihan keterampilan parenting, dan dukungan emosional. Kolaborasi dengan orang tua adalah kunci keberhasilan pembelajaran anak.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ 5 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq5">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                Berapa biaya pendidikan di Mulia Special Academy?
-                            </button>
-                        </h2>
-                        <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                Untuk informasi detail mengenai biaya pendidikan, silakan kunjungi halaman kontak kami atau hubungi langsung tim MSA. Kami juga menyediakan brosur digital yang berisi informasi lengkap tentang biaya pendidikan tahun ajaran 2025-2026.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ 6 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq6">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                                Apa saja fasilitas yang tersedia di MSA?
-                            </button>
-                        </h2>
-                        <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                MSA dilengkapi dengan fasilitas lengkap seperti Ruang Belajar One-on-One, Ruang Terapi, Playground, Ruang Konsultasi, Toilet khusus anak, dan Kolam Renang. Semua fasilitas dirancang khusus untuk mendukung kebutuhan anak berkebutuhan khusus.
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
 
                 
@@ -255,7 +184,7 @@
 
 .testimonial-photo-section {
     width: 100%;
-    height: 200px;
+    height: 350px; /* Diperbesar dari 200px ke 350px */
     position: relative;
     overflow: hidden;
 }
@@ -297,14 +226,26 @@
     margin-bottom: 0;
 }
 
-/* Responsive */
+/* Responsive - Tablet */
+@media (max-width: 991.98px) {
+    .testimonial-photo-section {
+        height: 300px;
+    }
+}
+
+/* Responsive - Mobile */
 @media (max-width: 768px) {
     .testimonial-card {
         margin-bottom: 1.5rem;
     }
     
+    .testimonial-photo-section {
+        height: 280px;
+    }
+    
     .testimonial-text {
         min-height: auto;
+        font-size: 0.95rem;
     }
 }
 

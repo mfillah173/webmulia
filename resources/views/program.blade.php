@@ -20,80 +20,42 @@
 <section class="py-5">
     <div class="container">
         <div class="row">
-            <!-- Toilet Training Program -->
+            @forelse($programs as $program)
+            <!-- Program Card -->
             <div class="col-lg-6 mb-5">
                 <div class="card h-100 program-card">
-                    <div class="card-header text-center">
-                        <i class="fas fa-toilet fa-3x mb-3"></i>
-                        <h2>Toilet Training Program</h2>
-                        <p class="mb-0">Program Pelatihan Toilet</p>
+                    @if($program->gambar)
+                    <div class="program-image">
+                        <img src="{{ asset('storage/images/program/' . $program->gambar) }}" alt="{{ $program->nama }}">
                     </div>
+                    @else
+                    <div class="program-image program-image-placeholder">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    @endif
+                    
                     <div class="card-body">
-                        <h4>Tujuan Program:</h4>
-                        <p>Program ini bertujuan untuk mengembangkan kemandirian anak dalam menggunakan toilet, meningkatkan kesadaran tubuh, membangun rutinitas yang konsisten, dan meningkatkan kepercayaan diri anak dalam melakukan aktivitas toileting secara mandiri.</p>
+                        <h3 class="program-title">{{ $program->nama }}</h3>
+                        @if($program->deskripsi)
+                        <p class="program-subtitle">{{ \Str::limit($program->deskripsi, 80) }}</p>
+                        @endif
                     </div>
                 </div>
             </div>
-
-            <!-- Pengembangan Akidah Akhlaq -->
+            @empty
+            <!-- Default Programs jika database kosong -->
             <div class="col-lg-6 mb-5">
                 <div class="card h-100 program-card">
-                    <div class="card-header text-center">
-                        <i class="fas fa-mosque fa-3x mb-3"></i>
-                        <h2>Pengembangan Akidah Akhlaq</h2>
-                        <p class="mb-0">Program Pembentukan Karakter Islami</p>
+                    <div class="program-image program-image-placeholder">
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
                     <div class="card-body">
-                        <h4>Tujuan Program:</h4>
-                        <p>Program ini bertujuan untuk menanamkan nilai-nilai Islam dalam kehidupan sehari-hari, mengembangkan akhlak mulia, membangun karakter yang baik, dan mengenalkan konsep dasar agama Islam kepada anak dengan cara yang mudah dipahami dan diaplikasikan.</p>
+                        <h3 class="program-title">BELUM ADA PROGRAM</h3>
+                        <p class="program-subtitle">Silakan tambahkan program dari panel admin</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Terapi Perilaku -->
-            <div class="col-lg-6 mb-5">
-                <div class="card h-100 program-card">
-                    <div class="card-header text-center">
-                        <i class="fas fa-brain fa-3x mb-3"></i>
-                        <h2>Terapi Perilaku</h2>
-                        <p class="mb-0">Program Modifikasi Perilaku</p>
-                    </div>
-                    <div class="card-body">
-                        <h4>Tujuan Program:</h4>
-                        <p>Program ini dirancang untuk mengurangi perilaku yang tidak diinginkan, meningkatkan perilaku positif, mengembangkan keterampilan sosial, dan meningkatkan kemampuan adaptasi anak dalam berbagai situasi dan lingkungan.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Terapi Sensori -->
-            <div class="col-lg-6 mb-5">
-                <div class="card h-100 program-card">
-                    <div class="card-header text-center">
-                        <i class="fas fa-hand-holding-heart fa-3x mb-3"></i>
-                        <h2>Terapi Sensori</h2>
-                        <p class="mb-0">Program Integrasi Sensorik</p>
-                    </div>
-                    <div class="card-body">
-                        <h4>Tujuan Program:</h4>
-                        <p>Program ini bertujuan untuk meningkatkan kemampuan anak dalam memproses informasi sensorik, mengurangi sensitivitas berlebihan, meningkatkan toleransi terhadap berbagai stimulus, dan mengembangkan kemampuan regulasi diri yang lebih baik.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stimulasi Tahap Perkembangan -->
-            <div class="col-lg-12 mb-5">
-                <div class="card h-100 program-card">
-                    <div class="card-header text-center">
-                        <i class="fas fa-chart-line fa-3x mb-3"></i>
-                        <h2>Stimulasi Tahap Perkembangan</h2>
-                        <p class="mb-0">Program Stimulasi Komprehensif</p>
-                    </div>
-                    <div class="card-body">
-                        <h4>Tujuan Program:</h4>
-                        <p>Program ini bertujuan untuk mengoptimalkan perkembangan anak sesuai dengan tahap usianya, mengidentifikasi dan mengatasi keterlambatan perkembangan, meningkatkan kemampuan kognitif dan motorik, serta mempersiapkan anak untuk transisi ke tahap perkembangan berikutnya dengan lancar.</p>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -223,4 +185,129 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('styles')
+<style>
+/* Program Card Styling - Simple & Clean seperti screenshot */
+.program-card {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Program Card Image - Auto Height untuk gambar full */
+.program-image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #f5f5f5;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.program-image img {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.program-card:hover .program-image img {
+    transform: scale(1.05);
+}
+
+/* Placeholder jika tidak ada gambar */
+.program-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+}
+
+.program-image-placeholder i {
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Card Body - Simple & Clean */
+.program-card .card-body {
+    padding: 2rem 1.5rem;
+    background: #fff;
+}
+
+/* Program Title - Bold seperti "MAINAN BARU" */
+.program-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+}
+
+/* Program Subtitle - Warna orange seperti "BALABALANDAD" */
+.program-subtitle {
+    font-size: 1rem;
+    color: var(--primary-orange);
+    font-weight: 500;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 991.98px) {
+    .program-image {
+        min-height: 250px;
+    }
+    
+    .program-image img {
+        max-height: 500px;
+    }
+    
+    .program-title {
+        font-size: 0.95rem;
+    }
+    
+    .program-card .card-body {
+        padding: 1.5rem 1.25rem;
+    }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 767.98px) {
+    .program-image {
+        min-height: 350px;
+    }
+    
+    .program-image img {
+        max-height: 600px;
+        width: 100%;
+    }
+    
+    .program-title {
+        font-size: 0.9rem;
+    }
+    
+    .program-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .program-card .card-body {
+        padding: 1.25rem 1rem;
+    }
+}
+</style>
 @endsection
