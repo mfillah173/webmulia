@@ -5,7 +5,7 @@
 
 @section('content')
 <!-- Page Header -->
-<section class="py-5 bg-light">
+<section class="py-5">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
@@ -161,27 +161,63 @@
     }
 }
 
+/* Page Header - Add more space from navbar */
+section.py-5:first-child {
+    padding-top: 5.5rem !important;
+    padding-bottom: 3rem !important;
+}
+
 /* Responsive - Mobile */
 @media (max-width: 767.98px) {
+    /* Page Header Mobile */
+    section.py-5:first-child {
+        padding-top: 3.5rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    .section-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.75rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem !important;
+        line-height: 1.5;
+    }
+    
+    /* Facility Card Mobile - Ukuran dikurangi */
     .facility-image {
-        min-height: 350px;
+        min-height: 200px; /* Dikurangi dari 350px ke 200px */
+        max-height: 350px; /* Batasi tinggi maksimal container */
     }
     
     .facility-image img {
-        max-height: 600px;
+        max-height: 350px; /* Dikurangi dari 600px ke 350px */
         width: 100%;
+        object-fit: cover; /* Ubah ke cover agar gambar fill container */
+    }
+    
+    .facility-card {
+        margin-bottom: 1.5rem !important;
     }
     
     .facility-title {
         font-size: 0.9rem;
+        line-height: 1.3;
     }
     
     .facility-subtitle {
         font-size: 0.85rem;
+        line-height: 1.4;
     }
     
     .facility-card .card-body {
-        padding: 1.25rem 1rem;
+        padding: 1rem 0.875rem; /* Padding dikurangi */
+    }
+    
+    /* Section Spacing Mobile */
+    section.py-5 {
+        padding: 2rem 0 !important;
     }
 }
 </style>
