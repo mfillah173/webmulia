@@ -44,10 +44,6 @@
                         <td>{{ $fasilitas->nama }}</td>
                     </tr>
                     <tr>
-                        <th>Slug:</th>
-                        <td><code>{{ $fasilitas->slug }}</code></td>
-                    </tr>
-                    <tr>
                         <th>Dibuat:</th>
                         <td>{{ $fasilitas->created_at->format('d M Y H:i') }}</td>
                     </tr>

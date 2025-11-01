@@ -13,8 +13,6 @@ class Program extends Model
 
     protected $fillable = [
         'nama',
-        'slug',
-        'deskripsi',
         'tujuan_program',
         'gambar'
     ];
@@ -26,11 +24,5 @@ class Program extends Model
             return asset('storage/images/program/' . $this->gambar);
         }
         return null;
-    }
-
-    // Accessor untuk excerpt deskripsi
-    public function getExcerptAttribute()
-    {
-        return \Str::limit(strip_tags($this->deskripsi), 150);
     }
 }

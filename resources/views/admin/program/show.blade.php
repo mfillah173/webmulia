@@ -44,10 +44,6 @@
                         <td>{{ $program->nama }}</td>
                     </tr>
                     <tr>
-                        <th>Slug:</th>
-                        <td><code>{{ $program->slug }}</code></td>
-                    </tr>
-                    <tr>
                         <th>Dibuat:</th>
                         <td>{{ $program->created_at->format('d M Y H:i') }}</td>
                     </tr>
@@ -56,15 +52,6 @@
                         <td>{{ $program->updated_at->format('d M Y H:i') }}</td>
                     </tr>
                 </table>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-align-left me-2"></i>Deskripsi Program</h5>
-            </div>
-            <div class="card-body">
-                <p class="mb-0">{{ $program->deskripsi }}</p>
             </div>
         </div>
 

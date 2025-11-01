@@ -31,7 +31,7 @@ class FasilitasController extends Controller
         ]);
 
         $data = $request->all();
-        $data['slug'] = Str::slug($request->nama);
+        unset($data['slug']); // Kolom slug sudah dihapus
 
         // Handle gambar upload (cropped or original)
         if ($request->filled('gambar_cropped')) {

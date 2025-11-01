@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Kontak;
 use App\Models\Setting;
 
 class KontakController extends Controller
@@ -24,18 +23,8 @@ class KontakController extends Controller
             'pesan' => 'required|string|max:1000'
         ]);
 
-        // Simpan ke database
-        Kontak::create([
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'telepon' => $request->telepon,
-            'subjek' => $request->subjek,
-            'pesan' => $request->pesan,
-            'tanggal_kirim' => now(),
-            'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent()
-        ]);
-        
-        return redirect()->route('kontak')->with('success', 'Pesan Anda telah berhasil dikirim. Terima kasih!');
+        // Tabel kontak sudah dihapus karena sudah ada setting
+        // Form tetap menerima input tapi tidak disimpan ke database
+        return redirect()->route('kontak')->with('success', 'Terima kasih atas pesan Anda!');
     }
 }
