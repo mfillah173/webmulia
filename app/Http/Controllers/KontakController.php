@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kontak;
+use App\Models\Setting;
 
 class KontakController extends Controller
 {
     public function index()
     {
-        return view('kontak');
+        $setting = Setting::getSetting();
+        return view('kontak', compact('setting'));
     }
 
     public function store(Request $request)

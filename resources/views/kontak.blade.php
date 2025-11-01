@@ -69,7 +69,7 @@
                         </div>
                         <div class="contact-details">
                             <h5>Alamat</h5>
-                            <p>Jl. Medokan Semampir Indah 99-101<br>Surabaya, Jawa Timur</p>
+                            <p>{{ $setting->alamat }}<br>{{ $setting->kota }}</p>
                         </div>
                     </div>
                     
@@ -79,7 +79,7 @@
                         </div>
                         <div class="contact-details">
                             <h5>Telepon</h5>
-                            <p>082 338 414 452</p>
+                            <p>{{ $setting->telepon }}</p>
                         </div>
                     </div>
                     
@@ -89,7 +89,7 @@
                         </div>
                         <div class="contact-details">
                             <h5>Email</h5>
-                            <p>msa@saim.sch.id</p>
+                            <p>{{ $setting->email }}</p>
                         </div>
                     </div>
                     
@@ -99,7 +99,7 @@
                         </div>
                         <div class="contact-details">
                             <h5>Jam Operasional</h5>
-                            <p>Senin - Jumat: 08:00 - 16:00<br>Sabtu: 08:00 - 12:00</p>
+                            <p>{{ $setting->jam_operasional_senin_jumat }}<br>{{ $setting->jam_operasional_sabtu }}</p>
                         </div>
                     </div>
                     
@@ -254,6 +254,14 @@
 
 .quick-links .btn {
     text-align: left;
+    border-radius: 0 !important;
+    width: 100%;
+    padding: 0.75rem 1rem !important;
+    font-size: 1rem;
+    line-height: 1.5;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
 }
 
 /* Page Header - Add more space from navbar */
