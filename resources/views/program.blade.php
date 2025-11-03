@@ -190,185 +190,100 @@
 @section('styles')
 <style>
 /* Program Card Styling - Simple & Clean seperti screenshot */
+/* Program Card Styling - Simple & Clean seperti screenshot */
 .program-card {
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    background: #ffffff;
+    border-radius: 18px;
     overflow: hidden;
-    border-radius: 8px;
-    background: #fff;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    transition: 0.35s ease;
+    border: 1px solid rgba(224, 200, 150, 0.35);
 }
 
 .program-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.12);
 }
 
-/* Program Card Image - Auto Height untuk gambar full */
 .program-image {
-    position: relative;
     width: 100%;
+    aspect-ratio: 4/3; /* Rasio 4:3 untuk gambar lebih proporsional (landscape) */
     overflow: hidden;
-    background: #f5f5f5;
-    min-height: 300px;
+    background: #f9f8f4;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .program-image img {
     width: 100%;
-    height: auto;
-    max-height: 600px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
+    height: 100%;
+    object-fit: cover; /* tetap penuh */
+    transition: .5s ease;
 }
 
 .program-card:hover .program-image img {
-    transform: scale(1.05);
+    transform: scale(1.06);
 }
 
-/* Placeholder jika tidak ada gambar */
-.program-image-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
-}
-
-.program-image-placeholder i {
-    font-size: 5rem;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-/* Card Body - Simple & Clean */
+.program-content,
 .program-card .card-body {
-    padding: 2rem 1.5rem;
-    background: #fff;
+    padding: 18px 24px; 
 }
 
-/* Program Title - Bold seperti "MAINAN BARU" */
+.program-content h3,
 .program-title {
-    font-size: 1rem;
+    font-size: 1.3rem; 
     font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    line-height: 1.3;
+    color: #2b2b2b;
+    margin-bottom: 8px;
 }
 
-/* Program Subtitle - Warna orange seperti "BALABALANDAD" */
+.program-content p {
+    font-size: .95rem;
+    line-height: 1.55;
+    color: #6b6b6b;
+    margin-bottom: 18px;
+}
+
 .program-subtitle {
-    font-size: 1rem;
-    color: var(--primary-orange);
-    font-weight: 500;
+    font-size: .85rem;
+    line-height: 1.4;
+    color: #ff8c00;
     margin-bottom: 0;
-    line-height: 1.5;
 }
 
-/* Responsive - Tablet */
-@media (max-width: 991.98px) {
+.btn-detail {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #c8a75f;
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: .9rem;
+    transition: .3s;
+    text-decoration: none;
+}
+
+.btn-detail:hover {
+    background: #b19048;
+}
+
+@media(max-width: 768px) {
     .program-image {
-        min-height: 250px;
+        aspect-ratio: 4/3; /* Rasio sama di mobile */
     }
-    
-    .program-image img {
-        max-height: 500px;
-    }
-    
-    .program-title {
-        font-size: 0.95rem;
-    }
-    
+
+    .program-content,
     .program-card .card-body {
-        padding: 1.5rem 1.25rem;
+        padding: 15px 18px;
+    }
+
+    .program-content h3,
+    .program-title {
+        font-size: 1.15rem;
     }
 }
 
-/* Page Header - Add more space from navbar */
-section.py-5:first-child {
-    padding-top: 5.5rem !important;
-    padding-bottom: 3rem !important;
-}
-
-/* Responsive - Mobile */
-@media (max-width: 767.98px) {
-    /* Page Header Mobile */
-    section.py-5:first-child {
-        padding-top: 3.5rem !important;
-        padding-bottom: 2rem !important;
-    }
-    
-    .section-title {
-        font-size: 1.5rem !important;
-        margin-bottom: 0.75rem;
-    }
-    
-    .section-subtitle {
-        font-size: 0.9rem !important;
-        line-height: 1.5;
-    }
-    
-    /* Program Card Mobile - Ukuran dikurangi */
-    .program-image {
-        min-height: 200px; /* Dikurangi dari 350px ke 200px */
-        max-height: 350px; /* Batasi tinggi maksimal container */
-    }
-    
-    .program-image img {
-        max-height: 350px; /* Dikurangi dari 600px ke 350px */
-        width: 100%;
-        object-fit: cover; /* Ubah ke cover agar gambar fill container */
-    }
-    
-    .program-card {
-        margin-bottom: 1.5rem !important;
-    }
-    
-    .program-title {
-        font-size: 0.9rem;
-        line-height: 1.3;
-    }
-    
-    .program-subtitle {
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-    
-    .program-card .card-body {
-        padding: 1rem 0.875rem; /* Padding dikurangi */
-    }
-    
-    /* Section Spacing Mobile */
-    section.py-5 {
-        padding: 2rem 0 !important;
-    }
-    
-    /* Call to Action Mobile */
-    .bg-primary.text-white {
-        padding: 2rem 0 !important;
-    }
-    
-    .bg-primary.text-white h3 {
-        font-size: 1.25rem !important;
-        margin-bottom: 1rem !important;
-    }
-    
-    .bg-primary.text-white p {
-        font-size: 0.9rem !important;
-        margin-bottom: 1.5rem !important;
-    }
-    
-    .bg-primary.text-white .btn {
-        width: 100%;
-        font-size: 0.95rem;
-    }
-    
-    .bg-primary .text-lg-end {
-        text-align: center !important;
-        margin-top: 1rem;
-    }
-}
 </style>
 @endsection

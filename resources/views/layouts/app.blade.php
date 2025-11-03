@@ -67,6 +67,46 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* Logo Image Styling */
+        .logo-image {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .navbar-brand:hover .logo-image img {
+            transform: scale(1.1);
+        }
+
+        /* Logo Image Footer Styling */
+        .logo-image-footer {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-image-footer img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(1.2);
+        }
+
         /* Navbar height and spacing */
         .navbar {
             min-height: 80px;
@@ -1776,10 +1816,9 @@
             font-size: 2rem;
         }
 
-        /* Related Program Cards */
+        /* Related Program Cards - Removed height to avoid conflict with program.blade.php */
         .program-image {
             position: relative;
-            height: 200px;
             overflow: hidden;
         }
 
@@ -2274,7 +2313,6 @@
 
         .facility-image {
             position: relative;
-            height: 250px;
             overflow: hidden;
         }
 
@@ -2525,8 +2563,8 @@
             </button>
 
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <div class="logo-circle me-3">
-                    <i class="fas fa-hands-helping"></i>
+                <div class="logo-image me-3">
+                    <img src="{{ asset('storage/images/logo msa.png') }}" alt="MSA Logo">
                 </div>
                 <div>
                     <h4 class="mb-0 text-white fw-bold">Mulia Special Akademik</h4>
@@ -2576,8 +2614,8 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="logo-circle me-3">
-                            <i class="fas fa-hands-helping"></i>
+                        <div class="logo-image-footer me-3">
+                            <img src="{{ asset('storage/images/logo msa.png') }}" alt="MSA Logo">
                         </div>
                         <div>
                             <h5 class="mb-0 text-primary">Mulia Special Academy</h5>
@@ -2881,6 +2919,17 @@
                 font-size: 0.65rem !important;
                 line-height: 1.2;
                 display: block;
+            }
+
+            /* Logo Image Mobile */
+            .logo-image {
+                width: 45px;
+                height: 45px;
+            }
+
+            .logo-image-footer {
+                width: 40px;
+                height: 40px;
             }
         }
     </style>

@@ -166,7 +166,7 @@
 /* Hero Section - Desktop */
 .hero-section {
     padding-top: 5rem !important;
-    padding-bottom: 12rem !important;
+    padding-bottom: 10rem !important;
     background: linear-gradient(135deg, rgba(255, 140, 0, 0.03) 0%, rgba(255, 107, 107, 0.03) 100%);
 }
 

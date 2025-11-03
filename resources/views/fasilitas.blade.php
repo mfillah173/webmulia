@@ -66,158 +66,74 @@
 <style>
 /* Facility Card Styling - Simple & Clean seperti Program */
 .facility-card {
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    background: #ffffff;
+    border-radius: 18px;
     overflow: hidden;
-    border-radius: 8px;
-    background: #fff;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    transition: 0.35s ease;
+    border: 1px solid rgba(224, 200, 150, 0.35);
 }
 
 .facility-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.12);
 }
 
 /* Facility Card Image - Auto Height untuk gambar full */
 .facility-image {
-    position: relative;
     width: 100%;
+    aspect-ratio: 4/3; /* Rasio 4:3 untuk gambar lebih proporsional (landscape) */
     overflow: hidden;
-    background: #f5f5f5;
-    min-height: 300px;
+    background: #f9f8f4;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .facility-image img {
     width: 100%;
-    height: auto;
-    max-height: 600px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
+    height: 100%;
+    object-fit: cover;
+    transition: .5s ease;
 }
 
 .facility-card:hover .facility-image img {
-    transform: scale(1.05);
-}
-
-/* Placeholder jika tidak ada gambar */
-.facility-image-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
-}
-
-.facility-image-placeholder i {
-    font-size: 5rem;
-    color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.06);
 }
 
 /* Card Body - Simple & Clean */
 .facility-card .card-body {
-    padding: 2rem 1.5rem;
+    padding: 18px 24px;
     background: #fff;
 }
 
 /* Facility Title - Bold seperti Program */
 .facility-title {
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    line-height: 1.3;
+    color: #2b2b2b;
+    margin-bottom: 8px;
 }
 
 /* Facility Subtitle - Warna orange */
 .facility-subtitle {
-    font-size: 1rem;
-    color: var(--primary-orange);
-    font-weight: 500;
+    font-size: .85rem;
+    line-height: 1.4;
+    color: #ff8c00;
     margin-bottom: 0;
-    line-height: 1.5;
 }
 
-/* Responsive - Tablet */
-@media (max-width: 991.98px) {
+@media(max-width: 768px) {
     .facility-image {
-        min-height: 250px;
+        aspect-ratio: 4/3; /* Rasio sama di mobile */
     }
-    
-    .facility-image img {
-        max-height: 500px;
-    }
-    
-    .facility-title {
-        font-size: 0.95rem;
-    }
-    
-    .facility-card .card-body {
-        padding: 1.5rem 1.25rem;
-    }
-}
 
-/* Page Header - Add more space from navbar */
-section.py-5:first-child {
-    padding-top: 5.5rem !important;
-    padding-bottom: 3rem !important;
-}
-
-/* Responsive - Mobile */
-@media (max-width: 767.98px) {
-    /* Page Header Mobile */
-    section.py-5:first-child {
-        padding-top: 3.5rem !important;
-        padding-bottom: 2rem !important;
-    }
-    
-    .section-title {
-        font-size: 1.5rem !important;
-        margin-bottom: 0.75rem;
-    }
-    
-    .section-subtitle {
-        font-size: 0.9rem !important;
-        line-height: 1.5;
-    }
-    
-    /* Facility Card Mobile - Ukuran dikurangi */
-    .facility-image {
-        min-height: 200px; /* Dikurangi dari 350px ke 200px */
-        max-height: 350px; /* Batasi tinggi maksimal container */
-    }
-    
-    .facility-image img {
-        max-height: 350px; /* Dikurangi dari 600px ke 350px */
-        width: 100%;
-        object-fit: cover; /* Ubah ke cover agar gambar fill container */
-    }
-    
-    .facility-card {
-        margin-bottom: 1.5rem !important;
-    }
-    
-    .facility-title {
-        font-size: 0.9rem;
-        line-height: 1.3;
-    }
-    
-    .facility-subtitle {
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-    
     .facility-card .card-body {
-        padding: 1rem 0.875rem; /* Padding dikurangi */
+        padding: 18px;
     }
-    
-    /* Section Spacing Mobile */
-    section.py-5 {
-        padding: 2rem 0 !important;
+
+    .facility-title {
+        font-size: 1.15rem;
     }
 }
 </style>
