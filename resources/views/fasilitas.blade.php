@@ -26,7 +26,7 @@
                 <div class="card h-100 facility-card">
                     @if($item->gambar)
                     <div class="facility-image">
-                        <img src="{{ asset('storage/images/fasilitas/' . $item->gambar) }}" alt="{{ $item->nama }}">
+                        <img src="{{ asset('storage/images/media/' . $item->gambar) }}" alt="{{ $item->nama }}">
                     </div>
                     @else
                     <div class="facility-image facility-image-placeholder">

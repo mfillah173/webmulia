@@ -27,14 +27,21 @@ class FasilitasController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
         $data = $request->all();
         unset($data['slug']); // Kolom slug sudah dihapus
 
-        // Handle gambar upload (cropped or original)
-        if ($request->filled('gambar_cropped')) {
+        // Handle gambar dari media library (semua gambar disimpan di images/media)
+        if ($request->filled('gambar_from_library')) {
+            $libraryPath = $request->input('gambar_from_library');
+            // Extract filename from URL (e.g., http://domain.com/storage/images/media/image.jpg)
+            if (preg_match('/\/images\/media\/(.+)$/', $libraryPath, $matches)) {
+                $fileName = $matches[1];
+                $data['gambar'] = $fileName;
+            }
+        } elseif ($request->filled('gambar_cropped')) {
             // Handle cropped image (base64)
             try {
                 $base64Image = $request->input('gambar_cropped');
@@ -52,7 +59,7 @@ class FasilitasController extends Controller
                 }
 
                 $gambarName = time() . '_' . Str::slug($request->nama) . '.' . $type;
-                $directory = storage_path('app/public/images/fasilitas');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -69,7 +76,7 @@ class FasilitasController extends Controller
             try {
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-                $directory = storage_path('app/public/images/fasilitas');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -108,19 +115,35 @@ class FasilitasController extends Controller
 
             $request->validate([
                 'nama' => 'required|string|max:255',
-                'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif'
             ]);
 
             $data = $request->all();
-            $data['slug'] = Str::slug($request->nama);
+            unset($data['slug']); // Kolom slug sudah dihapus
 
-            // Handle gambar upload (cropped or original)
-            if ($request->filled('gambar_cropped')) {
+            // Handle gambar dari media library (semua gambar disimpan di images/media)
+            if ($request->filled('gambar_from_library')) {
+                $libraryPath = $request->input('gambar_from_library');
+                // Extract filename from URL
+                if (preg_match('/\/images\/media\/(.+)$/', $libraryPath, $matches)) {
+                    $fileName = $matches[1];
+
+                    // Delete old gambar only if it's different from the new one
+                    if ($fasilitas->gambar && $fasilitas->gambar !== $fileName) {
+                        $oldPath = storage_path('app/public/images/media/' . $fasilitas->gambar);
+                        if (file_exists($oldPath)) {
+                            @unlink($oldPath);
+                        }
+                    }
+
+                    $data['gambar'] = $fileName;
+                }
+            } elseif ($request->filled('gambar_cropped')) {
                 // Handle cropped image (base64)
                 try {
                     // Delete old gambar
                     if ($fasilitas->gambar) {
-                        $oldPath = storage_path('app/public/images/fasilitas/' . $fasilitas->gambar);
+                        $oldPath = storage_path('app/public/images/media/' . $fasilitas->gambar);
                         if (file_exists($oldPath)) {
                             @unlink($oldPath);
                         }
@@ -141,7 +164,7 @@ class FasilitasController extends Controller
                     }
 
                     $gambarName = time() . '_' . Str::slug($request->nama) . '.' . $type;
-                    $directory = storage_path('app/public/images/fasilitas');
+                    $directory = storage_path('app/public/images/media');
 
                     if (!file_exists($directory)) {
                         mkdir($directory, 0755, true);
@@ -158,7 +181,7 @@ class FasilitasController extends Controller
                 try {
                     // Delete old gambar
                     if ($fasilitas->gambar) {
-                        $oldPath = storage_path('app/public/images/fasilitas/' . $fasilitas->gambar);
+                        $oldPath = storage_path('app/public/images/media/' . $fasilitas->gambar);
                         if (file_exists($oldPath)) {
                             @unlink($oldPath);
                         }
@@ -166,7 +189,7 @@ class FasilitasController extends Controller
 
                     $gambar = $request->file('gambar');
                     $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-                    $directory = storage_path('app/public/images/fasilitas');
+                    $directory = storage_path('app/public/images/media');
 
                     if (!file_exists($directory)) {
                         mkdir($directory, 0755, true);
@@ -215,7 +238,7 @@ class FasilitasController extends Controller
 
             // Delete gambar if exists
             if ($fasilitas->gambar) {
-                $oldPath = storage_path('app/public/images/fasilitas/' . $fasilitas->gambar);
+                $oldPath = storage_path('app/public/images/media/' . $fasilitas->gambar);
                 if (file_exists($oldPath)) {
                     @unlink($oldPath);
                 }

@@ -33,8 +33,15 @@ class ProgramController extends Controller
         $data = $request->all();
         unset($data['slug']);
 
-        // Handle gambar upload (cropped or original)
-        if ($request->filled('gambar_cropped')) {
+        // Handle gambar dari media library (semua gambar disimpan di images/media)
+        if ($request->filled('gambar_from_library')) {
+            $libraryPath = $request->input('gambar_from_library');
+            // Extract filename from URL
+            if (preg_match('/\/images\/media\/(.+)$/', $libraryPath, $matches)) {
+                $fileName = $matches[1];
+                $data['gambar'] = $fileName;
+            }
+        } elseif ($request->filled('gambar_cropped')) {
             // Handle cropped image (base64)
             try {
                 $base64Image = $request->input('gambar_cropped');
@@ -52,7 +59,7 @@ class ProgramController extends Controller
                 }
 
                 $gambarName = time() . '_' . Str::slug($request->nama) . '.' . $type;
-                $directory = storage_path('app/public/images/program');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -69,7 +76,7 @@ class ProgramController extends Controller
             try {
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-                $directory = storage_path('app/public/images/program');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -109,13 +116,29 @@ class ProgramController extends Controller
         $data = $request->all();
         unset($data['slug']);
 
-        // Handle gambar upload (cropped or original)
-        if ($request->filled('gambar_cropped')) {
+        // Handle gambar dari media library (semua gambar disimpan di images/media)
+        if ($request->filled('gambar_from_library')) {
+            $libraryPath = $request->input('gambar_from_library');
+            // Extract filename from URL
+            if (preg_match('/\/images\/media\/(.+)$/', $libraryPath, $matches)) {
+                $fileName = $matches[1];
+
+                // Delete old gambar only if it's different from the new one
+                if ($program->gambar && $program->gambar !== $fileName) {
+                    $oldPath = storage_path('app/public/images/media/' . $program->gambar);
+                    if (file_exists($oldPath)) {
+                        @unlink($oldPath);
+                    }
+                }
+
+                $data['gambar'] = $fileName;
+            }
+        } elseif ($request->filled('gambar_cropped')) {
             // Handle cropped image (base64)
             try {
                 // Delete old gambar
                 if ($program->gambar) {
-                    $oldPath = storage_path('app/public/images/program/' . $program->gambar);
+                    $oldPath = storage_path('app/public/images/media/' . $program->gambar);
                     if (file_exists($oldPath)) {
                         @unlink($oldPath);
                     }
@@ -136,7 +159,7 @@ class ProgramController extends Controller
                 }
 
                 $gambarName = time() . '_' . Str::slug($request->nama) . '.' . $type;
-                $directory = storage_path('app/public/images/program');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -153,7 +176,7 @@ class ProgramController extends Controller
             try {
                 // Delete old gambar
                 if ($program->gambar) {
-                    $oldPath = storage_path('app/public/images/program/' . $program->gambar);
+                    $oldPath = storage_path('app/public/images/media/' . $program->gambar);
                     if (file_exists($oldPath)) {
                         @unlink($oldPath);
                     }
@@ -161,7 +184,7 @@ class ProgramController extends Controller
 
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-                $directory = storage_path('app/public/images/program');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -184,7 +207,7 @@ class ProgramController extends Controller
     {
         // Delete gambar
         if ($program->gambar) {
-            $oldPath = storage_path('app/public/images/program/' . $program->gambar);
+            $oldPath = storage_path('app/public/images/media/' . $program->gambar);
             if (file_exists($oldPath)) {
                 unlink($oldPath);
             }

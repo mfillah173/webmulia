@@ -49,7 +49,7 @@
     <div class="col-md-6 col-lg-4 fasilitas-item" data-name="{{ strtolower($item->nama) }}">
         <div class="card h-100">
             @if($item->gambar)
-            <img src="{{ asset('storage/images/fasilitas/' . $item->gambar) }}"
+            <img src="{{ asset('storage/images/media/' . $item->gambar) }}"
                 class="card-img-top"
                 alt="{{ $item->nama }}"
                 style="height: 200px; object-fit: cover;">

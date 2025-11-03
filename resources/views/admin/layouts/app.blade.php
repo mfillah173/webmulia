@@ -514,7 +514,7 @@
             .card-body .btn i {
                 font-size: 0.875rem !important;
             }
-            
+
             /* Make buttons compact on mobile */
             .card-footer .btn,
             .card-body .btn {
@@ -595,6 +595,29 @@
             animation: slideIn 0.3s ease-out;
         }
 
+        /* Cropper Container Styles */
+        .cropper-container {
+            max-width: 100% !important;
+            max-height: 500px !important;
+            background: #000;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        #cropperImage {
+            max-width: 100% !important;
+            max-height: 500px !important;
+            width: auto !important;
+            height: auto !important;
+            display: block;
+        }
+
+        /* Modal body adjustments */
+        .modal-body {
+            min-height: 400px;
+        }
+
         @keyframes slideIn {
             from {
                 transform: translateX(-20px);
@@ -605,6 +628,32 @@
                 transform: translateX(0);
                 opacity: 1;
             }
+        }
+
+        /* Cropper Preview Styles */
+        #preview {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #preview img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .preview-container {
+            position: relative;
+            min-height: 200px;
         }
     </style>
 
@@ -657,6 +706,12 @@
                         <a href="{{ route('admin.testimoni.index') }}" class="nav-link {{ request()->routeIs('admin.testimoni*') ? 'active' : '' }}">
                             <i class="fas fa-comments"></i>
                             <span class="nav-text">Testimoni</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.media-library.index') }}" class="nav-link {{ request()->routeIs('admin.media-library*') ? 'active' : '' }}">
+                            <i class="fas fa-images"></i>
+                            <span class="nav-text">Media Library</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -876,7 +931,7 @@
 
     <!-- Cropper Modal -->
     <div class="modal fade" id="imageCropperModal" tabindex="-1" aria-labelledby="imageCropperModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content" style="background-color: #1f2937;">
                 <div class="modal-header border-secondary">
                     <h5 class="modal-title text-white" id="imageCropperModalLabel">
@@ -887,10 +942,10 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-8">
-                            <div class="cropper-container" style="max-width: 100%; background: #000; padding: 10px; border-radius: 8px;">
-                                <img id="cropperImage" src="" style="max-width: 100%; display: block;">
+                            <div class="cropper-container">
+                                <img id="cropperImage" src="" style="display: block; max-width: 100%;">
                             </div>
-                            <div class="mt-3 d-flex gap-2 justify-content-center">
+                            <div class="mt-3 d-flex gap-2 justify-content-center flex-wrap">
                                 <button type="button" class="btn btn-sm btn-outline-light" id="rotateLeftBtn">
                                     <i class="fas fa-undo"></i> Rotate Left
                                 </button>
@@ -910,19 +965,11 @@
                         </div>
                         <div class="col-md-4">
                             <div class="text-white">
-                                <h6 class="mb-3">Preview</h6>
-                                <div class="preview-container" style="width: 100%; max-width: 200px; height: 200px; overflow: hidden; background: #000; border-radius: 8px; margin-bottom: 15px;">
-                                    <div id="preview"></div>
-                                </div>
-                                <div class="preview-info mb-3">
-                                    <small class="text-muted">Dimensions:</small>
-                                    <div id="dimensions" class="text-white">-</div>
-                                </div>
-                                <div class="form-group">
+                                <div class="form-group mb-3">
                                     <label class="text-white small">Aspect Ratio</label>
                                     <select class="form-select form-select-sm bg-dark text-white border-secondary" id="aspectRatio">
                                         <option value="NaN">Free</option>
-                                        <option value="1">1:1</option>
+                                        <option value="1" selected>1:1</option>
                                         <option value="16/9">16:9</option>
                                         <option value="4/3">4:3</option>
                                         <option value="3/2">3:2</option>
@@ -939,6 +986,28 @@
                     <button type="button" class="btn btn-primary" id="cropImageBtn">
                         <i class="fas fa-check me-2"></i>Crop & Apply
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Media Library Modal -->
+    <div class="modal fade" id="mediaLibraryModal" tabindex="-1" aria-labelledby="mediaLibraryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content bg-dark border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-white" id="mediaLibraryModalLabel">
+                        <i class="fas fa-images me-2"></i>Pilih dari Media Library
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="mediaLibraryContent">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-white mt-3">Memuat media library...</p>
+                    </div>
                 </div>
             </div>
         </div>

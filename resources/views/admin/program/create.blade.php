@@ -88,13 +88,18 @@
                             <i class="fas fa-image me-1"></i>Gambar Program
                         </label>
 
-                        <input type="file"
-                            class="form-control @error('gambar') is-invalid @enderror"
-                            id="gambar"
-                            name="gambar"
-                            accept="image/*">
+                        <div class="d-flex gap-2 mb-2">
+                            <input type="file"
+                                class="form-control @error('gambar') is-invalid @enderror"
+                                id="gambar"
+                                name="gambar"
+                                accept="image/*">
+                            <button type="button" class="btn btn-outline-primary" id="selectFromLibraryBtn">
+                                <i class="fas fa-images me-1"></i>Pilih dari Media Library
+                            </button>
+                        </div>
                         <input type="hidden" id="gambar_cropped" name="gambar_cropped">
-
+                        <input type="hidden" id="gambar_from_library" name="gambar_from_library">
                         <div class="form-help">Gambar utama program yang akan ditampilkan di website. Format: JPG, PNG, GIF</div>
                         @error('gambar')
                         <div class="invalid-feedback">
@@ -157,25 +162,7 @@
             </div>
         </div>
 
-        <!-- Preview Card -->
-        <div class="preview-card">
-            <div class="preview-card-header">
-                <h4 class="preview-card-title">
-                    <i class="fas fa-eye me-2"></i>Preview
-                </h4>
-            </div>
-            <div class="preview-card-body">
-                <div class="preview-content">
-                    <div class="preview-image-placeholder" id="previewImagePlaceholder">
-                        <i class="fas fa-image"></i>
-                        <p>Gambar akan muncul di sini</p>
-                    </div>
-                    <div class="preview-text">
-                        <h5 class="preview-title" id="previewTitle">Nama Program</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 @endsection
@@ -599,31 +586,6 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Meta description counter
-        const metaDesc = document.getElementById('meta_description');
-        const metaDescCount = document.getElementById('metaDescCount');
-
-        if (metaDesc && metaDescCount) {
-            metaDesc.addEventListener('input', function() {
-                metaDescCount.textContent = this.value.length;
-                if (this.value.length > 160) {
-                    metaDescCount.style.color = 'var(--danger-color)';
-                } else {
-                    metaDescCount.style.color = 'var(--gray-500)';
-                }
-            });
-        }
-
-        // Live preview
-        const namaInput = document.getElementById('nama');
-        const previewTitle = document.getElementById('previewTitle');
-
-        if (namaInput && previewTitle) {
-            namaInput.addEventListener('input', function() {
-                previewTitle.textContent = this.value || 'Nama Program';
-            });
-        }
-
         // Image Cropper
         const imageInput = document.getElementById('gambar');
         const imageCroppedInput = document.getElementById('gambar_cropped');
@@ -638,6 +600,57 @@
             cropperModal = new bootstrap.Modal(document.getElementById('imageCropperModal'));
         }
 
+        // Function to insert image from library
+        window.insertImageFromLibrary = function(imagePath, imageName) {
+            // Set preview image
+            previewImg.src = imagePath;
+            imagePreview.style.display = 'block';
+
+            // Set hidden input for library image
+            const gambarFromLibrary = document.getElementById('gambar_from_library');
+            if (gambarFromLibrary) {
+                gambarFromLibrary.value = imagePath;
+            }
+
+            // Clear file input
+            imageInput.value = '';
+
+            // Clear cropped input
+            imageCroppedInput.value = '';
+        };
+
+        // Open media library in modal
+        const selectFromLibraryBtn = document.getElementById('selectFromLibraryBtn');
+        if (selectFromLibraryBtn) {
+            selectFromLibraryBtn.addEventListener('click', function() {
+                const mediaLibraryModal = new bootstrap.Modal(document.getElementById('mediaLibraryModal'));
+                const mediaLibraryContent = document.getElementById('mediaLibraryContent');
+
+                // Load content via AJAX
+                fetch('{{ route("admin.media-library.grid") }}')
+                    .then(response => response.text())
+                    .then(html => {
+                        mediaLibraryContent.innerHTML = html;
+                        // Execute script in loaded content
+                        const scripts = mediaLibraryContent.querySelectorAll('script');
+                        scripts.forEach(oldScript => {
+                            const newScript = document.createElement('script');
+                            Array.from(oldScript.attributes).forEach(attr => {
+                                newScript.setAttribute(attr.name, attr.value);
+                            });
+                            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                            oldScript.parentNode.replaceChild(newScript, oldScript);
+                        });
+                        mediaLibraryModal.show();
+                    })
+                    .catch(error => {
+                        console.error('Error loading media library:', error);
+                        mediaLibraryContent.innerHTML = '<div class="alert alert-danger">Gagal memuat media library</div>';
+                        mediaLibraryModal.show();
+                    });
+            });
+        }
+
         // Handle file input change
         if (imageInput) {
             imageInput.addEventListener('change', function(e) {
@@ -649,7 +662,6 @@
                         return;
                     }
 
-
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         // Show cropper modal
@@ -660,13 +672,14 @@
                             cropperModal.show();
                         }
 
-                        // Initialize cropper
+                        // Initialize cropper setelah gambar dimuat
                         cropperImage.onload = function() {
                             if (cropper) {
                                 cropper.destroy();
                             }
+
                             cropper = new Cropper(cropperImage, {
-                                aspectRatio: NaN,
+                                aspectRatio: 1,
                                 viewMode: 1,
                                 preview: '#preview',
                                 guides: true,
@@ -676,6 +689,9 @@
                                 cropBoxResizable: true,
                                 toggleDragModeOnDblclick: false,
                                 responsive: true,
+                                autoCropArea: 0.8,
+                                minContainerWidth: 400,
+                                minContainerHeight: 400,
                                 ready: function() {
                                     updateDimensions();
                                 },
@@ -705,43 +721,48 @@
 
                             // Flip buttons
                             document.getElementById('flipHorizontalBtn').addEventListener('click', function() {
-                                cropper.scaleX(-cropper.imageData.scaleX);
+                                const scaleX = cropper.getData().scaleX;
+                                cropper.scaleX(scaleX === 1 ? -1 : 1);
                             });
 
                             document.getElementById('flipVerticalBtn').addEventListener('click', function() {
-                                cropper.scaleY(-cropper.imageData.scaleY);
+                                const scaleY = cropper.getData().scaleY;
+                                cropper.scaleY(scaleY === 1 ? -1 : 1);
                             });
 
                             // Reset button
                             document.getElementById('resetBtn').addEventListener('click', function() {
                                 cropper.reset();
-                                document.getElementById('aspectRatio').value = 'NaN';
+                                document.getElementById('aspectRatio').value = '1';
+                                cropper.setAspectRatio(1);
                             });
 
                             // Crop button
                             document.getElementById('cropImageBtn').addEventListener('click', function() {
                                 if (cropper) {
                                     const canvas = cropper.getCroppedCanvas({
-                                        width: 1200,
-                                        height: 1200,
+                                        width: 800,
+                                        height: 800,
                                         imageSmoothingEnabled: true,
                                         imageSmoothingQuality: 'high',
                                     });
 
-                                    canvas.toBlob(function(blob) {
-                                        const reader = new FileReader();
-                                        reader.onload = function(e) {
-                                            const base64 = e.target.result;
-                                            imageCroppedInput.value = base64;
-                                            previewImg.src = base64;
-                                            imagePreview.style.display = 'block';
+                                    if (canvas) {
+                                        canvas.toBlob(function(blob) {
+                                            const reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                const base64 = e.target.result;
+                                                imageCroppedInput.value = base64;
+                                                previewImg.src = base64;
+                                                imagePreview.style.display = 'block';
 
-                                            if (cropperModal) {
-                                                cropperModal.hide();
-                                            }
-                                        };
-                                        reader.readAsDataURL(blob);
-                                    }, 'image/jpeg', 0.9);
+                                                if (cropperModal) {
+                                                    cropperModal.hide();
+                                                }
+                                            };
+                                            reader.readAsDataURL(blob);
+                                        }, 'image/jpeg', 0.9);
+                                    }
                                 }
                             });
                         };
@@ -765,9 +786,9 @@
             // Update dimensions
             function updateDimensions() {
                 if (cropper) {
-                    const cropBoxData = cropper.getCropBoxData();
+                    const data = cropper.getData();
                     document.getElementById('dimensions').textContent =
-                        Math.round(cropBoxData.width) + ' x ' + Math.round(cropBoxData.height);
+                        Math.round(data.width) + ' x ' + Math.round(data.height);
                 }
             }
 

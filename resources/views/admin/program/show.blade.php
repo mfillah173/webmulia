@@ -72,7 +72,7 @@
             </div>
             <div class="card-body text-center">
                 @if($program->gambar)
-                <img src="{{ asset('storage/images/program/' . $program->gambar) }}"
+                <img src="{{ asset('storage/images/media/' . $program->gambar) }}"
                     alt="{{ $program->nama }}"
                     class="img-fluid rounded">
                 @else

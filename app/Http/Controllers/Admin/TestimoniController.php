@@ -28,13 +28,20 @@ class TestimoniController extends Controller
             'nama_narasumber' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
         $data = $request->all();
 
-        // Handle gambar upload (cropped or original)
-        if ($request->filled('gambar_cropped')) {
+        // Handle gambar dari media library (semua gambar disimpan di images/media)
+        if ($request->filled('gambar_from_library')) {
+            $libraryPath = $request->input('gambar_from_library');
+            // Extract filename from URL
+            if (preg_match('/\/images\/media\/(.+)$/', $libraryPath, $matches)) {
+                $fileName = $matches[1];
+                $data['gambar'] = $fileName;
+            }
+        } elseif ($request->filled('gambar_cropped')) {
             // Handle cropped image (base64)
             try {
                 $base64Image = $request->input('gambar_cropped');
@@ -52,7 +59,7 @@ class TestimoniController extends Controller
                 }
 
                 $gambarName = time() . '_' . Str::slug($request->nama_narasumber) . '.' . $type;
-                $directory = storage_path('app/public/images/testimoni');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -69,7 +76,7 @@ class TestimoniController extends Controller
             try {
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-                $directory = storage_path('app/public/images/testimoni');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -104,18 +111,34 @@ class TestimoniController extends Controller
             'nama_narasumber' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
         $data = $request->all();
 
-        // Handle gambar upload (cropped or original)
-        if ($request->filled('gambar_cropped')) {
+        // Handle gambar dari media library (semua gambar disimpan di images/media)
+        if ($request->filled('gambar_from_library')) {
+            $libraryPath = $request->input('gambar_from_library');
+            // Extract filename from URL
+            if (preg_match('/\/images\/media\/(.+)$/', $libraryPath, $matches)) {
+                $fileName = $matches[1];
+
+                // Delete old gambar only if it's different from the new one
+                if ($testimoni->gambar && $testimoni->gambar !== $fileName) {
+                    $oldPath = storage_path('app/public/images/media/' . $testimoni->gambar);
+                    if (file_exists($oldPath)) {
+                        @unlink($oldPath);
+                    }
+                }
+
+                $data['gambar'] = $fileName;
+            }
+        } elseif ($request->filled('gambar_cropped')) {
             // Handle cropped image (base64)
             try {
                 // Delete old image
                 if ($testimoni->gambar) {
-                    $oldImagePath = storage_path('app/public/images/testimoni/' . $testimoni->gambar);
+                    $oldImagePath = storage_path('app/public/images/media/' . $testimoni->gambar);
                     if (file_exists($oldImagePath)) {
                         @unlink($oldImagePath);
                     }
@@ -136,7 +159,7 @@ class TestimoniController extends Controller
                 }
 
                 $gambarName = time() . '_' . Str::slug($request->nama_narasumber) . '.' . $type;
-                $directory = storage_path('app/public/images/testimoni');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -153,7 +176,7 @@ class TestimoniController extends Controller
             try {
                 // Delete old image
                 if ($testimoni->gambar) {
-                    $oldImagePath = storage_path('app/public/images/testimoni/' . $testimoni->gambar);
+                    $oldImagePath = storage_path('app/public/images/media/' . $testimoni->gambar);
                     if (file_exists($oldImagePath)) {
                         @unlink($oldImagePath);
                     }
@@ -162,7 +185,7 @@ class TestimoniController extends Controller
                 // Upload new image
                 $gambar = $request->file('gambar');
                 $gambarName = time() . '_' . Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gambar->getClientOriginalExtension();
-                $directory = storage_path('app/public/images/testimoni');
+                $directory = storage_path('app/public/images/media');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
@@ -185,7 +208,7 @@ class TestimoniController extends Controller
     {
         // Delete image
         if ($testimoni->gambar) {
-            $imagePath = storage_path('app/public/images/testimoni/' . $testimoni->gambar);
+            $imagePath = storage_path('app/public/images/media/' . $testimoni->gambar);
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }

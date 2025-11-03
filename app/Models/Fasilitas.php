@@ -28,7 +28,7 @@ class Fasilitas extends Model
     public function getImageUrlAttribute()
     {
         if ($this->gambar) {
-            return asset('storage/images/fasilitas/' . $this->gambar);
+            return asset('storage/images/media/' . $this->gambar);
         }
         return null;
     }

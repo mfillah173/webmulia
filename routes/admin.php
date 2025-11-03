@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\FasilitasController;
 use App\Http\Controllers\Admin\TestimoniController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\MediaLibraryController;
 
 // Admin Authentication Routes (tidak perlu middleware)
 // Login routes
@@ -39,6 +40,12 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 
     // Testimoni Management
     Route::resource('testimoni', TestimoniController::class);
+
+    // Media Library
+    Route::get('media-library', [MediaLibraryController::class, 'index'])->name('media-library.index');
+    Route::get('media-library/grid', [MediaLibraryController::class, 'grid'])->name('media-library.grid');
+    Route::post('media-library', [MediaLibraryController::class, 'store'])->name('media-library.store');
+    Route::delete('media-library/delete', [MediaLibraryController::class, 'delete'])->name('media-library.delete');
 
     // FAQ Management
     Route::resource('faq', FaqController::class);

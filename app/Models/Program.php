@@ -21,7 +21,7 @@ class Program extends Model
     public function getImageUrlAttribute()
     {
         if ($this->gambar) {
-            return asset('storage/images/program/' . $this->gambar);
+            return asset('storage/images/media/' . $this->gambar);
         }
         return null;
     }

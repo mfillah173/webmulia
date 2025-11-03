@@ -22,7 +22,7 @@ class Testimoni extends Model
     public function getImageUrlAttribute()
     {
         if ($this->gambar) {
-            return asset('storage/images/testimoni/' . $this->gambar);
+            return asset('storage/images/media/' . $this->gambar);
         }
         return asset('images/default-avatar.png');
     }

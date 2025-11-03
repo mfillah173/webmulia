@@ -50,7 +50,7 @@
         data-name="{{ strtolower($item->nama_narasumber . ' ' . $item->jabatan) }}">
         <div class="card h-100">
             @if($item->gambar)
-            <img src="{{ asset('storage/images/testimoni/' . $item->gambar) }}"
+            <img src="{{ asset('storage/images/media/' . $item->gambar) }}"
                 class="card-img-top"
                 alt="{{ $item->nama_narasumber }}"
                 style="height: 200px; object-fit: cover;">

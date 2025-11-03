@@ -47,12 +47,12 @@
                         <label for="nama" class="form-label required">
                             <i class="fas fa-tag me-1"></i>Nama Fasilitas
                         </label>
-                        <input type="text" 
+                        <input type="text"
                             class="form-control @error('nama') is-invalid @enderror"
-                            id="nama" 
-                            name="nama" 
+                            id="nama"
+                            name="nama"
                             value="{{ old('nama', $fasilitas->nama) }}"
-                            placeholder="Contoh: Ruang Terapi" 
+                            placeholder="Contoh: Ruang Terapi"
                             required>
                         <div class="form-help">Nama fasilitas yang akan ditampilkan di website</div>
                         @error('nama')
@@ -67,12 +67,12 @@
                         <label for="gambar" class="form-label">
                             <i class="fas fa-image me-1"></i>Gambar Fasilitas
                         </label>
-                        
+
                         @if($fasilitas->gambar)
                         <div id="currentImage" class="mb-3">
-                            <img src="{{ asset('storage/images/fasilitas/' . $fasilitas->gambar) }}" 
-                                alt="{{ $fasilitas->nama }}" 
-                                class="img-fluid rounded" 
+                            <img src="{{ asset('storage/images/media/' . $fasilitas->gambar) }}"
+                                alt="{{ $fasilitas->nama }}"
+                                class="img-fluid rounded"
                                 style="max-height: 200px;">
                             <div class="form-help mt-2">Foto saat ini</div>
                         </div>
@@ -87,13 +87,19 @@
                             </div>
                         </div>
 
-                        <input type="file" 
-                            class="form-control @error('gambar') is-invalid @enderror"
-                            id="gambar" 
-                            name="gambar" 
-                            accept="image/*">
+                        <div class="d-flex gap-2 mb-2">
+                            <input type="file"
+                                class="form-control @error('gambar') is-invalid @enderror"
+                                id="gambar"
+                                name="gambar"
+                                accept="image/*">
+                            <button type="button" class="btn btn-outline-primary" id="selectFromLibraryBtn">
+                                <i class="fas fa-images me-1"></i>Pilih dari Media Library
+                            </button>
+                        </div>
                         <input type="hidden" id="gambar_cropped" name="gambar_cropped">
-                        <div class="form-help">Gambar fasilitas yang akan ditampilkan di website. Format: JPG, PNG, GIF. Maksimal 2MB. Kosongkan jika tidak ingin mengubah gambar.</div>
+                        <input type="hidden" id="gambar_from_library" name="gambar_from_library">
+                        <div class="form-help">Gambar fasilitas yang akan ditampilkan di website. Format: JPG, PNG, GIF.</div>
                         @error('gambar')
                         <div class="invalid-feedback">
                             <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
@@ -120,79 +126,133 @@
 
 @section('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Image Cropper
-    const imageInput = document.getElementById('gambar');
-    const imageCroppedInput = document.getElementById('gambar_cropped');
-    const imagePreview = document.getElementById('imagePreview');
-    const previewImg = document.getElementById('previewImg');
-    const removeImageBtn = document.getElementById('removeImageBtn');
-    const currentImage = document.getElementById('currentImage');
-    let cropper = null;
-    let cropperModal = null;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Image Cropper
+        const imageInput = document.getElementById('gambar');
+        const imageCroppedInput = document.getElementById('gambar_cropped');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+        const removeImageBtn = document.getElementById('removeImageBtn');
+        let cropper = null;
+        let cropperModal = null;
 
-    // Initialize modal
-    if (typeof bootstrap !== 'undefined') {
-        cropperModal = new bootstrap.Modal(document.getElementById('imageCropperModal'));
-    }
+        // Initialize modal
+        if (typeof bootstrap !== 'undefined') {
+            cropperModal = new bootstrap.Modal(document.getElementById('imageCropperModal'));
+        }
 
-    // Handle file input change
-    if (imageInput) {
-        imageInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                if (!file.type.match('image.*')) {
-                    alert('Silakan pilih file gambar!');
-                    imageInput.value = '';
-                    return;
-                }
+        // Function to insert image from library
+        window.insertImageFromLibrary = function(imagePath, imageName) {
+            // Set preview image
+            previewImg.src = imagePath;
+            imagePreview.style.display = 'block';
 
-                if (file.size > 2 * 1024 * 1024) {
-                    alert('Ukuran file maksimal 2MB!');
-                    imageInput.value = '';
-                    return;
-                }
+            // Hide current image if exists
+            const currentImage = document.getElementById('currentImage');
+            if (currentImage) {
+                currentImage.style.display = 'none';
+            }
 
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Show cropper modal
-                    const cropperImage = document.getElementById('cropperImage');
-                    cropperImage.src = e.target.result;
-                    
-                    if (cropperModal) {
-                        cropperModal.show();
+            // Set hidden input for library image
+            const gambarFromLibrary = document.getElementById('gambar_from_library');
+            if (gambarFromLibrary) {
+                gambarFromLibrary.value = imagePath;
+            }
+
+            // Clear file input
+            if (imageInput) {
+                imageInput.value = '';
+            }
+
+            // Clear cropped input
+            if (imageCroppedInput) {
+                imageCroppedInput.value = '';
+            }
+        };
+
+        // Open media library in modal
+        const selectFromLibraryBtn = document.getElementById('selectFromLibraryBtn');
+        if (selectFromLibraryBtn) {
+            selectFromLibraryBtn.addEventListener('click', function() {
+                const mediaLibraryModal = new bootstrap.Modal(document.getElementById('mediaLibraryModal'));
+                const mediaLibraryContent = document.getElementById('mediaLibraryContent');
+
+                // Load content via AJAX
+                fetch('{{ route("admin.media-library.grid") }}')
+                    .then(response => response.text())
+                    .then(html => {
+                        mediaLibraryContent.innerHTML = html;
+                        // Execute script in loaded content
+                        const scripts = mediaLibraryContent.querySelectorAll('script');
+                        scripts.forEach(oldScript => {
+                            const newScript = document.createElement('script');
+                            Array.from(oldScript.attributes).forEach(attr => {
+                                newScript.setAttribute(attr.name, attr.value);
+                            });
+                            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                            oldScript.parentNode.replaceChild(newScript, oldScript);
+                        });
+                        mediaLibraryModal.show();
+                    })
+                    .catch(error => {
+                        console.error('Error loading media library:', error);
+                        mediaLibraryContent.innerHTML = '<div class="alert alert-danger">Gagal memuat media library</div>';
+                        mediaLibraryModal.show();
+                    });
+            });
+        }
+
+        // Handle file input change
+        if (imageInput) {
+            imageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (!file.type.match('image.*')) {
+                        alert('Silakan pilih file gambar!');
+                        imageInput.value = '';
+                        return;
                     }
 
-                    // Initialize cropper
-                    cropperImage.onload = function() {
-                        if (cropper) {
-                            cropper.destroy();
-                        }
-                        cropper = new Cropper(cropperImage, {
-                            aspectRatio: NaN,
-                            viewMode: 1,
-                            preview: '#preview',
-                            guides: true,
-                            center: true,
-                            highlight: false,
-                            cropBoxMovable: true,
-                            cropBoxResizable: true,
-                            toggleDragModeOnDblclick: false,
-                            responsive: true,
-                            ready: function() {
-                                updateDimensions();
-                            },
-                            crop: function() {
-                                updateDimensions();
-                            }
-                        });
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Show cropper modal
+                        const cropperImage = document.getElementById('cropperImage');
+                        cropperImage.src = e.target.result;
 
-                        // Setup controls - use cloneNode to remove old listeners
-                        const aspectRatioEl = document.getElementById('aspectRatio');
-                        if (aspectRatioEl) {
-                            const newAspectRatio = aspectRatioEl.cloneNode(true);
-                            aspectRatioEl.parentNode.replaceChild(newAspectRatio, aspectRatioEl);
-                            newAspectRatio.addEventListener('change', function() {
+                        if (cropperModal) {
+                            cropperModal.show();
+                        }
+
+                        // Initialize cropper setelah gambar dimuat
+                        cropperImage.onload = function() {
+                            if (cropper) {
+                                cropper.destroy();
+                            }
+
+                            cropper = new Cropper(cropperImage, {
+                                aspectRatio: 1,
+                                viewMode: 1,
+                                preview: '#preview',
+                                guides: true,
+                                center: true,
+                                highlight: false,
+                                cropBoxMovable: true,
+                                cropBoxResizable: true,
+                                toggleDragModeOnDblclick: false,
+                                responsive: true,
+                                autoCropArea: 0.8,
+                                minContainerWidth: 400,
+                                minContainerHeight: 400,
+                                ready: function() {
+                                    updateDimensions();
+                                },
+                                crop: function() {
+                                    updateDimensions();
+                                }
+                            });
+
+                            // Aspect ratio change
+                            document.getElementById('aspectRatio').addEventListener('change', function() {
                                 const value = this.value;
                                 if (value === 'NaN') {
                                     cropper.setAspectRatio(NaN);
@@ -200,101 +260,69 @@ document.addEventListener('DOMContentLoaded', function() {
                                     cropper.setAspectRatio(eval(value));
                                 }
                             });
-                        }
 
-                        // Rotate buttons
-                        const rotateLeftBtn = document.getElementById('rotateLeftBtn');
-                        if (rotateLeftBtn) {
-                            const newRotateLeft = rotateLeftBtn.cloneNode(true);
-                            rotateLeftBtn.parentNode.replaceChild(newRotateLeft, rotateLeftBtn);
-                            newRotateLeft.addEventListener('click', function() {
+                            // Rotate buttons
+                            document.getElementById('rotateLeftBtn').addEventListener('click', function() {
                                 cropper.rotate(-90);
                             });
-                        }
 
-                        const rotateRightBtn = document.getElementById('rotateRightBtn');
-                        if (rotateRightBtn) {
-                            const newRotateRight = rotateRightBtn.cloneNode(true);
-                            rotateRightBtn.parentNode.replaceChild(newRotateRight, rotateRightBtn);
-                            newRotateRight.addEventListener('click', function() {
+                            document.getElementById('rotateRightBtn').addEventListener('click', function() {
                                 cropper.rotate(90);
                             });
-                        }
 
-                        // Flip buttons
-                        const flipHorizontalBtn = document.getElementById('flipHorizontalBtn');
-                        if (flipHorizontalBtn) {
-                            const newFlipH = flipHorizontalBtn.cloneNode(true);
-                            flipHorizontalBtn.parentNode.replaceChild(newFlipH, flipHorizontalBtn);
-                            newFlipH.addEventListener('click', function() {
-                                cropper.scaleX(-cropper.imageData.scaleX);
+                            // Flip buttons
+                            document.getElementById('flipHorizontalBtn').addEventListener('click', function() {
+                                const scaleX = cropper.getData().scaleX;
+                                cropper.scaleX(scaleX === 1 ? -1 : 1);
                             });
-                        }
 
-                        const flipVerticalBtn = document.getElementById('flipVerticalBtn');
-                        if (flipVerticalBtn) {
-                            const newFlipV = flipVerticalBtn.cloneNode(true);
-                            flipVerticalBtn.parentNode.replaceChild(newFlipV, flipVerticalBtn);
-                            newFlipV.addEventListener('click', function() {
-                                cropper.scaleY(-cropper.imageData.scaleY);
+                            document.getElementById('flipVerticalBtn').addEventListener('click', function() {
+                                const scaleY = cropper.getData().scaleY;
+                                cropper.scaleY(scaleY === 1 ? -1 : 1);
                             });
-                        }
 
-                        // Reset button
-                        const resetBtn = document.getElementById('resetBtn');
-                        if (resetBtn) {
-                            const newReset = resetBtn.cloneNode(true);
-                            resetBtn.parentNode.replaceChild(newReset, resetBtn);
-                            newReset.addEventListener('click', function() {
+                            // Reset button
+                            document.getElementById('resetBtn').addEventListener('click', function() {
                                 cropper.reset();
-                                const aspectRatioEl = document.getElementById('aspectRatio');
-                                if (aspectRatioEl) aspectRatioEl.value = 'NaN';
+                                document.getElementById('aspectRatio').value = '1';
+                                cropper.setAspectRatio(1);
                             });
-                        }
 
-                        // Crop button
-                        const cropImageBtn = document.getElementById('cropImageBtn');
-                        if (cropImageBtn) {
-                            const newCropBtn = cropImageBtn.cloneNode(true);
-                            cropImageBtn.parentNode.replaceChild(newCropBtn, cropImageBtn);
-                            newCropBtn.addEventListener('click', function() {
+                            // Crop button
+                            document.getElementById('cropImageBtn').addEventListener('click', function() {
                                 if (cropper) {
                                     const canvas = cropper.getCroppedCanvas({
-                                        width: 1200,
-                                        height: 1200,
+                                        width: 800,
+                                        height: 800,
                                         imageSmoothingEnabled: true,
                                         imageSmoothingQuality: 'high',
                                     });
-                                    
-                                    canvas.toBlob(function(blob) {
-                                        const reader = new FileReader();
-                                        reader.onload = function(e) {
-                                            const base64 = e.target.result;
-                                            imageCroppedInput.value = base64;
-                                            previewImg.src = base64;
-                                            imagePreview.style.display = 'block';
-                                            
-                                            if (currentImage) {
-                                                currentImage.style.display = 'none';
-                                            }
-                                            
-                                            if (cropperModal) {
-                                                cropperModal.hide();
-                                            }
-                                        };
-                                        reader.readAsDataURL(blob);
-                                    }, 'image/jpeg', 0.9);
+
+                                    if (canvas) {
+                                        canvas.toBlob(function(blob) {
+                                            const reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                const base64 = e.target.result;
+                                                imageCroppedInput.value = base64;
+                                                previewImg.src = base64;
+                                                imagePreview.style.display = 'block';
+
+                                                if (cropperModal) {
+                                                    cropperModal.hide();
+                                                }
+                                            };
+                                            reader.readAsDataURL(blob);
+                                        }, 'image/jpeg', 0.9);
+                                    }
                                 }
                             });
-                        }
+                        };
                     };
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+                    reader.readAsDataURL(file);
+                }
+            });
 
-        // Remove image
-        if (removeImageBtn) {
+            // Remove image
             removeImageBtn.addEventListener('click', function() {
                 imageInput.value = '';
                 imageCroppedInput.value = '';
@@ -304,30 +332,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     cropper.destroy();
                     cropper = null;
                 }
-                if (currentImage) {
-                    currentImage.style.display = 'block';
+            });
+
+            // Update dimensions
+            function updateDimensions() {
+                if (cropper) {
+                    const data = cropper.getData();
+                    document.getElementById('dimensions').textContent =
+                        Math.round(data.width) + ' x ' + Math.round(data.height);
+                }
+            }
+
+            // Handle form submit - ensure cropped image is sent
+            document.querySelector('form').addEventListener('submit', function(e) {
+                if (imageCroppedInput.value) {
+                    // Remove original file input so only cropped data is sent
+                    imageInput.disabled = true;
                 }
             });
         }
-
-        // Update dimensions
-        function updateDimensions() {
-            if (cropper) {
-                const cropBoxData = cropper.getCropBoxData();
-                document.getElementById('dimensions').textContent = 
-                    Math.round(cropBoxData.width) + ' x ' + Math.round(cropBoxData.height);
-            }
-        }
-
-        // Handle form submit - ensure cropped image is sent
-        document.querySelector('form').addEventListener('submit', function(e) {
-            if (imageCroppedInput.value) {
-                // Remove original file input so only cropped data is sent
-                imageInput.disabled = true;
-            }
-        });
-    }
-});
+    });
 </script>
 @endsection
 

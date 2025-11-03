@@ -26,7 +26,7 @@
                 <div class="card h-100 program-card">
                     @if($program->gambar)
                     <div class="program-image">
-                        <img src="{{ asset('storage/images/program/' . $program->gambar) }}" alt="{{ $program->nama }}">
+                        <img src="{{ asset('storage/images/media/' . $program->gambar) }}" alt="{{ $program->nama }}">
                     </div>
                     @else
                     <div class="program-image program-image-placeholder">

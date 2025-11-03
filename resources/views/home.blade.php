@@ -52,7 +52,7 @@
                     <!-- Photo Section (Top Half) -->
                     <div class="testimonial-photo-section">
                         @if($item->gambar)
-                            <img src="{{ asset('storage/images/testimoni/' . $item->gambar) }}" alt="{{ $item->nama_narasumber }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="{{ asset('storage/images/media/' . $item->gambar) }}" alt="{{ $item->nama_narasumber }}" style="width: 100%; height: 100%; object-fit: cover;">
                         @else
                             <div class="photo-placeholder">
                                 <i class="fas fa-user"></i>
