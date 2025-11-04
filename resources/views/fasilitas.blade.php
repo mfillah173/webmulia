@@ -64,76 +64,96 @@
 
 @section('styles')
 <style>
-/* Facility Card Styling - Simple & Clean seperti Program */
+/* Facility Card Styling - Sama seperti Program Card */
 .facility-card {
-    background: #ffffff;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    box-shadow: none;
     transition: 0.35s ease;
-    border: 1px solid rgba(224, 200, 150, 0.35);
+    border: none;
 }
 
 .facility-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+    transform: translateY(0);
+    box-shadow: none;
 }
 
-/* Facility Card Image - Auto Height untuk gambar full */
+/* Facility Image - Landscape 16:9 */
 .facility-image {
     width: 100%;
-    aspect-ratio: 4/3; /* Rasio 4:3 untuk gambar lebih proporsional (landscape) */
+    aspect-ratio: 16/9; /* Rasio landscape 16:9 untuk gambar lebar seperti program */
     overflow: hidden;
-    background: #f9f8f4;
+    background: #ffffff; /* background putih untuk gambar Full HD */
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    margin-bottom: 20px;
 }
 
 .facility-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* tampilkan gambar full tanpa crop */
     transition: .5s ease;
+    image-rendering: high-quality;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: bicubic;
+    max-width: 100%;
+    height: auto;
 }
 
 .facility-card:hover .facility-image img {
-    transform: scale(1.06);
+    transform: scale(1.0); /* tidak ada zoom agar gambar tetap Full HD */
 }
 
-/* Card Body - Simple & Clean */
+/* Card Body - Centered Text */
 .facility-card .card-body {
-    padding: 18px 24px;
-    background: #fff;
+    padding: 0 20px 30px 20px;
+    text-align: center;
 }
 
-/* Facility Title - Bold seperti Program */
+/* Facility Title - Bold */
 .facility-title {
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 600;
     color: #2b2b2b;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    line-height: 1.4;
 }
 
-/* Facility Subtitle - Warna orange */
+/* Facility Subtitle */
 .facility-subtitle {
-    font-size: .85rem;
-    line-height: 1.4;
-    color: #ff8c00;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
     margin-bottom: 0;
+    font-weight: 400;
 }
 
 @media(max-width: 768px) {
     .facility-image {
-        aspect-ratio: 4/3; /* Rasio sama di mobile */
+        aspect-ratio: 16/9; /* Rasio landscape 16:9 untuk mobile juga */
+        height: auto;
+        min-height: 200px;
+        border-radius: 15px;
+        margin-bottom: 15px;
     }
 
     .facility-card .card-body {
-        padding: 18px;
+        padding: 0 20px 25px 20px;
+        text-align: center;
     }
 
     .facility-title {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
+    }
+
+    .facility-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
 }
 </style>

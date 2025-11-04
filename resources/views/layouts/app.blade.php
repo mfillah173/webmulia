@@ -179,7 +179,7 @@
             justify-content: center;
             min-width: 110px;
             text-align: center;
-            height: 70px;
+            height: 75px;
         }
 
         .nav-link-custom::before {
@@ -213,8 +213,8 @@
 
         .nav-link-custom i {
             transition: transform 0.3s ease;
-            font-size: 1.2rem;
-            margin-bottom: 0.25rem;
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
         }
 
         .nav-link-custom:hover i {
@@ -308,7 +308,7 @@
             .nav-link-custom i {
                 margin-bottom: 0;
                 margin-right: 0.75rem;
-                font-size: 1.1rem;
+                font-size: 1.4rem;
             }
 
             .nav-link-custom span {

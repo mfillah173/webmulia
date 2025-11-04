@@ -37,7 +37,7 @@
                     <div class="card-body">
                         <h3 class="program-title">{{ $program->nama }}</h3>
                         @if($program->tujuan_program)
-                        <p class="program-subtitle">{{ \Str::limit($program->tujuan_program, 80) }}</p>
+                        <p class="program-subtitle">{{ $program->tujuan_program }}</p>
                         @endif
                     </div>
                 </div>
@@ -192,51 +192,61 @@
 /* Program Card Styling - Simple & Clean seperti screenshot */
 /* Program Card Styling - Simple & Clean seperti screenshot */
 .program-card {
-    background: #ffffff;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    box-shadow: none;
     transition: 0.35s ease;
-    border: 1px solid rgba(224, 200, 150, 0.35);
+    border: none;
 }
 
 .program-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+    transform: translateY(0);
+    box-shadow: none;
 }
 
 .program-image {
     width: 100%;
-    aspect-ratio: 4/3; /* Rasio 4:3 untuk gambar lebih proporsional (landscape) */
+    aspect-ratio: 16/9; /* Rasio landscape 16:9 untuk gambar lebar seperti contoh */
     overflow: hidden;
-    background: #f9f8f4;
+    background: #ffffff; /* background putih untuk gambar Full HD */
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    margin-bottom: 20px;
 }
 
 .program-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* tetap penuh */
+    object-fit: contain; /* tampilkan gambar full tanpa crop */
     transition: .5s ease;
+    image-rendering: high-quality;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: bicubic;
+    max-width: 100%;
+    height: auto;
 }
 
 .program-card:hover .program-image img {
-    transform: scale(1.06);
+    transform: scale(1.0); /* tidak ada zoom agar gambar tetap Full HD */
 }
 
 .program-content,
 .program-card .card-body {
-    padding: 18px 24px; 
+    padding: 0 30px 30px 30px;
+    text-align: center;
 }
 
 .program-content h3,
 .program-title {
-    font-size: 1.3rem; 
-    font-weight: 700;
+    font-size: 1.25rem; 
+    font-weight: 600;
     color: #2b2b2b;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    line-height: 1.4;
 }
 
 .program-content p {
@@ -247,10 +257,12 @@
 }
 
 .program-subtitle {
-    font-size: .85rem;
-    line-height: 1.4;
-    color: #ff8c00;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #555;
     margin-bottom: 0;
+    font-weight: 400;
+    text-align: justify;
 }
 
 .btn-detail {
@@ -271,17 +283,28 @@
 
 @media(max-width: 768px) {
     .program-image {
-        aspect-ratio: 4/3; /* Rasio sama di mobile */
+        aspect-ratio: 16/9; /* Rasio landscape 16:9 untuk mobile juga */
+        height: auto;
+        min-height: 200px; /* Minimal tinggi gambar di mobile */
+        border-radius: 15px;
+        margin-bottom: 15px;
     }
 
     .program-content,
     .program-card .card-body {
-        padding: 15px 18px;
+        padding: 0 25px 25px 25px;
+        text-align: center;
     }
 
     .program-content h3,
     .program-title {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
+    }
+
+    .program-subtitle {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        text-align: justify;
     }
 }
 

@@ -26,7 +26,7 @@
             <div class="col-lg-6">
                 <div class="hero-image text-center">
                     <div class="hero-placeholder">
-                        <i class="fas fa-graduation-cap" style="font-size: 8rem; opacity: 0.3;"></i>
+                        <i class="fas fa-hand-holding-heart" style="font-size: 8rem; opacity: 0.3;"></i>
                     </div>
                 </div>
             </div>
