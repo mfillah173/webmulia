@@ -13,8 +13,8 @@ class HomeController extends Controller
     public function index()
     {
         // Ambil data dari database
-        $testimoni = Testimoni::orderBy('created_at', 'desc')->limit(3)->get();
-        $faqs = Faq::orderBy('created_at', 'desc')->limit(6)->get();
+        $testimoni = Testimoni::orderBy('created_at', 'desc')->get();
+        $faqs = Faq::orderBy('created_at', 'asc')->limit(6)->get(); // Yang terdahulu di paling atas
         
         return view('home', compact('testimoni', 'faqs'));
     }

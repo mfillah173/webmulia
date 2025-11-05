@@ -41,55 +41,71 @@
             <div class="col-lg-8 mx-auto text-center mb-5">
                 <h2 class="section-title">Apa Kata Mereka</h2>
                 <p class="section-subtitle">Testimoni dari orang tua siswa Mulia Special Academy</p>
+            </div>
+        </div>
+        
+        <!-- Testimonial Slider with Navigation -->
+        <div class="testimonial-slider-wrapper position-relative">
+            <!-- Previous Button -->
+            <button class="testimonial-nav-btn testimonial-prev" id="testimonialPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <!-- Testimonial Container -->
+            <div class="testimonial-container" id="testimonialContainer">
+                <div class="testimonial-row">
+                    @forelse($testimoni as $item)
+                    <!-- Testimonial Card -->
+                    <div class="testimonial-item">
+                        <div class="card testimonial-card h-100">
+                            <!-- Photo Section (Top Half) -->
+                            <div class="testimonial-photo-section">
+                                @if($item->gambar)
+                                    <img src="{{ asset('storage/images/media/' . $item->gambar) }}" alt="{{ $item->nama_narasumber }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                @else
+                                    <div class="photo-placeholder">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                @endif
+                            </div>
+                            <!-- Content Section (Bottom Half) -->
+                            <div class="card-body text-center">
+                                <div class="testimonial-quote mb-3">
+                                    <i class="fas fa-quote-left"></i>
+                                </div>
+                                <p class="testimonial-text">"{{ $item->deskripsi }}"</p>
+                                <h5 class="testimonial-name">{{ $item->nama_narasumber }}</h5>
+                                <p class="testimonial-role text-muted">{{ $item->jabatan }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @empty
+                    <!-- Default Testimonials jika database kosong -->
+                    <div class="testimonial-item">
+                        <div class="card testimonial-card h-100">
+                            <div class="testimonial-photo-section">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="testimonial-quote mb-3">
+                                    <i class="fas fa-quote-left"></i>
+                                </div>
+                                <p class="testimonial-text">"Belum ada testimoni. Silakan tambahkan dari panel admin."</p>
+                                <h5 class="testimonial-name">Admin</h5>
+                                <p class="testimonial-role text-muted">Mulia Special Academy</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforelse
                 </div>
             </div>
             
-        <div class="row">
-            @forelse($testimoni as $item)
-            <!-- Testimonial Card -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card testimonial-card h-100">
-                    <!-- Photo Section (Top Half) -->
-                    <div class="testimonial-photo-section">
-                        @if($item->gambar)
-                            <img src="{{ asset('storage/images/media/' . $item->gambar) }}" alt="{{ $item->nama_narasumber }}" style="width: 100%; height: 100%; object-fit: cover;">
-                        @else
-                            <div class="photo-placeholder">
-                                <i class="fas fa-user"></i>
-                            </div>
-                        @endif
-                        </div>
-                    <!-- Content Section (Bottom Half) -->
-                    <div class="card-body text-center">
-                        <div class="testimonial-quote mb-3">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p class="testimonial-text">"{{ $item->deskripsi }}"</p>
-                        <h5 class="testimonial-name">{{ $item->nama_narasumber }}</h5>
-                        <p class="testimonial-role text-muted">{{ $item->jabatan }}</p>
-                    </div>
-                </div>
-            </div>
-            @empty
-            <!-- Default Testimonials jika database kosong -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card testimonial-card h-100">
-                    <div class="testimonial-photo-section">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-                    <div class="card-body text-center">
-                        <div class="testimonial-quote mb-3">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p class="testimonial-text">"Belum ada testimoni. Silakan tambahkan dari panel admin."</p>
-                        <h5 class="testimonial-name">Admin</h5>
-                        <p class="testimonial-role text-muted">Mulia Special Academy</p>
-                    </div>
-                </div>
-            </div>
-            @endforelse
+            <!-- Next Button -->
+            <button class="testimonial-nav-btn testimonial-next" id="testimonialNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </div>
 </section>
@@ -377,7 +393,7 @@
 
 .testimonial-photo-section {
     width: 100%;
-    height: 350px; /* Diperbesar dari 200px ke 350px */
+    height: 300px; /* Diperbesar sesuai card yang lebih besar */
     position: relative;
     overflow: hidden;
 }
@@ -422,14 +438,7 @@
 /* Responsive - Tablet */
 @media (max-width: 991.98px) {
     .testimonial-photo-section {
-        height: 300px;
-    }
-}
-
-/* Responsive - Tablet */
-@media (max-width: 991.98px) {
-    .testimonial-photo-section {
-        height: 300px;
+        height: 270px; /* Diperbesar untuk tablet */
     }
     
     .section-title {
@@ -449,7 +458,7 @@
     }
     
     .testimonial-photo-section {
-        height: 280px;
+        height: 220px; /* Disesuaikan dengan card yang lebih kecil */
     }
     
     .testimonial-card .card-body {
@@ -494,6 +503,13 @@
     /* Section spacing mobile */
     section.py-5 {
         padding: 2rem 0 !important;
+    }
+}
+
+/* Responsive - Mobile Small */
+@media (max-width: 575.98px) {
+    .testimonial-photo-section {
+        height: 200px; /* Disesuaikan dengan card yang lebih kecil */
     }
 }
 
@@ -586,5 +602,222 @@
         margin-top: 1rem;
     }
 }
+
+/* ========== TESTIMONIAL SLIDER STYLES ========== */
+.testimonial-slider-wrapper {
+    padding: 0 60px;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.testimonial-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    padding: 20px 0;
+    width: 100%;
+    max-width: 1170px; /* 3 cards @ 390px = 1170px */
+    margin: 0 auto;
+}
+
+.testimonial-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.testimonial-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0; /* Tidak ada gap, pakai padding di item */
+}
+
+.testimonial-item {
+    flex: 0 0 auto;
+    width: 390px; /* Diperbesar dari 350px ke 390px */
+    padding: 0 15px;
+}
+
+/* Navigation Buttons */
+.testimonial-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff8c00, #ff6b35);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonial-nav-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
+}
+
+.testimonial-nav-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.testimonial-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.testimonial-prev {
+    left: 0;
+}
+
+.testimonial-next {
+    right: 0;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .testimonial-slider-wrapper {
+        padding: 0 50px;
+        max-width: 1000px;
+    }
+    
+    .testimonial-container {
+        max-width: 700px; /* 2 cards @ 350px = 700px */
+    }
+    
+    .testimonial-nav-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .testimonial-item {
+        width: 350px; /* Diperbesar dari 320px ke 350px */
+    }
+}
+
+@media (max-width: 767.98px) {
+    .testimonial-slider-wrapper {
+        padding: 0 40px;
+        max-width: 500px;
+    }
+    
+    .testimonial-container {
+        max-width: 320px; /* Dikurangi sedikit agar tidak terpotong */
+    }
+    
+    .testimonial-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .testimonial-prev {
+        left: -5px;
+    }
+    
+    .testimonial-next {
+        right: -5px;
+    }
+    
+    .testimonial-item {
+        width: 320px; /* Dikurangi agar pas dengan container */
+        padding: 0 10px; /* Padding dikurangi untuk mobile */
+    }
+}
+
+@media (max-width: 575.98px) {
+    .testimonial-slider-wrapper {
+        padding: 0 35px;
+        max-width: 400px;
+    }
+    
+    .testimonial-container {
+        max-width: 300px; /* Dikurangi sedikit agar tidak terpotong */
+    }
+    
+    .testimonial-nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .testimonial-item {
+        width: 300px; /* Dikurangi agar pas dengan container */
+        padding: 0 10px; /* Padding dikurangi untuk mobile */
+    }
+}
 </style>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('testimonialContainer');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
+    
+    if (container && prevBtn && nextBtn) {
+        // Get scroll amount based on viewport
+        function getScrollAmount() {
+            if (window.innerWidth <= 575) return 300; // Mobile small: 1 card @ 300px
+            if (window.innerWidth <= 767) return 320; // Mobile: 1 card @ 320px
+            if (window.innerWidth <= 991) return 350; // Tablet: 1 card @ 350px
+            return 390; // Desktop: 1 card @ 390px
+        }
+        
+        prevBtn.addEventListener('click', function() {
+            container.scrollBy({
+                left: -getScrollAmount(),
+                behavior: 'smooth'
+            });
+        });
+        
+        nextBtn.addEventListener('click', function() {
+            container.scrollBy({
+                left: getScrollAmount(),
+                behavior: 'smooth'
+            });
+        });
+        
+        // Hide/show buttons based on scroll position
+        function updateButtons() {
+            const scrollLeft = container.scrollLeft;
+            const maxScroll = container.scrollWidth - container.clientWidth;
+            
+            // Disable prev button if at start
+            if (scrollLeft <= 5) {
+                prevBtn.setAttribute('disabled', 'true');
+            } else {
+                prevBtn.removeAttribute('disabled');
+            }
+            
+            // Disable next button if at end
+            if (scrollLeft >= maxScroll - 5) {
+                nextBtn.setAttribute('disabled', 'true');
+            } else {
+                nextBtn.removeAttribute('disabled');
+            }
+        }
+        
+        container.addEventListener('scroll', updateButtons);
+        updateButtons(); // Initial check
+        
+        // Update on window resize
+        window.addEventListener('resize', function() {
+            updateButtons();
+        });
+    }
+});
+</script>
 @endsection
