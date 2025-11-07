@@ -2648,10 +2648,7 @@
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <div class="social-links">
-                        <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-youtube"></i></a>
-
+                        <a href="https://www.instagram.com/muliaspecialacademy/" target="_blank" rel="noopener noreferrer" class="text-light" title="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>

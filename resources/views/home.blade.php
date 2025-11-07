@@ -12,7 +12,7 @@
                 <div class="hero-content">
                     <h1 class="hero-title">Mulia Special Akademik (MSA)</h1>
                     <p class="hero-subtitle">Sekolah dan Pusat Terapi untuk Anak Berkebutuhan Khusus</p>
-                    <p class="lead">Mulia Special Akademik (MSA) adalah sekolah dan pusat terapi yang dirancang khusus untuk anak berkebutuhan khusus mulai usia 2-6 tahun. MSA memadukan pendidikan akademik, terapi perkembangan, dan pembentukan karakter melalui sistem stimulasi bertahap dan pembelajaran individual (one-on-one).</p>
+                    <p class="lead">Mulia Special Akademik (MSA) adalah pusat terapi yang dirancang khusus untuk anak berkebutuhan khusus mulai usia 2-7 tahun. MSA memadukan pendidikan akademik, terapi perkembangan, dan pembentukan karakter melalui sistem stimulasi bertahap dan pembelajaran individual (one-on-one).</p>
                     <div class="hero-buttons">
                         <a href="{{ route('kontak') }}" class="btn btn-primary btn-lg me-3">
                             <i class="fas fa-phone me-2"></i>Hubungi Kami
@@ -393,7 +393,7 @@
 
 .testimonial-photo-section {
     width: 100%;
-    height: 300px; /* Diperbesar sesuai card yang lebih besar */
+    height: 350px; /* Diperbesar untuk desktop agar foto lebih jelas */
     position: relative;
     overflow: hidden;
 }
@@ -438,7 +438,7 @@
 /* Responsive - Tablet */
 @media (max-width: 991.98px) {
     .testimonial-photo-section {
-        height: 270px; /* Diperbesar untuk tablet */
+        height: 290px; /* Diperbesar agar foto tidak terpotong */
     }
     
     .section-title {
@@ -458,7 +458,7 @@
     }
     
     .testimonial-photo-section {
-        height: 220px; /* Disesuaikan dengan card yang lebih kecil */
+        height: 280px; /* Diperbesar agar foto tidak terpotong */
     }
     
     .testimonial-card .card-body {
@@ -509,7 +509,7 @@
 /* Responsive - Mobile Small */
 @media (max-width: 575.98px) {
     .testimonial-photo-section {
-        height: 200px; /* Disesuaikan dengan card yang lebih kecil */
+        height: 250px; /* Diperbesar agar foto tidak terpotong */
     }
 }
 
