@@ -242,7 +242,7 @@
 
 .program-content h3,
 .program-title {
-    font-size: 1.25rem; 
+    font-size: 1.8rem !important; 
     font-weight: 600;
     color: #2b2b2b;
     margin-bottom: 10px;
@@ -282,6 +282,10 @@
 }
 
 @media(max-width: 768px) {
+    .section-title {
+        font-size: 1.5rem !important;
+    }
+
     .program-image {
         aspect-ratio: 16/9; /* Rasio landscape 16:9 untuk mobile juga */
         height: auto;
@@ -298,7 +302,7 @@
 
     .program-content h3,
     .program-title {
-        font-size: 1.1rem;
+        font-size: 1.6rem !important;
     }
 
     .program-subtitle {

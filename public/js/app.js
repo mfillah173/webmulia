@@ -202,7 +202,9 @@ function showNotification(message, type = 'success') {
     }, 5000);
 }
 
-// Back to top button
+// Back to top button - DISABLED
+// Uncomment code below to enable back to top button
+/*
 function createBackToTopButton() {
     const button = document.createElement('button');
     button.innerHTML = '<i class="fas fa-arrow-up"></i>';
@@ -285,4 +287,5 @@ function createBackToTopButton() {
 }
 
 // Initialize back to top button
-createBackToTopButton();
+// createBackToTopButton(); // DISABLED
+*/

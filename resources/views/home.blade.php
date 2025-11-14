@@ -4,6 +4,105 @@
 @section('description', 'Sekolah Berbasis Stimulasi for Children with Special Needs - Kindergarten & Primary School di Surabaya')
 
 @section('content')
+<!-- Photo Slider Section -->
+<!-- 
+    PANDUAN FOTO SLIDER:
+    - Ukuran yang disarankan: 1920x700 pixels (landscape)
+    - Minimal resolusi: 1600x600 pixels
+    - Format: JPG, PNG (ukuran file < 500KB untuk performa optimal)
+    - Rasio: 16:9 atau lebih lebar
+    - Foto akan otomatis di-crop dan di-center agar tidak pecah/distorsi
+-->
+<section class="hero-slider-section">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        </div>
+        
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="hero-slide hero-slide-placeholder-1">
+                    <div class="hero-slide-overlay"></div>
+                    <div class="container">
+                        <div class="hero-slide-content">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="hero-slide hero-slide-placeholder-2">
+                    <div class="hero-slide-overlay"></div>
+                    <div class="container">
+                        <div class="hero-slide-content">
+                            <h2 class="hero-slide-title">Program Pembelajaran Individual</h2>
+                            <p class="hero-slide-subtitle">Pendekatan One-on-One untuk Setiap Anak</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <div class="hero-slide hero-slide-placeholder-3">
+                    <div class="hero-slide-overlay"></div>
+                    <div class="container">
+                        <div class="hero-slide-content">
+                            <h2 class="hero-slide-title">Fasilitas Lengkap & Modern</h2>
+                            <p class="hero-slide-subtitle">Lingkungan Belajar yang Nyaman dan Mendukung</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="carousel-item">
+                <div class="hero-slide hero-slide-placeholder-4">
+                    <div class="hero-slide-overlay"></div>
+                    <div class="container">
+                        <div class="hero-slide-content">
+                            <h2 class="hero-slide-title">Terapi Terpadu & Profesional</h2>
+                            <p class="hero-slide-subtitle">Didukung oleh Tenaga Ahli Berpengalaman</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 5 -->
+            <div class="carousel-item">
+                <div class="hero-slide hero-slide-placeholder-5">
+                    <div class="hero-slide-overlay"></div>
+                    <div class="container">
+                        <div class="hero-slide-content">
+                            <h2 class="hero-slide-title">Bergabunglah Bersama Kami</h2>
+                            <p class="hero-slide-subtitle">Wujudkan Potensi Terbaik Anak Anda</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="container">
@@ -14,9 +113,6 @@
                     <p class="hero-subtitle">Sekolah dan Pusat Terapi untuk Anak Berkebutuhan Khusus</p>
                     <p class="lead">Mulia Special Akademik (MSA) adalah pusat terapi yang dirancang khusus untuk anak berkebutuhan khusus mulai usia 2-7 tahun. MSA memadukan pendidikan akademik, terapi perkembangan, dan pembentukan karakter melalui sistem stimulasi bertahap dan pembelajaran individual (one-on-one).</p>
                     <div class="hero-buttons">
-                        <a href="{{ route('kontak') }}" class="btn btn-primary btn-lg me-3">
-                            <i class="fas fa-phone me-2"></i>Hubungi Kami
-                        </a>
                         <a href="{{ route('program') }}" class="btn btn-outline-primary btn-lg">
                             <i class="fas fa-info-circle me-2"></i>Pelajari Program
                         </a>
@@ -177,18 +273,341 @@
 @endsection
 @section('styles')
 <style>
+/* ========== HERO SLIDER SECTION STYLES ========== */
+.hero-slider-section {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Optimize image rendering untuk foto berkualitas tinggi */
+.carousel-inner,
+.carousel-item {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition-duration: 1s;
+    transition-property: opacity;
+}
+
+.carousel-fade .carousel-item.active,
+.carousel-fade .carousel-item-next.carousel-item-start,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+    opacity: 1;
+}
+
+.carousel-fade .carousel-item-next,
+.carousel-fade .carousel-item-prev {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hero-slide {
+    height: 700px;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Optimasi rendering gambar untuk mencegah pecah */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Untuk gambar yang diupload via img tag - mencegah pecah */
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* High quality rendering */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: bicubic;
+    /* Smooth rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.hero-slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.5) 0%, rgba(255, 107, 107, 0.5) 100%);
+    z-index: 1;
+}
+
+.hero-slide-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.hero-slide-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+.hero-slide-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    margin-bottom: 0;
+}
+
+.hero-slide-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    margin-top: 1rem;
+}
+
+.hero-slide-badge i {
+    margin-right: 0.5rem;
+}
+
+/* Placeholder slides dengan gradient background */
+.hero-slide-placeholder-1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.hero-slide-placeholder-2 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.hero-slide-placeholder-3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.hero-slide-placeholder-4 {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.hero-slide-placeholder-5 {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+/* Carousel Controls */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-control-next {
+    right: 20px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+    bottom: 20px;
+    margin-bottom: 0;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: none;
+    transition: all 0.3s ease;
+    margin: 0 4px;
+    opacity: 0.7;
+}
+
+.carousel-indicators .active {
+    width: 10px;
+    border-radius: 50%;
+    background-color: white;
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Responsive Slider - Tablet */
+@media (max-width: 991.98px) {
+    .hero-slide {
+        height: 600px;
+        min-height: 450px;
+    }
+    
+    .hero-slide-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-slide-subtitle {
+        font-size: 1.25rem;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .carousel-control-prev {
+        left: 15px;
+    }
+    
+    .carousel-control-next {
+        right: 15px;
+    }
+}
+
+/* Responsive Slider - Mobile */
+@media (max-width: 767.98px) {
+    main {
+        margin-top: 0 !important;
+    }
+
+    .hero-slider-section {
+        padding-top: 80px;
+    }
+
+    .hero-slide {
+        height: 500px;
+        min-height: 400px;
+    }
+    
+    .hero-slide-content {
+        padding: 1rem;
+    }
+    
+    .hero-slide-title {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero-slide-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-slide-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .carousel-control-prev {
+        left: 10px;
+    }
+    
+    .carousel-control-next {
+        right: 10px;
+    }
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .carousel-indicators {
+        bottom: 15px;
+    }
+    
+    .carousel-indicators [data-bs-target] {
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+    }
+    
+    .carousel-indicators .active {
+        width: 8px;
+        height: 8px;
+        transform: scale(1.3);
+    }
+}
+
+/* Responsive Slider - Mobile Small */
+@media (max-width: 575.98px) {
+    .hero-slider-section {
+        padding-top: 75px;
+    }
+
+    .hero-slide {
+        height: 450px;
+        min-height: 350px;
+    }
+    
+    .hero-slide-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-slide-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
 /* ========== HERO SECTION STYLES ========== */
 
 /* Hero Section - Desktop */
 .hero-section {
     padding-top: 5rem !important;
     padding-bottom: 10rem !important;
-    background: linear-gradient(135deg, rgba(255, 140, 0, 0.03) 0%, rgba(255, 107, 107, 0.03) 100%);
+    background: white !important;
+    background-color: white !important;
 }
 
-/* Testimonial Section - Same gradient background */
+/* Testimonial Section - White background */
 .hero-section + section.py-5 {
-    background: linear-gradient(135deg, rgba(255, 140, 0, 0.03) 0%, rgba(255, 107, 107, 0.03) 100%);
+    background: white !important;
     padding-top: 3rem !important;
     padding-bottom: 5rem !important;
 }

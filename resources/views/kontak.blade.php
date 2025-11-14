@@ -16,43 +16,7 @@
     </div>
 </section>
 
-<!-- Important Links Section -->
-<section class="py-5" style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="text-center text-white mb-5">LINK PENDAFTARAN DAN INFOMASI TERKAIT</h2>
-                
-                <div class="links-container">
-                    <!-- Link Pendaftaran -->
-                    <a href="https://bit.ly/PendaftaranSiswaBaruMuliaSpecialAcademy2025-2026" target="_blank" class="link-item">
-                        <div class="link-icon">
-                            <i class="fas fa-link"></i>
-                        </div>
-                        <div class="link-content">
-                            <h5 class="link-title">Link Pendaftaran Siswa Baru 2025-2026</h5>
-                            <p class="link-url">bit.ly/PendaftaranSiswaBaruMuliaSpecialAcademy2025-2026</p>
-                        </div>
-                    </a>
-                    
-                    <!-- Divider -->
-                    <div class="link-divider"></div>
-                    
-                    <!-- Link Informasi Biaya -->
-                    <a href="https://heyzine.com/flip-book/9a89e78d26.html" target="_blank" class="link-item">
-                        <div class="link-icon">
-                            <i class="fas fa-link"></i>
-                        </div>
-                        <div class="link-content">
-                            <h5 class="link-title">Informasi Biaya Pendidikan Mulia Special Academy 2025-2026</h5>
-                            <p class="link-url">heyzine.com/flip-book/9a89e78d26.html</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- Contact Information -->
 <section class="py-5">

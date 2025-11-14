@@ -117,7 +117,7 @@
 
 /* Facility Title - Bold */
 .facility-title {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #2b2b2b;
     margin-bottom: 10px;
@@ -134,6 +134,10 @@
 }
 
 @media(max-width: 768px) {
+    .section-title {
+        font-size: 1.5rem !important;
+    }
+
     .facility-image {
         aspect-ratio: 16/9; /* Rasio landscape 16:9 untuk mobile juga */
         height: auto;
@@ -148,7 +152,7 @@
     }
 
     .facility-title {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
     }
 
     .facility-subtitle {

@@ -2582,7 +2582,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom {{ request()->routeIs('program') ? 'active' : '' }}" href="{{ route('program') }}">
-                            <i class="fas fa-graduation-cap"></i>
+                            <i class="fas fa-book-open"></i>
                             <span>Program Pembelajaran</span>
                         </a>
                     </li>
@@ -2814,6 +2814,15 @@
     </a>
     @endif
 
+    <!-- Floating Pendaftaran Button -->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScKJwiCFE_3YG_K8_bMCZVi-zYYJg7K-jF7atfz-zxtn_NejQ/viewform"
+        target="_blank"
+        class="pendaftaran-float"
+        title="Pendaftaran Siswa Baru"
+        aria-label="Pendaftaran Siswa Baru">
+        <div class="pendaftaran-text">ADMISSION</div>
+    </a>
+
     <style>
         /* Floating WhatsApp Button */
         .whatsapp-float {
@@ -2821,7 +2830,7 @@
             width: 60px;
             height: 60px;
             bottom: 100px;
-            right: 30px;
+            right: 15px;
             background: #25D366;
             color: white;
             border-radius: 50%;
@@ -2855,17 +2864,68 @@
             padding: 0;
         }
 
+        /* Floating Pendaftaran Button */
+        .pendaftaran-float {
+            position: fixed;
+            top: 60%;
+            right: 0;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+            color: white;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: 25px 18px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: -4px 0 15px rgba(255, 140, 0, 0.4);
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .pendaftaran-float:hover {
+            right: 0;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c00 100%);
+            box-shadow: -6px 0 20px rgba(255, 140, 0, 0.6);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .pendaftaran-text {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: white;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
         /* Responsive untuk mobile */
         @media (max-width: 768px) {
             .whatsapp-float {
                 width: 55px;
                 height: 55px;
                 bottom: 85px;
-                right: 20px;
+                right: 5px;
             }
 
             .whatsapp-float i {
                 font-size: 28px;
+            }
+
+            /* Pendaftaran button responsive - lebih kecil di mobile */
+            .pendaftaran-float {
+                padding: 12px 8px;
+                top: 65%;
+            }
+
+            .pendaftaran-text {
+                font-size: 11px;
+                letter-spacing: 1px;
             }
 
             /* Footer spacing untuk mobile */
