@@ -28,7 +28,8 @@ class KontakController extends Controller
             'facebook' => 'nullable|url|max:255',
             'instagram' => 'nullable|url|max:255',
             'twitter' => 'nullable|url|max:255',
-            'youtube' => 'nullable|url|max:255'
+            'youtube' => 'nullable|url|max:255',
+            'admission_link' => 'nullable|url|max:500'
         ]);
 
         $setting = Setting::getSetting();

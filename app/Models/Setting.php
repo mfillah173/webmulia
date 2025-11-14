@@ -20,7 +20,8 @@ class Setting extends Model
         'facebook',
         'instagram',
         'twitter',
-        'youtube'
+        'youtube',
+        'admission_link'
     ];
 
     // Get singleton setting
@@ -35,7 +36,8 @@ class Setting extends Model
                 'telepon' => '082 338 414 452',
                 'email' => 'msa@saim.sch.id',
                 'jam_operasional_senin_jumat' => 'Senin - Jumat: 08:00 - 16:00',
-                'jam_operasional_sabtu' => 'Sabtu: 09:00 - 12:00'
+                'jam_operasional_sabtu' => 'Sabtu: 09:00 - 12:00',
+                'admission_link' => 'https://docs.google.com/forms/d/e/1FAIpQLScKJwiCFE_3YG_K8_bMCZVi-zYYJg7K-jF7atfz-zxtn_NejQ/viewform'
             ]);
         }
 

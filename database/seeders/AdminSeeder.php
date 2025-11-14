@@ -16,12 +16,8 @@ class AdminSeeder extends Seeder
         Admin::create([
             'name' => 'Admin MSA',
             'email' => 'admin@msa.com',
-            'password' => Hash::make('password123'), // Ganti dengan password yang aman
+            'password' => Hash::make('admin123'), // Ganti dengan password yang aman
             'is_active' => true,
         ]);
-
-        $this->command->info('Admin user berhasil dibuat!');
-        $this->command->info('Email: admin@msa.com');
-        $this->command->info('Password: password123');
     }
 }

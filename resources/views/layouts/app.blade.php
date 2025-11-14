@@ -2815,13 +2815,15 @@
     @endif
 
     <!-- Floating Pendaftaran Button -->
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScKJwiCFE_3YG_K8_bMCZVi-zYYJg7K-jF7atfz-zxtn_NejQ/viewform"
+    @if($setting && $setting->admission_link)
+    <a href="{{ $setting->admission_link }}"
         target="_blank"
         class="pendaftaran-float"
         title="Pendaftaran Siswa Baru"
         aria-label="Pendaftaran Siswa Baru">
         <div class="pendaftaran-text">ADMISSION</div>
     </a>
+    @endif
 
     <style>
         /* Floating WhatsApp Button */

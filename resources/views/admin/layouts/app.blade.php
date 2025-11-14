@@ -691,6 +691,12 @@
                 <div class="nav-section-title">Content</div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
+                        <a href="{{ route('admin.banner.index') }}" class="nav-link {{ request()->routeIs('admin.banner*') ? 'active' : '' }}">
+                            <i class="fas fa-image"></i>
+                            <span class="nav-text">Banner Slider</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('admin.program.index') }}" class="nav-link {{ request()->routeIs('admin.program*') ? 'active' : '' }}">
                             <i class="fas fa-graduation-cap"></i>
                             <span class="nav-text">Program</span>

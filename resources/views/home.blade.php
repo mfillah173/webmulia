@@ -15,82 +15,28 @@
 -->
 <section class="hero-slider-section">
     <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+        @if($banners && $banners->count() > 0)
         <!-- Indicators -->
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            @foreach($banners as $index => $banner)
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $index }}"
+                class="{{ $index === 0 ? 'active' : '' }}"
+                aria-current="{{ $index === 0 ? 'true' : 'false' }}"
+                aria-label="Slide {{ $index + 1 }}"></button>
+            @endforeach
         </div>
-        
+
         <!-- Slides -->
         <div class="carousel-inner">
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-                <div class="hero-slide hero-slide-placeholder-1">
+            @foreach($banners as $index => $banner)
+            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                <div class="hero-slide" style="background-image: url('{{ asset('storage/images/media/' . $banner->gambar) }}');">
                     <div class="hero-slide-overlay"></div>
-                    <div class="container">
-                        <div class="hero-slide-content">
-                            
-                        </div>
-                    </div>
                 </div>
             </div>
-            
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-                <div class="hero-slide hero-slide-placeholder-2">
-                    <div class="hero-slide-overlay"></div>
-                    <div class="container">
-                        <div class="hero-slide-content">
-                            <h2 class="hero-slide-title">Program Pembelajaran Individual</h2>
-                            <p class="hero-slide-subtitle">Pendekatan One-on-One untuk Setiap Anak</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slide 3 -->
-            <div class="carousel-item">
-                <div class="hero-slide hero-slide-placeholder-3">
-                    <div class="hero-slide-overlay"></div>
-                    <div class="container">
-                        <div class="hero-slide-content">
-                            <h2 class="hero-slide-title">Fasilitas Lengkap & Modern</h2>
-                            <p class="hero-slide-subtitle">Lingkungan Belajar yang Nyaman dan Mendukung</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slide 4 -->
-            <div class="carousel-item">
-                <div class="hero-slide hero-slide-placeholder-4">
-                    <div class="hero-slide-overlay"></div>
-                    <div class="container">
-                        <div class="hero-slide-content">
-                            <h2 class="hero-slide-title">Terapi Terpadu & Profesional</h2>
-                            <p class="hero-slide-subtitle">Didukung oleh Tenaga Ahli Berpengalaman</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slide 5 -->
-            <div class="carousel-item">
-                <div class="hero-slide hero-slide-placeholder-5">
-                    <div class="hero-slide-overlay"></div>
-                    <div class="container">
-                        <div class="hero-slide-content">
-                            <h2 class="hero-slide-title">Bergabunglah Bersama Kami</h2>
-                            <p class="hero-slide-subtitle">Wujudkan Potensi Terbaik Anak Anda</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
-        
+
         <!-- Controls -->
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -100,6 +46,22 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+        @else
+        <!-- Default placeholder jika belum ada banner -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero-slide hero-slide-placeholder-1">
+                    <div class="hero-slide-overlay"></div>
+                    <div class="container">
+                        <div class="hero-slide-content">
+                            <h2 class="hero-slide-title">Selamat Datang di MSA</h2>
+                            <p class="hero-slide-subtitle">Mulia Special Akademik</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </section>
 
@@ -139,14 +101,14 @@
                 <p class="section-subtitle">Testimoni dari orang tua siswa Mulia Special Academy</p>
             </div>
         </div>
-        
+
         <!-- Testimonial Slider with Navigation -->
         <div class="testimonial-slider-wrapper position-relative">
             <!-- Previous Button -->
             <button class="testimonial-nav-btn testimonial-prev" id="testimonialPrev">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            
+
             <!-- Testimonial Container -->
             <div class="testimonial-container" id="testimonialContainer">
                 <div class="testimonial-row">
@@ -157,11 +119,11 @@
                             <!-- Photo Section (Top Half) -->
                             <div class="testimonial-photo-section">
                                 @if($item->gambar)
-                                    <img src="{{ asset('storage/images/media/' . $item->gambar) }}" alt="{{ $item->nama_narasumber }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img src="{{ asset('storage/images/media/' . $item->gambar) }}" alt="{{ $item->nama_narasumber }}" style="width: 100%; height: 100%; object-fit: cover;">
                                 @else
-                                    <div class="photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
                                 @endif
                             </div>
                             <!-- Content Section (Bottom Half) -->
@@ -197,7 +159,7 @@
                     @endforelse
                 </div>
             </div>
-            
+
             <!-- Next Button -->
             <button class="testimonial-nav-btn testimonial-next" id="testimonialNext">
                 <i class="fas fa-chevron-right"></i>
@@ -215,7 +177,7 @@
                 <p class="section-subtitle">Temukan jawaban atas pertanyaan umum tentang Mulia Special Academy</p>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <div class="accordion" id="faqAccordion">
@@ -273,970 +235,1006 @@
 @endsection
 @section('styles')
 <style>
-/* ========== HERO SLIDER SECTION STYLES ========== */
-.hero-slider-section {
-    position: relative;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-/* Optimize image rendering untuk foto berkualitas tinggi */
-.carousel-inner,
-.carousel-item {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-}
-
-.carousel-fade .carousel-item {
-    opacity: 0;
-    transition-duration: 1s;
-    transition-property: opacity;
-}
-
-.carousel-fade .carousel-item.active,
-.carousel-fade .carousel-item-next.carousel-item-start,
-.carousel-fade .carousel-item-prev.carousel-item-end {
-    opacity: 1;
-}
-
-.carousel-fade .carousel-item-next,
-.carousel-fade .carousel-item-prev {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.hero-slide {
-    height: 700px;
-    min-height: 500px;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Optimasi rendering gambar untuk mencegah pecah */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform;
-}
-
-/* Untuk gambar yang diupload via img tag - mencegah pecah */
-.hero-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    /* High quality rendering */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    -ms-interpolation-mode: bicubic;
-    /* Smooth rendering */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.hero-slide-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 140, 0, 0.5) 0%, rgba(255, 107, 107, 0.5) 100%);
-    z-index: 1;
-}
-
-.hero-slide-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: white;
-    padding: 2rem;
-}
-
-.hero-slide-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 1rem;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    line-height: 1.2;
-}
-
-.hero-slide-subtitle {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: white;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-    margin-bottom: 0;
-}
-
-.hero-slide-badge {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    margin-top: 1rem;
-}
-
-.hero-slide-badge i {
-    margin-right: 0.5rem;
-}
-
-/* Placeholder slides dengan gradient background */
-.hero-slide-placeholder-1 {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.hero-slide-placeholder-2 {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.hero-slide-placeholder-3 {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.hero-slide-placeholder-4 {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-}
-
-.hero-slide-placeholder-5 {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-}
-
-/* Carousel Controls */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 50px;
-    height: 50px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.carousel-control-prev {
-    left: 20px;
-}
-
-.carousel-control-next {
-    right: 20px;
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 1;
-    transform: translateY(-50%) scale(1.05);
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    width: 20px;
-    height: 20px;
-}
-
-/* Carousel Indicators */
-.carousel-indicators {
-    bottom: 20px;
-    margin-bottom: 0;
-}
-
-.carousel-indicators [data-bs-target] {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.6);
-    border: none;
-    transition: all 0.3s ease;
-    margin: 0 4px;
-    opacity: 0.7;
-}
-
-.carousel-indicators .active {
-    width: 10px;
-    border-radius: 50%;
-    background-color: white;
-    opacity: 1;
-    transform: scale(1.2);
-}
-
-/* Responsive Slider - Tablet */
-@media (max-width: 991.98px) {
-    .hero-slide {
-        height: 600px;
-        min-height: 450px;
-    }
-    
-    .hero-slide-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-slide-subtitle {
-        font-size: 1.25rem;
-    }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .carousel-control-prev {
-        left: 15px;
-    }
-    
-    .carousel-control-next {
-        right: 15px;
-    }
-}
-
-/* Responsive Slider - Mobile */
-@media (max-width: 767.98px) {
-    main {
-        margin-top: 0 !important;
-    }
-
+    /* ========== HERO SLIDER SECTION STYLES ========== */
     .hero-slider-section {
-        padding-top: 80px;
-    }
-
-    .hero-slide {
-        height: 500px;
-        min-height: 400px;
-    }
-    
-    .hero-slide-content {
-        padding: 1rem;
-    }
-    
-    .hero-slide-title {
-        font-size: 1.75rem;
-        margin-bottom: 0.75rem;
-    }
-    
-    .hero-slide-subtitle {
-        font-size: 1rem;
-    }
-    
-    .hero-slide-badge {
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-    }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .carousel-control-prev {
-        left: 10px;
-    }
-    
-    .carousel-control-next {
-        right: 10px;
-    }
-    
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        width: 18px;
-        height: 18px;
-    }
-    
-    .carousel-indicators {
-        bottom: 15px;
-    }
-    
-    .carousel-indicators [data-bs-target] {
-        width: 8px;
-        height: 8px;
-        margin: 0 3px;
-    }
-    
-    .carousel-indicators .active {
-        width: 8px;
-        height: 8px;
-        transform: scale(1.3);
-    }
-}
-
-/* Responsive Slider - Mobile Small */
-@media (max-width: 575.98px) {
-    .hero-slider-section {
-        padding-top: 75px;
-    }
-
-    .hero-slide {
-        height: 450px;
-        min-height: 350px;
-    }
-    
-    .hero-slide-title {
-        font-size: 1.5rem;
-    }
-    
-    .hero-slide-subtitle {
-        font-size: 0.9rem;
-    }
-}
-
-/* ========== HERO SECTION STYLES ========== */
-
-/* Hero Section - Desktop */
-.hero-section {
-    padding-top: 5rem !important;
-    padding-bottom: 10rem !important;
-    background: white !important;
-    background-color: white !important;
-}
-
-/* Testimonial Section - White background */
-.hero-section + section.py-5 {
-    background: white !important;
-    padding-top: 3rem !important;
-    padding-bottom: 5rem !important;
-}
-
-.hero-content {
-    padding: 2rem 0;
-}
-
-.hero-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--dark-color);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-}
-
-.hero-subtitle {
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--primary-orange);
-    margin-bottom: 1.5rem;
-    line-height: 1.3;
-}
-
-.hero-content .lead {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 2rem;
-    text-align: justify;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.hero-buttons .btn {
-    padding: 0.875rem 2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.hero-buttons .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
-}
-
-.hero-buttons .btn-outline-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
-}
-
-.hero-placeholder {
-    min-height: 400px;
-    background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Hero - Tablet (768px - 991px) */
-@media (max-width: 991.98px) {
-    .hero-section {
-        padding-top: 4rem !important;
-        padding-bottom: 2rem !important;
-    }
-    
-    .hero-section + section.py-5 {
-        padding-top: 2.5rem !important;
-        padding-bottom: 4rem !important;
-    }
-    
-    .hero-content {
-        padding: 1.5rem 0;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-        margin-bottom: 0.875rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.15rem;
-        margin-bottom: 1.25rem;
-    }
-    
-    .hero-content .lead {
-        font-size: 1rem;
-        margin-bottom: 1.75rem;
-    }
-    
-    .hero-placeholder {
-        min-height: 300px;
-        margin-top: 2rem;
-    }
-}
-
-/* Hero - Mobile (< 768px) */
-@media (max-width: 767.98px) {
-    .hero-section {
-        padding-top: 3.5rem !important;
-        padding-bottom: 1.5rem !important;
-    }
-    
-    .hero-section + section.py-5 {
-        padding-top: 2rem !important;
-        padding-bottom: 3rem !important;
-    }
-    
-    .hero-content {
+        position: relative;
+        width: 100%;
+        margin: 0;
         padding: 0;
-        text-align: center;
+        overflow: hidden;
     }
-    
-    .hero-title {
-        font-size: 1.75rem;
-        margin-bottom: 0.75rem;
-        line-height: 1.3;
+
+    /* Optimize image rendering untuk foto berkualitas tinggi */
+    .carousel-inner,
+    .carousel-item {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
     }
-    
-    .hero-subtitle {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        line-height: 1.4;
+
+    .carousel-fade .carousel-item {
+        opacity: 0;
+        transition-duration: 1s;
+        transition-property: opacity;
     }
-    
-    .hero-content .lead {
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-        text-align: center;
+
+    .carousel-fade .carousel-item.active,
+    .carousel-fade .carousel-item-next.carousel-item-start,
+    .carousel-fade .carousel-item-prev.carousel-item-end {
+        opacity: 1;
     }
-    
-    .hero-buttons {
-        flex-direction: column;
-        gap: 0.75rem;
+
+    .carousel-fade .carousel-item-next,
+    .carousel-fade .carousel-item-prev {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
-    
-    .hero-buttons .btn {
+
+    .hero-slide {
+        height: 540px;
+        min-height: 400px;
+        background-size: cover;
+        background-position: center 35%;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        /* Optimasi rendering gambar untuk mencegah pecah */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
+    }
+
+    /* Responsive untuk mobile */
+    @media (max-width: 768px) {
+        .hero-slide {
+            height: 350px;
+            min-height: 300px;
+            background-position: center 40%;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-slide {
+            height: 300px;
+            min-height: 250px;
+            background-position: center 40%;
+        }
+    }
+
+    /* Untuk gambar yang diupload via img tag - mencegah pecah */
+    .hero-slide img {
         width: 100%;
-        padding: 0.75rem 1.5rem;
-        font-size: 0.95rem;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        /* High quality rendering */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        -ms-interpolation-mode: bicubic;
+        /* Smooth rendering */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
-    
-    .hero-buttons .me-3 {
-        margin-right: 0 !important;
-    }
-    
-    /* Hide hero image on mobile to save space */
-    .hero-image {
-        display: none;
-    }
-}
 
-/* Hero - Extra Small Mobile (< 576px) */
-@media (max-width: 575.98px) {
-    .hero-section {
-        padding-top: 3rem !important;
-        padding-bottom: 1.25rem !important;
+    .hero-slide-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 140, 0, 0.5) 0%, rgba(255, 107, 107, 0.5) 100%);
+        z-index: 1;
     }
-    
-    .hero-section + section.py-5 {
-        padding-top: 1.75rem !important;
-        padding-bottom: 2.5rem !important;
-    }
-    
-    .hero-title {
-        font-size: 1.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 0.95rem;
-    }
-    
-    .hero-content .lead {
-        font-size: 0.85rem;
-    }
-}
 
-/* ========== TESTIMONIAL CARD STYLES ========== */
-.testimonial-card {
-    border: 4px solid #FF6B6B;
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    overflow: hidden;
-    position: relative;
-    background: white;
-    display: flex;
-    flex-direction: column;
-}
-
-.testimonial-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(255, 140, 0, 0.2);
-}
-
-.testimonial-photo-section {
-    width: 100%;
-    height: 350px; /* Diperbesar untuk desktop agar foto lebih jelas */
-    position: relative;
-    overflow: hidden;
-}
-
-.photo-placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-    color: white;
-}
-
-.testimonial-quote {
-    font-size: 2rem;
-    color: var(--primary-orange);
-    opacity: 0.3;
-}
-
-.testimonial-text {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #666;
-    font-style: italic;
-    margin-bottom: 1.5rem;
-    min-height: 120px;
-}
-
-.testimonial-name {
-    font-weight: 700;
-    color: var(--dark-color);
-    margin-bottom: 0.5rem;
-}
-
-.testimonial-role {
-    font-size: 0.9rem;
-    margin-bottom: 0;
-}
-
-/* Responsive - Tablet */
-@media (max-width: 991.98px) {
-    .testimonial-photo-section {
-        height: 290px; /* Diperbesar agar foto tidak terpotong */
+    .hero-slide-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+        padding: 2rem;
     }
-    
-    .section-title {
-        font-size: 1.75rem;
-    }
-    
-    .section-subtitle {
-        font-size: 0.95rem;
-    }
-}
 
-/* Responsive - Mobile */
-@media (max-width: 767.98px) {
-    .testimonial-card {
-        margin-bottom: 1.5rem;
-        border-width: 3px;
-    }
-    
-    .testimonial-photo-section {
-        height: 280px; /* Diperbesar agar foto tidak terpotong */
-    }
-    
-    .testimonial-card .card-body {
-        padding: 1.25rem 1rem;
-    }
-    
-    .testimonial-text {
-        min-height: auto;
-        font-size: 0.9rem;
-        line-height: 1.6;
+    .hero-slide-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: white;
         margin-bottom: 1rem;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        line-height: 1.2;
     }
-    
-    .testimonial-quote {
+
+    .hero-slide-subtitle {
         font-size: 1.5rem;
-        margin-bottom: 0.5rem !important;
+        font-weight: 600;
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        margin-bottom: 0;
     }
-    
-    .testimonial-name {
-        font-size: 1rem;
-    }
-    
-    .testimonial-role {
-        font-size: 0.85rem;
-    }
-    
-    .photo-placeholder i {
-        font-size: 3rem;
-    }
-    
-    .section-title {
-        font-size: 1.5rem !important;
-        margin-bottom: 0.75rem;
-    }
-    
-    .section-subtitle {
-        font-size: 0.9rem !important;
-        line-height: 1.5;
-        margin-bottom: 2rem;
-    }
-    
-    /* Section spacing mobile */
-    section.py-5 {
-        padding: 2rem 0 !important;
-    }
-}
 
-/* Responsive - Mobile Small */
-@media (max-width: 575.98px) {
-    .testimonial-photo-section {
-        height: 250px; /* Diperbesar agar foto tidak terpotong */
-    }
-}
-
-/* ========== FAQ SECTION STYLES ========== */
-.accordion-item {
-    border: 2px solid #f0f0f0;
-    border-radius: 10px !important;
-    margin-bottom: 1rem;
-    overflow: hidden;
-}
-
-.accordion-button {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--dark-color);
-    background-color: white;
-    padding: 1.25rem 1.5rem;
-}
-
-.accordion-button:not(.collapsed) {
-    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
-    color: white;
-    box-shadow: none;
-}
-
-.accordion-button:focus {
-    box-shadow: none;
-    border-color: var(--primary-orange);
-}
-
-.accordion-button::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23333'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-}
-
-.accordion-button:not(.collapsed)::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-}
-
-.accordion-body {
-    padding: 1.5rem;
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #666;
-    background-color: #fafafa;
-}
-
-/* FAQ Responsive - Mobile */
-@media (max-width: 767.98px) {
-    .accordion-button {
-        font-size: 0.95rem !important;
-        padding: 1rem !important;
-        line-height: 1.4;
-    }
-    
-    .accordion-body {
-        padding: 1rem !important;
-        font-size: 0.9rem !important;
-        line-height: 1.6;
-    }
-}
-
-/* ========== CALL TO ACTION STYLES ========== */
-
-/* Call to Action - Mobile */
-@media (max-width: 767.98px) {
-    .bg-primary.text-white {
-        padding: 2rem 0 !important;
-    }
-    
-    .bg-primary.text-white h3 {
-        font-size: 1.25rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.3;
-    }
-    
-    .bg-primary.text-white p {
-        font-size: 0.9rem !important;
-        margin-bottom: 1.5rem !important;
-        line-height: 1.5;
-    }
-    
-    .bg-primary.text-white .btn {
-        width: 100%;
-        font-size: 0.95rem;
+    .hero-slide-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
         padding: 0.75rem 1.5rem;
-    }
-    
-    .bg-primary .text-lg-end {
-        text-align: center !important;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.4);
         margin-top: 1rem;
     }
-}
 
-/* ========== TESTIMONIAL SLIDER STYLES ========== */
-.testimonial-slider-wrapper {
-    padding: 0 60px;
-    position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.testimonial-container {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    padding: 20px 0;
-    width: 100%;
-    max-width: 1170px; /* 3 cards @ 390px = 1170px */
-    margin: 0 auto;
-}
-
-.testimonial-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
-
-.testimonial-row {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 0; /* Tidak ada gap, pakai padding di item */
-}
-
-.testimonial-item {
-    flex: 0 0 auto;
-    width: 390px; /* Diperbesar dari 350px ke 390px */
-    padding: 0 15px;
-}
-
-/* Navigation Buttons */
-.testimonial-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #ff8c00, #ff6b35);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.testimonial-nav-btn:hover {
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
-}
-
-.testimonial-nav-btn:active {
-    transform: translateY(-50%) scale(0.95);
-}
-
-.testimonial-nav-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-
-.testimonial-prev {
-    left: 0;
-}
-
-.testimonial-next {
-    right: 0;
-}
-
-/* Responsive */
-@media (max-width: 991.98px) {
-    .testimonial-slider-wrapper {
-        padding: 0 50px;
-        max-width: 1000px;
+    .hero-slide-badge i {
+        margin-right: 0.5rem;
     }
-    
-    .testimonial-container {
-        max-width: 700px; /* 2 cards @ 350px = 700px */
-    }
-    
-    .testimonial-nav-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
-    }
-    
-    .testimonial-item {
-        width: 350px; /* Diperbesar dari 320px ke 350px */
-    }
-}
 
-@media (max-width: 767.98px) {
-    .testimonial-slider-wrapper {
-        padding: 0 40px;
-        max-width: 500px;
+    /* Placeholder slides dengan gradient background */
+    .hero-slide-placeholder-1 {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
-    
-    .testimonial-container {
-        max-width: 320px; /* Dikurangi sedikit agar tidak terpotong */
+
+    .hero-slide-placeholder-2 {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     }
-    
-    .testimonial-nav-btn {
-        width: 40px;
-        height: 40px;
+
+    .hero-slide-placeholder-3 {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .hero-slide-placeholder-4 {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+
+    .hero-slide-placeholder-5 {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    }
+
+    /* Carousel Controls */
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 50px;
+        height: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+    }
+
+    .carousel-control-prev {
+        left: 20px;
+    }
+
+    .carousel-control-next {
+        right: 20px;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 1;
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Carousel Indicators */
+    .carousel-indicators {
+        bottom: 20px;
+        margin-bottom: 0;
+    }
+
+    .carousel-indicators [data-bs-target] {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.6);
+        border: none;
+        transition: all 0.3s ease;
+        margin: 0 4px;
+        opacity: 0.7;
+    }
+
+    .carousel-indicators .active {
+        width: 10px;
+        border-radius: 50%;
+        background-color: white;
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    /* Responsive Slider - Tablet */
+    @media (max-width: 991.98px) {
+        .hero-slide {
+            height: 600px;
+            min-height: 450px;
+        }
+
+        .hero-slide-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-slide-subtitle {
+            font-size: 1.25rem;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 45px;
+            height: 45px;
+        }
+
+        .carousel-control-prev {
+            left: 15px;
+        }
+
+        .carousel-control-next {
+            right: 15px;
+        }
+    }
+
+    /* Responsive Slider - Mobile */
+    @media (max-width: 767.98px) {
+        main {
+            margin-top: 0 !important;
+        }
+
+        .hero-slider-section {
+            padding-top: 80px;
+        }
+
+        .hero-slide {
+            height: 500px;
+            min-height: 400px;
+        }
+
+        .hero-slide-content {
+            padding: 1rem;
+        }
+
+        .hero-slide-title {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-slide-subtitle {
+            font-size: 1rem;
+        }
+
+        .hero-slide-badge {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 40px;
+            height: 40px;
+        }
+
+        .carousel-control-prev {
+            left: 10px;
+        }
+
+        .carousel-control-next {
+            right: 10px;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .carousel-indicators {
+            bottom: 15px;
+        }
+
+        .carousel-indicators [data-bs-target] {
+            width: 8px;
+            height: 8px;
+            margin: 0 3px;
+        }
+
+        .carousel-indicators .active {
+            width: 8px;
+            height: 8px;
+            transform: scale(1.3);
+        }
+    }
+
+    /* Responsive Slider - Mobile Small */
+    @media (max-width: 575.98px) {
+        .hero-slider-section {
+            padding-top: 75px;
+        }
+
+        .hero-slide {
+            height: 450px;
+            min-height: 350px;
+        }
+
+        .hero-slide-title {
+            font-size: 1.5rem;
+        }
+
+        .hero-slide-subtitle {
+            font-size: 0.9rem;
+        }
+    }
+
+    /* ========== HERO SECTION STYLES ========== */
+
+    /* Hero Section - Desktop */
+    .hero-section {
+        padding-top: 5rem !important;
+        padding-bottom: 10rem !important;
+        background: white !important;
+        background-color: white !important;
+    }
+
+    /* Testimonial Section - White background */
+    .hero-section+section.py-5 {
+        background: white !important;
+        padding-top: 3rem !important;
+        padding-bottom: 5rem !important;
+    }
+
+    .hero-content {
+        padding: 2rem 0;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--dark-color);
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--primary-orange);
+        margin-bottom: 1.5rem;
+        line-height: 1.3;
+    }
+
+    .hero-content .lead {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 2rem;
+        text-align: justify;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .hero-buttons .btn {
+        padding: 0.875rem 2rem;
         font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
     }
-    
-    .testimonial-prev {
-        left: -5px;
-    }
-    
-    .testimonial-next {
-        right: -5px;
-    }
-    
-    .testimonial-item {
-        width: 320px; /* Dikurangi agar pas dengan container */
-        padding: 0 10px; /* Padding dikurangi untuk mobile */
-    }
-}
 
-@media (max-width: 575.98px) {
-    .testimonial-slider-wrapper {
-        padding: 0 35px;
-        max-width: 400px;
+    .hero-buttons .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
     }
-    
-    .testimonial-container {
-        max-width: 300px; /* Dikurangi sedikit agar tidak terpotong */
+
+    .hero-buttons .btn-outline-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
     }
-    
-    .testimonial-nav-btn {
-        width: 35px;
-        height: 35px;
+
+    .hero-placeholder {
+        min-height: 400px;
+        background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Hero - Tablet (768px - 991px) */
+    @media (max-width: 991.98px) {
+        .hero-section {
+            padding-top: 4rem !important;
+            padding-bottom: 2rem !important;
+        }
+
+        .hero-section+section.py-5 {
+            padding-top: 2.5rem !important;
+            padding-bottom: 4rem !important;
+        }
+
+        .hero-content {
+            padding: 1.5rem 0;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            margin-bottom: 0.875rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-content .lead {
+            font-size: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .hero-placeholder {
+            min-height: 300px;
+            margin-top: 2rem;
+        }
+    }
+
+    /* Hero - Mobile (< 768px) */
+    @media (max-width: 767.98px) {
+        .hero-section {
+            padding-top: 3.5rem !important;
+            padding-bottom: 1.5rem !important;
+        }
+
+        .hero-section+section.py-5 {
+            padding-top: 2rem !important;
+            padding-bottom: 3rem !important;
+        }
+
+        .hero-content {
+            padding: 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .hero-content .lead {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .hero-buttons .btn {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .hero-buttons .me-3 {
+            margin-right: 0 !important;
+        }
+
+        /* Hide hero image on mobile to save space */
+        .hero-image {
+            display: none;
+        }
+    }
+
+    /* Hero - Extra Small Mobile (< 576px) */
+    @media (max-width: 575.98px) {
+        .hero-section {
+            padding-top: 3rem !important;
+            padding-bottom: 1.25rem !important;
+        }
+
+        .hero-section+section.py-5 {
+            padding-top: 1.75rem !important;
+            padding-bottom: 2.5rem !important;
+        }
+
+        .hero-title {
+            font-size: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+        }
+
+        .hero-content .lead {
+            font-size: 0.85rem;
+        }
+    }
+
+    /* ========== TESTIMONIAL CARD STYLES ========== */
+    .testimonial-card {
+        border: 4px solid #FF6B6B;
+        border-radius: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+        background: white;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(255, 140, 0, 0.2);
+    }
+
+    .testimonial-photo-section {
+        width: 100%;
+        height: 350px;
+        /* Diperbesar untuk desktop agar foto lebih jelas */
+        position: relative;
+        overflow: hidden;
+    }
+
+    .photo-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: white;
+    }
+
+    .testimonial-quote {
+        font-size: 2rem;
+        color: var(--primary-orange);
+        opacity: 0.3;
+    }
+
+    .testimonial-text {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #666;
+        font-style: italic;
+        margin-bottom: 1.5rem;
+        min-height: 120px;
+    }
+
+    .testimonial-name {
+        font-weight: 700;
+        color: var(--dark-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .testimonial-role {
         font-size: 0.9rem;
+        margin-bottom: 0;
     }
-    
+
+    /* Responsive - Tablet */
+    @media (max-width: 991.98px) {
+        .testimonial-photo-section {
+            height: 290px;
+            /* Diperbesar agar foto tidak terpotong */
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+        }
+    }
+
+    /* Responsive - Mobile */
+    @media (max-width: 767.98px) {
+        .testimonial-card {
+            margin-bottom: 1.5rem;
+            border-width: 3px;
+        }
+
+        .testimonial-photo-section {
+            height: 280px;
+            /* Diperbesar agar foto tidak terpotong */
+        }
+
+        .testimonial-card .card-body {
+            padding: 1.25rem 1rem;
+        }
+
+        .testimonial-text {
+            min-height: auto;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-quote {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .testimonial-name {
+            font-size: 1rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+        }
+
+        .photo-placeholder i {
+            font-size: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem !important;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem !important;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+
+        /* Section spacing mobile */
+        section.py-5 {
+            padding: 2rem 0 !important;
+        }
+    }
+
+    /* Responsive - Mobile Small */
+    @media (max-width: 575.98px) {
+        .testimonial-photo-section {
+            height: 250px;
+            /* Diperbesar agar foto tidak terpotong */
+        }
+    }
+
+    /* ========== FAQ SECTION STYLES ========== */
+    .accordion-item {
+        border: 2px solid #f0f0f0;
+        border-radius: 10px !important;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+
+    .accordion-button {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: var(--dark-color);
+        background-color: white;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+        color: white;
+        box-shadow: none;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+        border-color: var(--primary-orange);
+    }
+
+    .accordion-button::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23333'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+
+    .accordion-button:not(.collapsed)::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+
+    .accordion-body {
+        padding: 1.5rem;
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #666;
+        background-color: #fafafa;
+    }
+
+    /* FAQ Responsive - Mobile */
+    @media (max-width: 767.98px) {
+        .accordion-button {
+            font-size: 0.95rem !important;
+            padding: 1rem !important;
+            line-height: 1.4;
+        }
+
+        .accordion-body {
+            padding: 1rem !important;
+            font-size: 0.9rem !important;
+            line-height: 1.6;
+        }
+    }
+
+    /* ========== CALL TO ACTION STYLES ========== */
+
+    /* Call to Action - Mobile */
+    @media (max-width: 767.98px) {
+        .bg-primary.text-white {
+            padding: 2rem 0 !important;
+        }
+
+        .bg-primary.text-white h3 {
+            font-size: 1.25rem !important;
+            margin-bottom: 1rem !important;
+            line-height: 1.3;
+        }
+
+        .bg-primary.text-white p {
+            font-size: 0.9rem !important;
+            margin-bottom: 1.5rem !important;
+            line-height: 1.5;
+        }
+
+        .bg-primary.text-white .btn {
+            width: 100%;
+            font-size: 0.95rem;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .bg-primary .text-lg-end {
+            text-align: center !important;
+            margin-top: 1rem;
+        }
+    }
+
+    /* ========== TESTIMONIAL SLIDER STYLES ========== */
+    .testimonial-slider-wrapper {
+        padding: 0 60px;
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .testimonial-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        padding: 20px 0;
+        width: 100%;
+        max-width: 1170px;
+        /* 3 cards @ 390px = 1170px */
+        margin: 0 auto;
+    }
+
+    .testimonial-container::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, Opera */
+    }
+
+    .testimonial-row {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0;
+        /* Tidak ada gap, pakai padding di item */
+    }
+
     .testimonial-item {
-        width: 300px; /* Dikurangi agar pas dengan container */
-        padding: 0 10px; /* Padding dikurangi untuk mobile */
+        flex: 0 0 auto;
+        width: 390px;
+        /* Diperbesar dari 350px ke 390px */
+        padding: 0 15px;
     }
-}
+
+    /* Navigation Buttons */
+    .testimonial-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #ff8c00, #ff6b35);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .testimonial-nav-btn:hover {
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
+    }
+
+    .testimonial-nav-btn:active {
+        transform: translateY(-50%) scale(0.95);
+    }
+
+    .testimonial-nav-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .testimonial-prev {
+        left: 0;
+    }
+
+    .testimonial-next {
+        right: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 991.98px) {
+        .testimonial-slider-wrapper {
+            padding: 0 50px;
+            max-width: 1000px;
+        }
+
+        .testimonial-container {
+            max-width: 700px;
+            /* 2 cards @ 350px = 700px */
+        }
+
+        .testimonial-nav-btn {
+            width: 45px;
+            height: 45px;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-item {
+            width: 350px;
+            /* Diperbesar dari 320px ke 350px */
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .testimonial-slider-wrapper {
+            padding: 0 40px;
+            max-width: 500px;
+        }
+
+        .testimonial-container {
+            max-width: 320px;
+            /* Dikurangi sedikit agar tidak terpotong */
+        }
+
+        .testimonial-nav-btn {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+
+        .testimonial-prev {
+            left: -5px;
+        }
+
+        .testimonial-next {
+            right: -5px;
+        }
+
+        .testimonial-item {
+            width: 320px;
+            /* Dikurangi agar pas dengan container */
+            padding: 0 10px;
+            /* Padding dikurangi untuk mobile */
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .testimonial-slider-wrapper {
+            padding: 0 35px;
+            max-width: 400px;
+        }
+
+        .testimonial-container {
+            max-width: 300px;
+            /* Dikurangi sedikit agar tidak terpotong */
+        }
+
+        .testimonial-nav-btn {
+            width: 35px;
+            height: 35px;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-item {
+            width: 300px;
+            /* Dikurangi agar pas dengan container */
+            padding: 0 10px;
+            /* Padding dikurangi untuk mobile */
+        }
+    }
 </style>
 @endsection
 
 @section('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('testimonialContainer');
-    const prevBtn = document.getElementById('testimonialPrev');
-    const nextBtn = document.getElementById('testimonialNext');
-    
-    if (container && prevBtn && nextBtn) {
-        // Get scroll amount based on viewport
-        function getScrollAmount() {
-            if (window.innerWidth <= 575) return 300; // Mobile small: 1 card @ 300px
-            if (window.innerWidth <= 767) return 320; // Mobile: 1 card @ 320px
-            if (window.innerWidth <= 991) return 350; // Tablet: 1 card @ 350px
-            return 390; // Desktop: 1 card @ 390px
-        }
-        
-        prevBtn.addEventListener('click', function() {
-            container.scrollBy({
-                left: -getScrollAmount(),
-                behavior: 'smooth'
-            });
-        });
-        
-        nextBtn.addEventListener('click', function() {
-            container.scrollBy({
-                left: getScrollAmount(),
-                behavior: 'smooth'
-            });
-        });
-        
-        // Hide/show buttons based on scroll position
-        function updateButtons() {
-            const scrollLeft = container.scrollLeft;
-            const maxScroll = container.scrollWidth - container.clientWidth;
-            
-            // Disable prev button if at start
-            if (scrollLeft <= 5) {
-                prevBtn.setAttribute('disabled', 'true');
-            } else {
-                prevBtn.removeAttribute('disabled');
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('testimonialContainer');
+        const prevBtn = document.getElementById('testimonialPrev');
+        const nextBtn = document.getElementById('testimonialNext');
+
+        if (container && prevBtn && nextBtn) {
+            // Get scroll amount based on viewport
+            function getScrollAmount() {
+                if (window.innerWidth <= 575) return 300; // Mobile small: 1 card @ 300px
+                if (window.innerWidth <= 767) return 320; // Mobile: 1 card @ 320px
+                if (window.innerWidth <= 991) return 350; // Tablet: 1 card @ 350px
+                return 390; // Desktop: 1 card @ 390px
             }
-            
-            // Disable next button if at end
-            if (scrollLeft >= maxScroll - 5) {
-                nextBtn.setAttribute('disabled', 'true');
-            } else {
-                nextBtn.removeAttribute('disabled');
+
+            prevBtn.addEventListener('click', function() {
+                container.scrollBy({
+                    left: -getScrollAmount(),
+                    behavior: 'smooth'
+                });
+            });
+
+            nextBtn.addEventListener('click', function() {
+                container.scrollBy({
+                    left: getScrollAmount(),
+                    behavior: 'smooth'
+                });
+            });
+
+            // Hide/show buttons based on scroll position
+            function updateButtons() {
+                const scrollLeft = container.scrollLeft;
+                const maxScroll = container.scrollWidth - container.clientWidth;
+
+                // Disable prev button if at start
+                if (scrollLeft <= 5) {
+                    prevBtn.setAttribute('disabled', 'true');
+                } else {
+                    prevBtn.removeAttribute('disabled');
+                }
+
+                // Disable next button if at end
+                if (scrollLeft >= maxScroll - 5) {
+                    nextBtn.setAttribute('disabled', 'true');
+                } else {
+                    nextBtn.removeAttribute('disabled');
+                }
             }
+
+            container.addEventListener('scroll', updateButtons);
+            updateButtons(); // Initial check
+
+            // Update on window resize
+            window.addEventListener('resize', function() {
+                updateButtons();
+            });
         }
-        
-        container.addEventListener('scroll', updateButtons);
-        updateButtons(); // Initial check
-        
-        // Update on window resize
-        window.addEventListener('resize', function() {
-            updateButtons();
-        });
-    }
-});
+    });
 </script>
 @endsection

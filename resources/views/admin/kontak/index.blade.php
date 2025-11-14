@@ -204,6 +204,28 @@
                 </div>
             </div>
 
+            <!-- Link Pendaftaran -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-user-plus me-2"></i>Link Pendaftaran</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="admission_link" class="form-label">
+                            <i class="fas fa-link text-warning me-1"></i>Link Google Form Admission
+                        </label>
+                        <input type="url" class="form-control @error('admission_link') is-invalid @enderror"
+                            id="admission_link" name="admission_link"
+                            value="{{ old('admission_link', $setting->admission_link) }}"
+                            placeholder="https://docs.google.com/forms/...">
+                        @error('admission_link')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <div class="form-text">Link Google Form untuk pendaftaran siswa baru yang akan tampil di tombol ADMISSION</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Preview -->
             <div class="card">
                 <div class="card-header">

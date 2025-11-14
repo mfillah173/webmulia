@@ -49,4 +49,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 
     // FAQ Management
     Route::resource('faq', FaqController::class);
+
+    // Banner Management
+    Route::resource('banner', App\Http\Controllers\Admin\BannerController::class);
 });
