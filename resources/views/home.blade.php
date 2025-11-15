@@ -7,10 +7,11 @@
 <!-- Photo Slider Section -->
 <!-- 
     PANDUAN FOTO SLIDER:
-    - Ukuran yang disarankan: 1920x700 pixels (landscape)
-    - Minimal resolusi: 1600x600 pixels
-    - Format: JPG, PNG (ukuran file < 500KB untuk performa optimal)
-    - Rasio: 16:9 atau lebih lebar
+    - Ukuran Desktop: 2000x700 pixels (landscape)
+    - Ukuran Mobile: 768x400 pixels
+    - Format: JPG (ukuran file < 300KB untuk performa optimal)
+    - Rasio Desktop: 3.25:1
+    - Rasio Mobile: 1.92:1
     - Foto akan otomatis di-crop dan di-center agar tidak pecah/distorsi
 -->
 <section class="hero-slider-section">
@@ -31,6 +32,7 @@
             @foreach($banners as $index => $banner)
             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                 <div class="hero-slide" style="background-image: url('{{ asset('storage/images/media/' . $banner->gambar) }}');">
+                    <img src="{{ asset('storage/images/media/' . $banner->gambar) }}" alt="Banner {{ $index + 1 }}" class="hero-slide-img">
                     <div class="hero-slide-overlay"></div>
                 </div>
             </div>
@@ -239,8 +241,8 @@
     .hero-slider-section {
         position: relative;
         width: 100%;
-        margin: 0;
-        padding: 0;
+        margin: -90px 0 0;
+        padding: 90px 0 0;
         overflow: hidden;
     }
 
@@ -273,10 +275,9 @@
     }
 
     .hero-slide {
-        height: 540px;
-        min-height: 400px;
+        height: 700px;
         background-size: cover;
-        background-position: center 35%;
+        background-position: center center;
         background-repeat: no-repeat;
         position: relative;
         display: flex;
@@ -289,22 +290,35 @@
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
         will-change: transform;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
     }
 
-    /* Responsive untuk mobile */
+    .hero-slide-img {
+        display: none;
+        width: 100%;
+        height: auto;
+    }
+
     @media (max-width: 768px) {
         .hero-slide {
-            height: 350px;
-            min-height: 300px;
-            background-position: center 40%;
+            height: 520px;
+            background-image: none !important;
+            padding: 0;
         }
-    }
 
-    @media (max-width: 576px) {
-        .hero-slide {
-            height: 300px;
-            min-height: 250px;
-            background-position: center 40%;
+        .hero-slide-img {
+            display: block;
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            object-position: center center;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .hero-slide-overlay {
+            display: none;
         }
     }
 
@@ -315,8 +329,7 @@
         object-fit: cover;
         object-position: center;
         /* High quality rendering */
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
+        image-rendering: auto;
         -ms-interpolation-mode: bicubic;
         /* Smooth rendering */
         -webkit-font-smoothing: antialiased;
@@ -324,13 +337,7 @@
     }
 
     .hero-slide-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(255, 140, 0, 0.5) 0%, rgba(255, 107, 107, 0.5) 100%);
-        z-index: 1;
+        display: none;
     }
 
     .hero-slide-content {
@@ -457,11 +464,6 @@
 
     /* Responsive Slider - Tablet */
     @media (max-width: 991.98px) {
-        .hero-slide {
-            height: 600px;
-            min-height: 450px;
-        }
-
         .hero-slide-title {
             font-size: 2.5rem;
         }
@@ -492,12 +494,8 @@
         }
 
         .hero-slider-section {
-            padding-top: 80px;
-        }
-
-        .hero-slide {
-            height: 500px;
-            min-height: 400px;
+            margin-top: -85px;
+            padding-top: 85px;
         }
 
         .hero-slide-content {
@@ -558,12 +556,8 @@
     /* Responsive Slider - Mobile Small */
     @media (max-width: 575.98px) {
         .hero-slider-section {
-            padding-top: 75px;
-        }
-
-        .hero-slide {
-            height: 450px;
-            min-height: 350px;
+            margin-top: -80px;
+            padding-top: 80px;
         }
 
         .hero-slide-title {

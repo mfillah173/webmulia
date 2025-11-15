@@ -2876,7 +2876,7 @@
             color: white;
             writing-mode: vertical-rl;
             text-orientation: mixed;
-            padding: 25px 18px;
+            padding: 18px 14px;
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -2898,9 +2898,9 @@
         }
 
         .pendaftaran-text {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: white;
             writing-mode: vertical-rl;
             text-orientation: mixed;
