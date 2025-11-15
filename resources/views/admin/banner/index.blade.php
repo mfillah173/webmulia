@@ -25,20 +25,6 @@
     </div>
 </div>
 
-@if(session('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-@endif
-
-@if(session('error'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-@endif
-
 <!-- Banner List -->
 @if($banners->count() > 0)
 <div class="card">
@@ -119,10 +105,10 @@
     <i class="fas fa-info-circle me-2"></i>
     <strong>Panduan Gambar Banner:</strong>
     <ul class="mb-0 mt-2">
-        <li>Ukuran yang disarankan: 1920x700 pixels (landscape)</li>
-        <li>Minimal resolusi: 1600x600 pixels</li>
+        <li>Ukuran yang disarankan: 2000x700 pixels (landscape)</li>
+        <li>Minimal resolusi: 1500x525 pixels</li>
         <li>Format: JPG, PNG</li>
-        <li>Rasio: 16:9 atau lebih lebar</li>
+        <li>Rasio: 2.85:1 (atau lebih lebar)</li>
         <li>Banner akan ditampilkan berurutan sesuai nomor urutan</li>
     </ul>
 </div>

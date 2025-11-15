@@ -242,7 +242,7 @@
 
 .program-content h3,
 .program-title {
-    font-size: 1.8rem !important; 
+    font-size: 1.8rem !important;
     font-weight: 600;
     color: #2b2b2b;
     margin-bottom: 10px;

@@ -1686,9 +1686,8 @@
 
         .program-title {
             color: var(--primary-orange);
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
         .program-description {
@@ -1865,7 +1864,7 @@
         /* Responsive Design */
         @media (max-width: 991.98px) {
             .program-title {
-                font-size: 2rem;
+                font-size: inherit;
             }
 
             .program-detail-image img {
@@ -1888,7 +1887,7 @@
 
         @media (max-width: 767.98px) {
             .program-title {
-                font-size: 1.8rem;
+                font-size: inherit;
             }
 
             .program-detail-image img {
@@ -2197,9 +2196,9 @@
 
         .facility-title {
             color: var(--primary-orange);
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
 
         .facility-description {
@@ -2265,7 +2264,7 @@
         /* Responsive Design */
         @media (max-width: 991.98px) {
             .facility-title {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
             .facility-detail-image img {
@@ -2279,7 +2278,7 @@
 
         @media (max-width: 767.98px) {
             .facility-title {
-                font-size: 1.8rem;
+                font-size: 1.2rem;
             }
 
             .facility-detail-image img {

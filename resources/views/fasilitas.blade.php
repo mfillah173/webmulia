@@ -117,7 +117,7 @@
 
 /* Facility Title - Bold */
 .facility-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #2b2b2b;
     margin-bottom: 10px;

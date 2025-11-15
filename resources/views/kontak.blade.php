@@ -16,8 +16,6 @@
     </div>
 </section>
 
-
-
 <!-- Contact Information -->
 <section class="py-5">
     <div class="container">
@@ -114,254 +112,82 @@
 
 @section('styles')
 <style>
-/* Links Container */
-.links-container {
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-}
-
-.link-item {
-    display: flex;
-    align-items: center;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: #2c3e50 !important;
-}
-
-.link-item:hover {
-    background: #e9ecef;
-    transform: translateX(5px);
-}
-
-.link-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    margin-right: 1.5rem;
-    flex-shrink: 0;
-}
-
-.link-content {
-    flex: 1;
-}
-
-.link-title {
-    font-weight: 600;
-    color: #2c3e50 !important;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.link-url {
-    color: #ff8c00 !important;
-    margin-bottom: 0;
-    font-size: 0.9rem;
-    word-break: break-all;
-}
-
-.link-divider {
-    height: 1px;
-    background: #dee2e6;
-    margin: 1.5rem 0;
-}
-
-/* Contact Info */
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 2rem;
-}
-
-.contact-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.2rem;
-    margin-right: 1rem;
-    flex-shrink: 0;
-}
-
-.contact-details h5 {
-    color: var(--dark-color);
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.contact-details p {
-    color: #666;
-    margin-bottom: 0;
-}
-
-.map-placeholder {
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.quick-links .btn {
-    text-align: left;
-    border-radius: 0 !important;
-    width: 100%;
-    padding: 0.75rem 1rem !important;
-    font-size: 1rem;
-    line-height: 1.5;
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-}
-
-/* Page Header - Add more space from navbar */
-section.py-5:first-child {
-    padding-top: 5.5rem !important;
-    padding-bottom: 3rem !important;
-}
-
-/* Responsive - Mobile */
-@media (max-width: 767.98px) {
-    /* Page Header Mobile */
-    section.py-5:first-child {
-        padding-top: 3.5rem !important;
-        padding-bottom: 2rem !important;
-    }
-    
-    .section-title {
-        font-size: 1.5rem !important;
-        margin-bottom: 0.75rem;
-    }
-    
-    .section-subtitle {
-        font-size: 0.9rem !important;
-        line-height: 1.5;
-    }
-    
-    /* Important Links Section Mobile */
-    section[style*="gradient"] {
-        padding: 2rem 0 !important;
-    }
-    
-    section[style*="gradient"] h2 {
-        font-size: 1.25rem !important;
-        line-height: 1.3;
-        margin-bottom: 2rem !important;
-        padding: 0 0.5rem;
-    }
-    
-    .links-container {
-        padding: 1rem;
-    }
-    
-    .link-item {
-        flex-direction: column;
-        text-align: center;
-        padding: 1rem;
-    }
-    
-    .link-icon {
-        margin-right: 0;
-        margin-bottom: 1rem;
-        width: 45px;
-        height: 45px;
-        font-size: 1.25rem;
-    }
-    
-    .link-title {
-        font-size: 0.95rem;
-        line-height: 1.4;
-    }
-    
-    .link-url {
-        font-size: 0.8rem;
-    }
-    
-    .link-divider {
-        margin: 1rem 0;
-    }
-    
-    /* Contact Info Mobile */
-    .contact-info h3 {
-        font-size: 1.25rem !important;
-        margin-bottom: 1.5rem !important;
-    }
-    
     .contact-item {
-        flex-direction: row;
-        text-align: left;
-        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 2rem;
     }
-    
+
     .contact-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
         margin-right: 1rem;
+        flex-shrink: 0;
     }
-    
+
     .contact-details h5 {
-        font-size: 0.95rem;
-        margin-bottom: 0.25rem;
+        color: var(--dark-color);
+        margin-bottom: 0.5rem;
+        font-weight: 600;
     }
-    
+
     .contact-details p {
-        font-size: 0.9rem;
-        line-height: 1.5;
+        color: #666;
+        margin-bottom: 0;
     }
-    
-    /* Quick Links Mobile */
-    .quick-links h4 {
-        font-size: 1.1rem !important;
-        margin-bottom: 1rem !important;
-    }
-    
-    .quick-links .btn {
-        font-size: 0.9rem;
-        padding: 0.75rem 1rem;
-    }
-    
-    /* Map Section Mobile */
+
     .map-placeholder {
-        min-height: 250px;
-        padding: 2rem 1rem !important;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-    
-    .map-placeholder h4 {
-        font-size: 1.1rem !important;
+
+    .quick-links .btn {
+        text-align: left;
+        border-radius: 0 !important;
+        width: 100%;
+        padding: 0.75rem 1rem !important;
+        font-size: 1rem;
+        line-height: 1.5;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
     }
-    
-    .map-placeholder p {
-        font-size: 0.9rem;
+
+    @media (max-width: 767.98px) {
+        section.py-5:first-child {
+            padding-top: 3.5rem !important;
+            padding-bottom: 2rem !important;
+        }
+
+        .section-title {
+            font-size: 1.5rem !important;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem !important;
+            line-height: 1.5;
+        }
+
+        .quick-links .btn {
+            font-size: 0.9rem;
+            padding: 0.75rem 1rem;
+        }
+
+        .map-placeholder {
+            min-height: 250px;
+            padding: 2rem 1rem !important;
+        }
     }
-    
-    .map-placeholder .btn {
-        font-size: 0.9rem;
-        padding: 0.75rem 1.25rem;
-    }
-    
-    .map-placeholder i {
-        font-size: 2rem !important;
-    }
-    
-    /* Section Spacing Mobile */
-    section.py-5 {
-        padding: 2rem 0 !important;
-    }
-}
 </style>
 @endsection
