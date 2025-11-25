@@ -13,12 +13,25 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=ChunkFive:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     @yield('styles')
 
     <style>
+        /* Agrandir Font */
+        @font-face {
+            font-family: 'Agrandir';
+            src: url('{{ asset("fonts/Agrandir-Regular.woff2") }}') format('woff2'),
+                 url('{{ asset("fonts/Agrandir-Regular.woff") }}') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         /* Custom Navbar Styles - Orange Theme */
         .bg-gradient-primary {
             background: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
@@ -69,13 +82,16 @@
 
         /* Logo Image Styling */
         .logo-image {
-            width: 60px;
-            height: 60px;
+            width: 120px;
+            height: 75px;
+            max-height: 75px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
             flex-shrink: 0;
+            margin: 0;
+            padding: 0;
         }
 
         .logo-image img {
@@ -92,19 +108,23 @@
 
         /* Logo Image Footer Styling */
         .logo-image-footer {
-            width: 50px;
-            height: 50px;
+            width: 120px;
+            height: 75px;
+            max-height: 75px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            margin: 0;
+            padding: 0;
         }
 
         .logo-image-footer img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: brightness(1.2);
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         /* Navbar height and spacing */
@@ -123,6 +143,19 @@
             margin-right: 2rem;
             display: flex;
             align-items: center;
+            gap: 0;
+        }
+
+        .navbar-brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            margin-left: -0.8rem;
         }
 
         /* Desktop: navbar-brand di kiri, hamburger di kanan */
@@ -138,17 +171,95 @@
             }
         }
 
-        .navbar-brand h4 {
+        .navbar-brand-text h4 {
             color: white !important;
-            font-weight: 700;
+            font-weight: 900;
+            font-family: 'ChunkFive', 'Playfair Display', 'Merriweather', serif;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.15rem;
+            margin-top: 0;
+            text-align: center;
+            text-transform: uppercase;
         }
 
-        .navbar-brand small {
+        .navbar-brand-text h5 {
+            color: white !important;
+            font-weight: 900;
+            font-family: 'ChunkFive', 'Playfair Display', 'Merriweather', serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 1.5rem;
+            margin-bottom: 0.15rem;
+            margin-top: 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .academy-text {
+            letter-spacing: 4px !important;
+        }
+
+        .navbar-brand-text small {
             color: rgba(255, 255, 255, 0.9) !important;
             font-weight: 500;
+            font-family: 'Agrandir', 'Space Grotesk', sans-serif;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-size: 0.875rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        /* Footer Brand Text */
+        .footer-brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            margin-left: -0.8rem;
+        }
+
+        .footer-brand-text h5 {
+            color: var(--primary-orange) !important;
+            font-weight: 900;
+            font-family: 'ChunkFive', 'Playfair Display', 'Merriweather', serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.15rem;
+            margin-top: 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .footer-brand-text h6 {
+            color: var(--primary-orange) !important;
+            font-weight: 900;
+            font-family: 'ChunkFive', 'Playfair Display', 'Merriweather', serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 1.5rem;
+            margin-bottom: 0.15rem;
+            margin-top: 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .academy-text-footer {
+            letter-spacing: 4px !important;
+        }
+
+        .footer-brand-text small {
+            color: white !important;
+            font-weight: 500;
+            font-family: 'Agrandir', 'Space Grotesk', sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            text-align: center;
         }
 
         /* Navbar text contrast fix */
@@ -2562,12 +2673,13 @@
             </button>
 
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <div class="logo-image me-3">
+                <div class="logo-image">
                     <img src="{{ asset('storage/images/logo msa.png') }}" alt="MSA Logo">
                 </div>
-                <div>
-                    <h4 class="mb-0 text-white fw-bold">Mulia Special Akademik</h4>
-                    <small class="text-light opacity-75">Nurturing Special Child Potentials</small>
+                <div class="navbar-brand-text">
+                    <h4 class="mb-0 text-white fw-bold">MULIA SPECIAL</h4>
+                    <h5 class="mb-0 text-white fw-bold academy-text">A C A D E M Y</h5>
+                    <small class="text-light opacity-75">NURTURING SPECIAL CHILD POTENTIALS</small>
                 </div>
             </a>
 
@@ -2612,13 +2724,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="logo-image-footer me-3">
+                    <div class="d-flex align-items-center mb-3" style="gap: 0;">
+                        <div class="logo-image-footer">
                             <img src="{{ asset('storage/images/logo msa.png') }}" alt="MSA Logo">
                         </div>
-                        <div>
-                            <h5 class="mb-0 text-primary">Mulia Special Academy</h5>
-                            <small class="text-muted">Nurturing Special Child Potentials</small>
+                        <div class="footer-brand-text">
+                            <h5 class="mb-0 text-primary fw-bold">MULIA SPECIAL</h5>
+                            <h6 class="mb-0 text-primary fw-bold academy-text-footer">A C A D E M Y</h6>
+                            <small class="text-muted">NURTURING SPECIAL CHILD POTENTIALS</small>
                         </div>
                     </div>
                     <p class="text-light">Sekolah Berbasis Stimulasi for Children with Special Needs - Kindergarten & Primary School di Surabaya.</p>
@@ -2825,9 +2938,38 @@
     @endif
 
     <style>
+        /* Custom Scrollbar Styling - Transparent dan tipis */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 140, 0, 0.3);
+            border-radius: 4px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 140, 0, 0.5);
+            background-clip: padding-box;
+        }
+
+        /* Firefox scrollbar - hanya untuk body dan html */
+        html,
+        body {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 140, 0, 0.3) transparent;
+        }
+
         /* Floating WhatsApp Button */
         .whatsapp-float {
-            position: fixed;
+            position: fixed !important;
             width: 60px;
             height: 60px;
             bottom: 100px;
@@ -2836,7 +2978,7 @@
             color: white;
             border-radius: 50%;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
+            z-index: 9999 !important;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2845,6 +2987,7 @@
             line-height: 1;
             margin: 0;
             padding: 0;
+            pointer-events: auto !important;
         }
 
         .whatsapp-float:hover {
@@ -2867,7 +3010,7 @@
 
         /* Floating Pendaftaran Button */
         .pendaftaran-float {
-            position: fixed;
+            position: fixed !important;
             top: 60%;
             right: 0;
             transform: translateY(-50%);
@@ -2876,7 +3019,7 @@
             writing-mode: vertical-rl;
             text-orientation: mixed;
             padding: 18px 14px;
-            z-index: 1000;
+            z-index: 9999 !important;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -2885,6 +3028,7 @@
             box-shadow: -4px 0 15px rgba(255, 140, 0, 0.4);
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
+            pointer-events: auto !important;
         }
 
         .pendaftaran-float:hover {
@@ -2905,13 +3049,28 @@
             text-orientation: mixed;
         }
 
+        /* Pastikan floating buttons tidak tertutup scrollbar di desktop */
+        @media (min-width: 769px) {
+            .whatsapp-float {
+                right: calc(15px + 12px);
+                /* Tambahkan spacing untuk scrollbar (8px scrollbar + 4px margin) */
+            }
+
+            .pendaftaran-float {
+                right: 12px;
+                /* Beri spacing untuk scrollbar agar tidak tertutup */
+            }
+        }
+
         /* Responsive untuk mobile */
         @media (max-width: 768px) {
+            /* Di mobile, scrollbar biasanya overlay atau tidak terlihat */
             .whatsapp-float {
                 width: 55px;
                 height: 55px;
                 bottom: 85px;
                 right: 5px;
+                z-index: 9999;
             }
 
             .whatsapp-float i {
@@ -2968,12 +3127,21 @@
             }
 
             /* Perkecil ukuran teks di mobile agar tidak kepotong */
-            .navbar-brand h4 {
+            .navbar-brand-text h4 {
                 font-size: 1rem;
                 line-height: 1.2;
             }
 
-            .navbar-brand small {
+            .navbar-brand-text h5 {
+                font-size: 1rem;
+                line-height: 1.2;
+            }
+
+            .academy-text {
+                letter-spacing: 2px !important;
+            }
+
+            .navbar-brand-text small {
                 font-size: 0.65rem !important;
                 line-height: 1.2;
                 display: block;
@@ -2981,13 +3149,15 @@
 
             /* Logo Image Mobile */
             .logo-image {
-                width: 45px;
-                height: 45px;
+                width: 100px;
+                height: 65px;
+                max-height: 65px;
             }
 
             .logo-image-footer {
-                width: 40px;
-                height: 40px;
+                width: 100px;
+                height: 65px;
+                max-height: 65px;
             }
         }
     </style>
