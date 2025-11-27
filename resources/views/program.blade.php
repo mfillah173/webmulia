@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="section-title">Program Pembelajaran</h1>
+                <h1 class="section-title">LEARNING PROGRAM</h1>
                 <p class="section-subtitle">Program pembelajaran yang dirancang khusus untuk mengembangkan potensi dan kemampuan anak berkebutuhan khusus</p>
             </div>
         </div>

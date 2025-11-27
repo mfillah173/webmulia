@@ -2688,25 +2688,25 @@
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
                             <i class="fas fa-home"></i>
-                            <span>Beranda</span>
+                            <span>Home</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom {{ request()->routeIs('program') ? 'active' : '' }}" href="{{ route('program') }}">
                             <i class="fas fa-book-open"></i>
-                            <span>Program Pembelajaran</span>
+                            <span>Our Program</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom {{ request()->routeIs('fasilitas') ? 'active' : '' }}" href="{{ route('fasilitas') }}">
                             <i class="fas fa-building"></i>
-                            <span>Fasilitas</span>
+                            <span>facilities</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ route('kontak') }}">
                             <i class="fas fa-phone"></i>
-                            <span>Kontak</span>
+                            <span>Contact Us</span>
                         </a>
                     </li>
                 </ul>

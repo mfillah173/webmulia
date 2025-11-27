@@ -99,7 +99,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center mb-5">
-                <h2 class="section-title">Apa Kata Mereka</h2>
+                <h2 class="section-title">TESTIMONIAL</h2>
                 <p class="section-subtitle">Testimoni dari orang tua siswa Mulia Special Academy</p>
             </div>
         </div>
@@ -117,7 +117,7 @@
                     @forelse($testimoni as $item)
                     <!-- Testimonial Card -->
                     <div class="testimonial-item">
-                        <div class="card testimonial-card h-100">
+                        <div class="card testimonial-card">
                             <!-- Photo Section (Top Half) -->
                             <div class="testimonial-photo-section">
                                 @if($item->gambar)
@@ -142,7 +142,7 @@
                     @empty
                     <!-- Default Testimonials jika database kosong -->
                     <div class="testimonial-item">
-                        <div class="card testimonial-card h-100">
+                        <div class="card testimonial-card">
                             <div class="testimonial-photo-section">
                                 <div class="photo-placeholder">
                                     <i class="fas fa-user"></i>
@@ -175,7 +175,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center mb-5">
-                <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+                <h2 class="section-title">FAQ</h2>
                 <p class="section-subtitle">Temukan jawaban atas pertanyaan umum tentang Mulia Special Academy</p>
             </div>
         </div>
@@ -815,7 +815,6 @@
         color: #666;
         font-style: italic;
         margin-bottom: 1.5rem;
-        min-height: 120px;
     }
 
     .testimonial-name {
@@ -1046,7 +1045,7 @@
     /* Navigation Buttons */
     .testimonial-nav-btn {
         position: absolute;
-        top: 50%;
+        top: 220px;
         transform: translateY(-50%);
         width: 50px;
         height: 50px;
@@ -1103,6 +1102,7 @@
             width: 45px;
             height: 45px;
             font-size: 1.1rem;
+            top: 205px;
         }
 
         .testimonial-item {
@@ -1126,6 +1126,7 @@
             width: 40px;
             height: 40px;
             font-size: 1rem;
+            top: 190px;
         }
 
         .testimonial-prev {
@@ -1159,6 +1160,7 @@
             width: 35px;
             height: 35px;
             font-size: 0.9rem;
+            top: 180px;
         }
 
         .testimonial-item {

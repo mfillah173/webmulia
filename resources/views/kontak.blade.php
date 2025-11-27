@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h1 class="section-title">Hubungi Kami</h1>
+                <h1 class="section-title">CONTACT US</h1>
                 <p class="section-subtitle">Kami siap membantu Anda dengan informasi lebih lanjut tentang program pembelajaran untuk anak berkebutuhan khusus</p>
             </div>
         </div>
@@ -95,7 +95,7 @@
 <!-- Map Section -->
 <section class="py-5">
     <div class="container">
-        <h2 class="section-title">Lokasi Sekolah</h2>
+        <h2 class="section-title">School Location</h2>
         <div class="row">
             <div class="col-12">
                 <div class="map-placeholder bg-primary text-white text-center py-5 rounded">
