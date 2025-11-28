@@ -315,6 +315,11 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
+        .nav-link-custom:hover i,
+        .nav-link-custom:hover span {
+            color: white !important;
+        }
+
         .nav-link-custom.active {
             color: white !important;
             background: rgba(255, 255, 255, 0.2);
@@ -322,10 +327,16 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
+        .nav-link-custom.active i,
+        .nav-link-custom.active span {
+            color: white !important;
+        }
+
         .nav-link-custom i {
             transition: transform 0.3s ease;
             font-size: 1.6rem;
             margin-bottom: 0.3rem;
+            color: white !important;
         }
 
         .nav-link-custom:hover i {
@@ -335,6 +346,7 @@
         .nav-link-custom span {
             font-size: 0.9rem;
             font-weight: 500;
+            color: white !important;
         }
 
         .navbar-toggler {
@@ -420,10 +432,12 @@
                 margin-bottom: 0;
                 margin-right: 0.75rem;
                 font-size: 1.4rem;
+                color: white !important;
             }
 
             .nav-link-custom span {
                 font-size: 1rem;
+                color: white !important;
             }
         }
 
@@ -2700,7 +2714,7 @@
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom {{ request()->routeIs('fasilitas') ? 'active' : '' }}" href="{{ route('fasilitas') }}">
                             <i class="fas fa-building"></i>
-                            <span>facilities</span>
+                            <span>Facilities</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -3057,8 +3071,8 @@
             }
 
             .pendaftaran-float {
-                right: 12px;
-                /* Beri spacing untuk scrollbar agar tidak tertutup */
+                right: 0 !important;
+                /* Tombol admission mentok kanan */
             }
         }
 
@@ -3081,6 +3095,7 @@
             .pendaftaran-float {
                 padding: 12px 8px;
                 top: 65%;
+                right: 0 !important;
             }
 
             .pendaftaran-text {

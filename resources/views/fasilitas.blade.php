@@ -5,7 +5,7 @@
 
 @section('content')
 <!-- Page Header -->
-<section class="py-5">
+<section class="page-header-section">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
@@ -64,6 +64,26 @@
 
 @section('styles')
 <style>
+/* Page Header Section - Centered between navbar and content */
+.page-header-section {
+    padding-top: 8rem;
+    padding-bottom: 3rem;
+}
+
+@media (min-width: 992px) {
+    .page-header-section {
+        padding-top: 10rem;
+        padding-bottom: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header-section {
+        padding-top: 6rem;
+        padding-bottom: 2rem;
+    }
+}
+
 /* Facility Card Styling - Sama seperti Program Card */
 .facility-card {
     background: transparent;
