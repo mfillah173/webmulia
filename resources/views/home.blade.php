@@ -246,13 +246,19 @@
         overflow: hidden;
     }
 
-    /* Optimize image rendering untuk foto berkualitas tinggi */
+    /* Optimize image rendering untuk foto berkualitas tinggi - mencegah pecah di Desktop */
     .carousel-inner,
     .carousel-item {
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
+        image-rendering: auto !important;
+        -ms-interpolation-mode: bicubic !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        image-orientation: from-image;
+        will-change: auto;
     }
 
     .carousel-fade .carousel-item {
@@ -284,14 +290,18 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        /* Optimasi rendering gambar untuk mencegah pecah */
+        /* Optimasi rendering gambar untuk mencegah pecah - Desktop */
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
         will-change: transform;
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
+        image-rendering: auto !important;
+        -ms-interpolation-mode: bicubic !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        /* Mencegah gambar pecah/pixelated di desktop */
+        image-orientation: from-image;
     }
 
     .hero-slide-img {
@@ -301,39 +311,139 @@
     }
 
     @media (max-width: 768px) {
+        .hero-slider-section {
+            margin-top: -85px;
+            padding-top: 115px;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0;
+        }
+
+        .carousel,
+        .carousel-inner {
+            width: 100%;
+            position: relative;
+        }
+
+        .carousel-inner {
+            aspect-ratio: 16/9;
+        }
+
+        .carousel-item {
+            width: 100%;
+            position: relative;
+            aspect-ratio: 16/9;
+        }
+
+        .carousel-inner {
+            aspect-ratio: 16/9;
+            border-radius: 0;
+        }
+
         .hero-slide {
-            height: 520px;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 16/9;
+            min-height: 200px;
             background-image: none !important;
             padding: 0;
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
         .hero-slide-img {
-            display: block;
+            display: block !important;
             width: 100%;
-            height: 520px;
-            object-fit: cover;
+            height: 100%;
+            object-fit: contain;
             object-position: center center;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
+            /* High quality rendering untuk mencegah pecah */
+            image-rendering: auto !important;
+            -ms-interpolation-mode: bicubic !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            /* Mencegah gambar pecah/pixelated */
+            image-orientation: from-image;
+            /* Smooth scaling - mencegah pixelation */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            will-change: auto;
+            /* Memastikan gambar tidak di-stretch */
+            max-width: 100%;
+            max-height: 100%;
+            /* Background untuk area kosong */
+            background-color: #ffffff;
+            border-radius: 0;
+            position: relative;
+            z-index: 1;
         }
 
-        .hero-slide-overlay {
-            display: none;
-        }
     }
 
-    /* Untuk gambar yang diupload via img tag - mencegah pecah */
+    /* Untuk gambar yang diupload via img tag - mencegah pecah di Desktop */
     .hero-slide img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
-        /* High quality rendering */
-        image-rendering: auto;
-        -ms-interpolation-mode: bicubic;
+        object-position: center center;
+        /* High quality rendering untuk mencegah pecah - Desktop */
+        image-rendering: auto !important;
+        -ms-interpolation-mode: bicubic !important;
         /* Smooth rendering */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        /* Mencegah gambar pecah/pixelated */
+        image-orientation: from-image;
+        /* Smooth scaling - mencegah pixelation */
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        will-change: auto;
+        /* Memastikan gambar tidak di-stretch */
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* Mobile: Optimasi gambar banner - sama seperti card fasilitas (16:9) - tidak pecah */
+    @media (max-width: 768px) {
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center center;
+            display: block;
+            /* High quality rendering untuk mencegah pecah */
+            image-rendering: auto !important;
+            -ms-interpolation-mode: bicubic !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            /* Mencegah gambar pecah/pixelated */
+            image-orientation: from-image;
+            /* Smooth scaling - mencegah pixelation */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            will-change: auto;
+            /* Memastikan gambar tidak di-stretch */
+            max-width: 100%;
+            max-height: 100%;
+            /* Background untuk area kosong */
+            background-color: #ffffff;
+            border-radius: 0;
+        }
+
+        .hero-slide {
+            background-color: #ffffff;
+        }
     }
 
     .hero-slide-overlay {
@@ -365,42 +475,9 @@
         margin-bottom: 0;
     }
 
-    .hero-slide-badge {
-        display: inline-block;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        padding: 0.75rem 1.5rem;
-        border-radius: 50px;
-        font-size: 1rem;
-        font-weight: 600;
-        color: white;
-        border: 2px solid rgba(255, 255, 255, 0.4);
-        margin-top: 1rem;
-    }
-
-    .hero-slide-badge i {
-        margin-right: 0.5rem;
-    }
-
     /* Placeholder slides dengan gradient background */
     .hero-slide-placeholder-1 {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
-    .hero-slide-placeholder-2 {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    }
-
-    .hero-slide-placeholder-3 {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
-
-    .hero-slide-placeholder-4 {
-        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-    }
-
-    .hero-slide-placeholder-5 {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     }
 
     /* Carousel Controls */
@@ -495,7 +572,13 @@
 
         .hero-slider-section {
             margin-top: -85px;
-            padding-top: 85px;
+            padding-top: 115px;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0;
+        }
+
+        .hero-slider-section .container {
+            padding: 0 15px;
         }
 
         .hero-slide-content {
@@ -509,11 +592,6 @@
 
         .hero-slide-subtitle {
             font-size: 1rem;
-        }
-
-        .hero-slide-badge {
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
         }
 
         .carousel-control-prev,
@@ -557,7 +635,67 @@
     @media (max-width: 575.98px) {
         .hero-slider-section {
             margin-top: -80px;
-            padding-top: 80px;
+            padding-top: 165px;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0;
+        }
+
+        .hero-slide {
+            aspect-ratio: 16/9;
+            border-radius: 0;
+            background-color: #ffffff;
+        }
+
+        .hero-slide-img {
+            object-fit: contain;
+            background-color: #ffffff;
+            border-radius: 0;
+            /* High quality rendering untuk mencegah pecah */
+            image-rendering: auto !important;
+            -ms-interpolation-mode: bicubic !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            image-orientation: from-image;
+            /* Smooth scaling - mencegah pixelation */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            will-change: auto;
+            /* Memastikan gambar tidak di-stretch */
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .carousel-item {
+            aspect-ratio: 16/9;
+            border-radius: 0;
+        }
+
+        .carousel-inner {
+            aspect-ratio: 16/9;
+            border-radius: 0;
+        }
+
+        .hero-slide img {
+            object-fit: contain;
+            background-color: #ffffff;
+            border-radius: 0;
+            /* High quality rendering untuk mencegah pecah */
+            image-rendering: auto !important;
+            -ms-interpolation-mode: bicubic !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            image-orientation: from-image;
+            /* Smooth scaling - mencegah pixelation */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            will-change: auto;
+            /* Memastikan gambar tidak di-stretch */
+            max-width: 100%;
+            max-height: 100%;
         }
 
         .hero-slide-title {
@@ -628,11 +766,6 @@
         transition: all 0.3s ease;
     }
 
-    .hero-buttons .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
-    }
-
     .hero-buttons .btn-outline-primary:hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
@@ -687,7 +820,7 @@
     /* Hero - Mobile (< 768px) */
     @media (max-width: 767.98px) {
         .hero-section {
-            padding-top: 3.5rem !important;
+            padding-top: 1.5rem !important;
             padding-bottom: 1.5rem !important;
         }
 
@@ -731,10 +864,6 @@
             font-size: 0.95rem;
         }
 
-        .hero-buttons .me-3 {
-            margin-right: 0 !important;
-        }
-
         /* Hide hero image on mobile to save space */
         .hero-image {
             display: none;
@@ -744,7 +873,7 @@
     /* Hero - Extra Small Mobile (< 576px) */
     @media (max-width: 575.98px) {
         .hero-section {
-            padding-top: 3rem !important;
+            padding-top: 1rem !important;
             padding-bottom: 1.25rem !important;
         }
 
@@ -964,38 +1093,6 @@
             padding: 1rem !important;
             font-size: 0.9rem !important;
             line-height: 1.6;
-        }
-    }
-
-    /* ========== CALL TO ACTION STYLES ========== */
-
-    /* Call to Action - Mobile */
-    @media (max-width: 767.98px) {
-        .bg-primary.text-white {
-            padding: 2rem 0 !important;
-        }
-
-        .bg-primary.text-white h3 {
-            font-size: 1.25rem !important;
-            margin-bottom: 1rem !important;
-            line-height: 1.3;
-        }
-
-        .bg-primary.text-white p {
-            font-size: 0.9rem !important;
-            margin-bottom: 1.5rem !important;
-            line-height: 1.5;
-        }
-
-        .bg-primary.text-white .btn {
-            width: 100%;
-            font-size: 0.95rem;
-            padding: 0.75rem 1.5rem;
-        }
-
-        .bg-primary .text-lg-end {
-            text-align: center !important;
-            margin-top: 1rem;
         }
     }
 
