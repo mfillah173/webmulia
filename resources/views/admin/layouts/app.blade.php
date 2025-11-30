@@ -7,6 +7,11 @@
     <title>@yield('title', 'Admin Panel') - Mulia Special Academy</title>
     <meta name="description" content="Admin Panel Mulia Special Academy">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <!-- Favicon - Logo MSA di Tab Browser -->
+    <link rel="icon" type="image/png" href="{{ asset('storage/images/logo msa2.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('storage/images/logo msa2.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('storage/images/logo msa2.png') }}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

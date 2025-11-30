@@ -64,27 +64,54 @@
 
 @section('styles')
 <style>
-/* Page Header Section - Centered between navbar and content */
+/* ========== CSS RESET - Spesifik untuk Gambar Fasilitas Saja ========== */
+/* Reset HANYA untuk image containers - tidak menyentuh Bootstrap */
+.facility-image,
+.facility-image img {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Image rendering consistency */
+.facility-image img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    border: 0;
+    outline: 0;
+}
+
+/* Normalize rendering untuk konsistensi cross-browser */
+.facility-image {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* Page Header Section */
 .page-header-section {
-    padding-top: 8rem;
-    padding-bottom: 3rem;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
 }
 
 @media (min-width: 992px) {
-    .page-header-section {
-        padding-top: 10rem;
-        padding-bottom: 3rem;
-    }
-}
-
-@media (max-width: 768px) {
     .page-header-section {
         padding-top: 6rem;
         padding-bottom: 2rem;
     }
 }
 
-/* Facility Card Styling - Sama seperti Program Card */
+@media (max-width: 768px) {
+    .page-header-section {
+        padding-top: 4rem;
+        padding-bottom: 1.5rem;
+    }
+}
+
+/* Facility Card Styling */
 .facility-card {
     background: transparent;
     border-radius: 0;
@@ -102,9 +129,9 @@
 /* Facility Image - Landscape 16:9 */
 .facility-image {
     width: 100%;
-    aspect-ratio: 16/9; /* Rasio landscape 16:9 untuk gambar lebar seperti program */
+    aspect-ratio: 16/9;
     overflow: hidden;
-    background: #ffffff; /* background putih untuk gambar Full HD */
+    background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,26 +143,24 @@
 .facility-image img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* tampilkan gambar full tanpa crop */
+    object-fit: contain;
     transition: .5s ease;
-    image-rendering: high-quality;
-    image-rendering: -webkit-optimize-contrast;
+    image-rendering: auto;
     -ms-interpolation-mode: bicubic;
-    max-width: 100%;
-    height: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .facility-card:hover .facility-image img {
-    transform: scale(1.0); /* tidak ada zoom agar gambar tetap Full HD */
+    transform: scale(1.0);
 }
 
-/* Card Body - Centered Text */
+/* Card Body */
 .facility-card .card-body {
     padding: 0 20px 30px 20px;
     text-align: center;
 }
 
-/* Facility Title - Bold */
 .facility-title {
     font-size: 1rem;
     font-weight: 600;
@@ -144,7 +169,6 @@
     line-height: 1.4;
 }
 
-/* Facility Subtitle */
 .facility-subtitle {
     font-size: 1rem;
     line-height: 1.6;
@@ -159,7 +183,7 @@
     }
 
     .facility-image {
-        aspect-ratio: 16/9; /* Rasio landscape 16:9 untuk mobile juga */
+        aspect-ratio: 16/9;
         height: auto;
         min-height: 200px;
         border-radius: 15px;

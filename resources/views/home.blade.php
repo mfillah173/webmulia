@@ -15,7 +15,7 @@
     - Foto akan otomatis di-crop dan di-center agar tidak pecah/distorsi
 -->
 <section class="hero-slider-section">
-    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="false" data-bs-wrap="true">
         @if($banners && $banners->count() > 0)
         <!-- Indicators -->
         <div class="carousel-indicators">
@@ -237,6 +237,39 @@
 @endsection
 @section('styles')
 <style>
+    /* ========== CSS RESET - Spesifik untuk Gambar & Slider Saja ========== */
+    /* Reset HANYA untuk image containers - tidak menyentuh Bootstrap */
+    .hero-slider-section .carousel-inner,
+    .hero-slider-section .carousel-item,
+    .hero-slider-section .hero-slide,
+    .hero-slider-section img,
+    .testimonial-photo-section,
+    .testimonial-photo-section img {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    /* Image rendering consistency - hanya untuk gambar */
+    .hero-slider-section img,
+    .testimonial-photo-section img {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        border: 0;
+        outline: 0;
+    }
+
+    /* Normalize rendering untuk konsistensi cross-browser */
+    .hero-slider-section .carousel-inner,
+    .hero-slider-section .carousel-item {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
     /* ========== HERO SLIDER SECTION STYLES ========== */
     .hero-slider-section {
         position: relative;
@@ -246,15 +279,14 @@
         overflow: hidden;
     }
 
-    /* Optimize image rendering untuk foto berkualitas tinggi - mencegah pecah di Desktop */
     .carousel-inner,
     .carousel-item {
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
-        image-rendering: auto !important;
-        -ms-interpolation-mode: bicubic !important;
+        image-rendering: auto;
+        -ms-interpolation-mode: bicubic;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         image-orientation: from-image;
@@ -290,17 +322,15 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        /* Optimasi rendering gambar untuk mencegah pecah - Desktop */
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
         will-change: transform;
-        image-rendering: auto !important;
-        -ms-interpolation-mode: bicubic !important;
+        image-rendering: auto;
+        -ms-interpolation-mode: bicubic;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        /* Mencegah gambar pecah/pixelated di desktop */
         image-orientation: from-image;
     }
 
@@ -310,7 +340,35 @@
         height: auto;
     }
 
-    @media (max-width: 768px) {
+    .hero-slide img,
+    .hero-slide-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        -o-object-fit: cover; /* Opera fallback */
+        object-position: center center;
+        display: block;
+        image-rendering: auto;
+        -ms-interpolation-mode: bicubic;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        backface-visibility: hidden;
+        image-orientation: from-image;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        will-change: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .hero-slide-img {
+        display: none;
+    }
+
+    @media (max-width: 767.98px) {
         .hero-slider-section {
             margin-top: -85px;
             padding-top: 115px;
@@ -318,131 +376,76 @@
             margin-bottom: 0;
         }
 
-        .carousel,
-        .carousel-inner {
+        .carousel {
             width: 100%;
             position: relative;
         }
 
         .carousel-inner {
+            width: 100%;
             aspect-ratio: 16/9;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
         }
 
         .carousel-item {
             width: 100%;
-            position: relative;
-            aspect-ratio: 16/9;
-        }
-
-        .carousel-inner {
-            aspect-ratio: 16/9;
-            border-radius: 0;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
 
         .hero-slide {
             width: 100%;
             height: 100%;
-            aspect-ratio: 16/9;
-            min-height: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            min-height: 0;
             background-image: none !important;
+            background-color: #ffffff;
             padding: 0;
             overflow: hidden;
             border-radius: 0;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            background: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
         .hero-slide-img {
             display: block !important;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center center;
-            /* High quality rendering untuk mencegah pecah */
-            image-rendering: auto !important;
-            -ms-interpolation-mode: bicubic !important;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            /* Mencegah gambar pecah/pixelated */
-            image-orientation: from-image;
-            /* Smooth scaling - mencegah pixelation */
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            will-change: auto;
-            /* Memastikan gambar tidak di-stretch */
-            max-width: 100%;
-            max-height: 100%;
-            /* Background untuk area kosong */
-            background-color: #ffffff;
-            border-radius: 0;
-            position: relative;
-            z-index: 1;
         }
 
-    }
-
-    /* Untuk gambar yang diupload via img tag - mencegah pecah di Desktop */
-    .hero-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
-        /* High quality rendering untuk mencegah pecah - Desktop */
-        image-rendering: auto !important;
-        -ms-interpolation-mode: bicubic !important;
-        /* Smooth rendering */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        /* Mencegah gambar pecah/pixelated */
-        image-orientation: from-image;
-        /* Smooth scaling - mencegah pixelation */
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-        will-change: auto;
-        /* Memastikan gambar tidak di-stretch */
-        max-width: 100%;
-        max-height: 100%;
-    }
-
-    /* Mobile: Optimasi gambar banner - sama seperti card fasilitas (16:9) - tidak pecah */
-    @media (max-width: 768px) {
-        .hero-slide img {
+        .hero-slide img,
+        .hero-slide-img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             object-position: center center;
             display: block;
-            /* High quality rendering untuk mencegah pecah */
-            image-rendering: auto !important;
-            -ms-interpolation-mode: bicubic !important;
+            image-rendering: auto;
+            -ms-interpolation-mode: bicubic;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            /* Mencegah gambar pecah/pixelated */
             image-orientation: from-image;
-            /* Smooth scaling - mencegah pixelation */
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
             will-change: auto;
-            /* Memastikan gambar tidak di-stretch */
             max-width: 100%;
             max-height: 100%;
-            /* Background untuk area kosong */
             background-color: #ffffff;
             border-radius: 0;
-        }
-
-        .hero-slide {
-            background-color: #ffffff;
+            position: relative;
+            z-index: 1;
         }
     }
 
@@ -486,10 +489,14 @@
         width: 50px;
         height: 50px;
         top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
         transform: translateY(-50%);
         background: rgba(255, 255, 255, 0.3);
         border-radius: 4px;
         opacity: 0.7;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
         transition: all 0.3s ease;
     }
 
@@ -505,6 +512,8 @@
     .carousel-control-next:hover {
         background: rgba(255, 255, 255, 0.5);
         opacity: 1;
+        -webkit-transform: translateY(-50%) scale(1.05);
+        -moz-transform: translateY(-50%) scale(1.05);
         transform: translateY(-50%) scale(1.05);
     }
 
@@ -526,6 +535,8 @@
         border-radius: 50%;
         background-color: rgba(255, 255, 255, 0.6);
         border: none;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
         transition: all 0.3s ease;
         margin: 0 4px;
         opacity: 0.7;
@@ -536,6 +547,8 @@
         border-radius: 50%;
         background-color: white;
         opacity: 1;
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
         transform: scale(1.2);
     }
 
@@ -564,17 +577,10 @@
         }
     }
 
-    /* Responsive Slider - Mobile */
+    /* Responsive Slider - Mobile (Controls & Indicators) */
     @media (max-width: 767.98px) {
         main {
             margin-top: 0 !important;
-        }
-
-        .hero-slider-section {
-            margin-top: -85px;
-            padding-top: 115px;
-            padding-bottom: 0.5rem;
-            margin-bottom: 0;
         }
 
         .hero-slider-section .container {
@@ -627,6 +633,8 @@
         .carousel-indicators .active {
             width: 8px;
             height: 8px;
+            -webkit-transform: scale(1.3);
+            -moz-transform: scale(1.3);
             transform: scale(1.3);
         }
     }
@@ -638,64 +646,6 @@
             padding-top: 165px;
             padding-bottom: 0.5rem;
             margin-bottom: 0;
-        }
-
-        .hero-slide {
-            aspect-ratio: 16/9;
-            border-radius: 0;
-            background-color: #ffffff;
-        }
-
-        .hero-slide-img {
-            object-fit: contain;
-            background-color: #ffffff;
-            border-radius: 0;
-            /* High quality rendering untuk mencegah pecah */
-            image-rendering: auto !important;
-            -ms-interpolation-mode: bicubic !important;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            image-orientation: from-image;
-            /* Smooth scaling - mencegah pixelation */
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            will-change: auto;
-            /* Memastikan gambar tidak di-stretch */
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .carousel-item {
-            aspect-ratio: 16/9;
-            border-radius: 0;
-        }
-
-        .carousel-inner {
-            aspect-ratio: 16/9;
-            border-radius: 0;
-        }
-
-        .hero-slide img {
-            object-fit: contain;
-            background-color: #ffffff;
-            border-radius: 0;
-            /* High quality rendering untuk mencegah pecah */
-            image-rendering: auto !important;
-            -ms-interpolation-mode: bicubic !important;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            image-orientation: from-image;
-            /* Smooth scaling - mencegah pixelation */
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            will-change: auto;
-            /* Memastikan gambar tidak di-stretch */
-            max-width: 100%;
-            max-height: 100%;
         }
 
         .hero-slide-title {
@@ -1273,6 +1223,22 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // ========== AUTO-SLIDE CAROUSEL ==========
+        // Inisialisasi carousel dengan autoplay (non-stop)
+        const heroCarousel = document.getElementById('heroCarousel');
+        if (heroCarousel) {
+            const carousel = new bootstrap.Carousel(heroCarousel, {
+                interval: 5000,  // 5 detik per slide
+                wrap: true,      // Loop infinite
+                pause: false,    // TIDAK pause - terus berjalan
+                ride: 'carousel' // Auto-start
+            });
+
+            // Force start carousel setelah page load
+            carousel.cycle();
+        }
+
+        // ========== TESTIMONIAL SLIDER ==========
         const container = document.getElementById('testimonialContainer');
         const prevBtn = document.getElementById('testimonialPrev');
         const nextBtn = document.getElementById('testimonialNext');

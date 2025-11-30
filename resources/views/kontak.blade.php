@@ -118,21 +118,21 @@
 <style>
     /* Page Header Section - Centered between navbar and content */
     .page-header-section {
-        padding-top: 8rem;
-        padding-bottom: 3rem;
+        padding-top: 5rem;
+        padding-bottom: 2rem;
     }
 
     @media (min-width: 992px) {
         .page-header-section {
-            padding-top: 10rem;
-            padding-bottom: 3rem;
+            padding-top: 6rem;
+            padding-bottom: 2rem;
         }
     }
 
     @media (max-width: 768px) {
         .page-header-section {
-            padding-top: 6rem;
-            padding-bottom: 2rem;
+            padding-top: 4rem;
+            padding-bottom: 1.5rem;
         }
     }
 

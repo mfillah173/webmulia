@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Mulia Special Academy')</title>
     <meta name="description" content="@yield('description', 'Sekolah Berbasis Stimulasi for Children with Special Needs - Kindergarten & Primary School di Surabaya')">
+    
+    <!-- Favicon - Logo MSA di Tab Browser -->
+    <link rel="icon" type="image/png" href="{{ asset('storage/images/logo msa2.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('storage/images/logo msa2.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('storage/images/logo msa2.png') }}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -32,44 +37,173 @@
             font-display: swap;
         }
 
+        /* ========== CSS RESET & NORMALIZE - Navbar Cross-Browser Compatibility ========== */
+        /* Reset HANYA untuk navbar - tidak menyentuh konten */
+        .navbar,
+        .navbar *,
+        .navbar *::before,
+        .navbar *::after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        /* Navbar container - konsisten di semua browser */
+        .navbar {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Logo image - prevent drag & konsisten rendering */
+        .navbar .logo-image img,
+        .navbar-brand img {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            -moz-user-drag: none;
+            user-drag: none;
+            border: 0;
+            outline: 0;
+            display: block;
+        }
+
+        /* Flexbox - vendor prefixes untuk browser lama */
+        .navbar,
+        .navbar .container,
+        .navbar-brand,
+        .navbar-brand-text,
+        .logo-image,
+        .nav-link-custom {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+        }
+
+        /* Align items - vendor prefixes */
+        .navbar .container,
+        .navbar-brand,
+        .logo-image {
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        /* Justify content - vendor prefixes */
+        .navbar .container {
+            -webkit-box-pack: justify;
+            -moz-box-pack: justify;
+            -ms-flex-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+        }
+
+        /* Transform - vendor prefixes untuk animasi */
+        .navbar-brand:hover .logo-image img,
+        .nav-link-custom:hover,
+        .nav-link-custom:hover i {
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        /* Transition - vendor prefixes untuk smooth animation */
+        .navbar *,
+        .nav-link-custom,
+        .logo-image img {
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
         /* Custom Navbar Styles - Orange Theme */
         .bg-gradient-primary {
+            background: -webkit-linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+            background: -moz-linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+            background: -o-linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
             background: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
             background-size: 200% 200%;
+            -webkit-animation: gradientShift 8s ease infinite;
+            -moz-animation: gradientShift 8s ease infinite;
+            -o-animation: gradientShift 8s ease infinite;
             animation: gradientShift 8s ease infinite;
         }
 
+        @-webkit-keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @-moz-keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @-o-keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .logo-circle {
             width: 50px;
             height: 50px;
             background: rgba(255, 255, 255, 0.25);
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
             border-radius: 50%;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            -ms-flex-align: center;
             align-items: center;
+            -webkit-box-pack: center;
+            -moz-box-pack: center;
+            -ms-flex-pack: center;
             justify-content: center;
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 255, 255, 0.4);
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
             transition: all 0.3s ease;
+            -webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .logo-circle:hover {
             background: rgba(255, 255, 255, 0.35);
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
             transform: scale(1.1);
+            -webkit-box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             border-color: rgba(255, 255, 255, 0.6);
         }
@@ -280,13 +414,34 @@
             font-weight: 500;
             padding: 1rem 1.25rem !important;
             margin: 0 0.25rem;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
             border-radius: 12px;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
             display: flex;
+            -webkit-flex-direction: column;
+            -moz-flex-direction: column;
+            -ms-flex-direction: column;
             flex-direction: column;
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
             align-items: center;
+            -webkit-box-pack: center;
+            -moz-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
             justify-content: center;
             min-width: 110px;
             text-align: center;
@@ -311,7 +466,12 @@
         .nav-link-custom:hover {
             color: white !important;
             background: rgba(255, 255, 255, 0.15);
+            -webkit-transform: translateY(-2px);
+            -moz-transform: translateY(-2px);
+            -ms-transform: translateY(-2px);
             transform: translateY(-2px);
+            -webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
@@ -324,6 +484,8 @@
             color: white !important;
             background: rgba(255, 255, 255, 0.2);
             font-weight: 600;
+            -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -333,6 +495,9 @@
         }
 
         .nav-link-custom i {
+            -webkit-transition: transform 0.3s ease;
+            -moz-transition: transform 0.3s ease;
+            -ms-transition: transform 0.3s ease;
             transition: transform 0.3s ease;
             font-size: 1.6rem;
             margin-bottom: 0.3rem;
@@ -340,6 +505,9 @@
         }
 
         .nav-link-custom:hover i {
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
             transform: scale(1.1);
         }
 
@@ -403,13 +571,19 @@
         @media (max-width: 991.98px) {
             .navbar-collapse {
                 background: rgba(255, 255, 255, 0.1);
+                -webkit-backdrop-filter: blur(10px);
                 backdrop-filter: blur(10px);
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
                 border-radius: 10px;
                 margin-top: 1rem;
                 padding: 1rem;
             }
 
             .navbar-nav {
+                -webkit-flex-direction: column;
+                -moz-flex-direction: column;
+                -ms-flex-direction: column;
                 flex-direction: column;
                 gap: 0.75rem;
             }
@@ -422,7 +596,14 @@
                 margin: 0;
                 min-width: auto;
                 width: 100%;
+                -webkit-flex-direction: row;
+                -moz-flex-direction: row;
+                -ms-flex-direction: row;
                 flex-direction: row;
+                -webkit-box-pack: start;
+                -moz-box-pack: start;
+                -ms-flex-pack: start;
+                -webkit-justify-content: flex-start;
                 justify-content: flex-start;
                 text-align: left;
                 padding: 0.75rem 1rem !important;
@@ -455,10 +636,15 @@
 
         /* Navbar shadow animation */
         .navbar {
+            -webkit-transition: box-shadow 0.3s ease;
+            -moz-transition: box-shadow 0.3s ease;
+            -ms-transition: box-shadow 0.3s ease;
             transition: box-shadow 0.3s ease;
         }
 
         .navbar.scrolled {
+            -webkit-box-shadow: 0 2px 20px rgba(255, 140, 0, 0.3);
+            -moz-box-shadow: 0 2px 20px rgba(255, 140, 0, 0.3);
             box-shadow: 0 2px 20px rgba(255, 140, 0, 0.3);
         }
 
@@ -2740,7 +2926,7 @@
                 <div class="col-lg-4 mb-4">
                     <div class="d-flex align-items-center mb-3" style="gap: 0;">
                         <div class="logo-image-footer">
-                            <img src="{{ asset('storage/images/logo msa.png') }}" alt="MSA Logo">
+                            <img src="{{ asset('storage/images/logo msa2.png') }}" alt="MSA Logo">
                         </div>
                         <div class="footer-brand-text">
                             <h5 class="mb-0 text-primary fw-bold">MULIA SPECIAL</h5>
@@ -2903,12 +3089,21 @@
         /* Enhanced mobile menu */
         @media (max-width: 991.98px) {
             .navbar-collapse {
+                -webkit-transition: all 0.3s ease;
+                -moz-transition: all 0.3s ease;
+                -ms-transition: all 0.3s ease;
                 transition: all 0.3s ease;
+                -webkit-transform: translateY(-10px);
+                -moz-transform: translateY(-10px);
+                -ms-transform: translateY(-10px);
                 transform: translateY(-10px);
                 opacity: 0;
             }
 
             .navbar-collapse.show {
+                -webkit-transform: translateY(0);
+                -moz-transform: translateY(0);
+                -ms-transform: translateY(0);
                 transform: translateY(0);
                 opacity: 1;
             }
