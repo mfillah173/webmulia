@@ -7,6 +7,10 @@
     <title>@yield('title', 'Mulia Special Academy')</title>
     <meta name="description" content="@yield('description', 'Sekolah Berbasis Stimulasi for Children with Special Needs - Kindergarten & Primary School di Surabaya')">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('storage/images/logo msa1.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('storage/images/logo msa1.png') }}">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
