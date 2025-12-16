@@ -12,9 +12,9 @@ use App\Http\Controllers\Admin\MediaLibraryController;
 
 // Admin Authentication Routes (tidak perlu middleware)
 // Login routes
-Route::get('/admin', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/admin', [AuthController::class, 'login'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/admin', [AuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin', [AuthController::class, 'login'])->name('admin.login.post');
+Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 
 // Admin Protected Routes (perlu middleware admin)
