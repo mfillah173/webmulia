@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KontakController;
 use App\Http\Controllers\Admin\ProgramController;
@@ -10,21 +9,9 @@ use App\Http\Controllers\Admin\TestimoniController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MediaLibraryController;
 
-// Semua admin routes dengan prefix 'admin'
-Route::prefix('admin')->name('admin.')->group(function () {
-    
-    // Authentication Routes (tanpa middleware)
-    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [AuthController::class, 'login'])->name('login.post');
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-    
-    // Redirect /admin ke /admin/login
-    Route::get('/', function () {
-        return redirect()->route('admin.login');
-    });
-    
-    // Protected Routes (perlu middleware admin)
-    Route::middleware('admin')->group(function () {
+// Admin Protected Routes (perlu middleware admin)
+// Authentication routes ada di web.php
+Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -58,5 +45,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Banner Management
     Route::resource('banner', App\Http\Controllers\Admin\BannerController::class);
-    });
 });
