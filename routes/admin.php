@@ -10,20 +10,21 @@ use App\Http\Controllers\Admin\TestimoniController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MediaLibraryController;
 
-// Admin Authentication Routes (tidak perlu middleware)
-// Login routes - menggunakan prefix berbeda untuk menghindari konflik
-Route::get('admin/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-Route::post('admin/login', [AuthController::class, 'login'])->name('admin.login.post');
-Route::post('admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
-
-// Redirect /admin ke /admin/login
-Route::get('admin', function () {
-    return redirect()->route('admin.login');
-});
-
-
-// Admin Protected Routes (perlu middleware admin)
-Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
+// Semua admin routes dengan prefix 'admin'
+Route::prefix('admin')->name('admin.')->group(function () {
+    
+    // Authentication Routes (tanpa middleware)
+    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AuthController::class, 'login'])->name('login.post');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    
+    // Redirect /admin ke /admin/login
+    Route::get('/', function () {
+        return redirect()->route('admin.login');
+    });
+    
+    // Protected Routes (perlu middleware admin)
+    Route::middleware('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -57,4 +58,5 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 
     // Banner Management
     Route::resource('banner', App\Http\Controllers\Admin\BannerController::class);
+    });
 });
