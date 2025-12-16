@@ -857,54 +857,10 @@
             }
         }
 
-        /* Floating decorative elements */
+        /* Hero content positioning */
         .hero-content {
             position: relative;
             z-index: 2;
-        }
-
-        .hero-content::before {
-            content: '✨';
-            position: absolute;
-            top: -20px;
-            right: 20px;
-            font-size: 2rem;
-            animation: sparkle 2s ease-in-out infinite;
-        }
-
-        .hero-content::after {
-            content: '🎓';
-            position: absolute;
-            bottom: -30px;
-            left: 10px;
-            font-size: 1.5rem;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes sparkle {
-
-            0%,
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 0.7;
-            }
-
-            50% {
-                transform: scale(1.2) rotate(180deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
         }
 
         /* Syarat Pendaftaran Section Styling */

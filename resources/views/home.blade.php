@@ -74,7 +74,7 @@
             <div class="col-lg-6">
                 <div class="hero-content">
                     <h1 class="hero-title">Mulia Special Academy (MSA)</h1>
-                    <p class="hero-subtitle">Sekolah dan Pusat Terapi untuk Anak Berkebutuhan Khusus</p>
+                    <p class="hero-subtitle">Sekolah Terapi untuk Anak Berkebutuhan Khusus</p>
                     <p class="lead">Mulia Special Academy (MSA) adalah pusat terapi yang dirancang khusus untuk anak berkebutuhan khusus mulai usia 2-7 tahun. MSA memadukan pendidikan akademik, terapi perkembangan, dan pembentukan karakter melalui sistem stimulasi bertahap dan pembelajaran individual (one-on-one).</p>
                     <div class="hero-buttons">
                         <a href="{{ route('program') }}" class="btn btn-outline-primary btn-lg">
