@@ -2648,7 +2648,7 @@
 
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
                 <div class="logo-image">
-                    <img src="{{ asset('storage/images/logo msa.png') }}" alt="MSA Logo">
+                    <img src="{{ asset('storage/images/logo msa1.png') }}" alt="MSA Logo">
                 </div>
                 <div class="navbar-brand-text">
                     <h4 class="mb-0 text-white fw-bold">MULIA SPECIAL</h4>
@@ -2700,7 +2700,7 @@
                 <div class="col-lg-4 mb-4">
                     <div class="d-flex align-items-center mb-3" style="gap: 0;">
                         <div class="logo-image-footer">
-                            <img src="{{ asset('storage/images/logo msa.png') }}" alt="MSA Logo">
+                            <img src="{{ asset('storage/images/logo msa1.png') }}" alt="MSA Logo">
                         </div>
                         <div class="footer-brand-text">
                             <h5 class="mb-0 text-primary fw-bold">MULIA SPECIAL</h5>
