@@ -8,8 +8,8 @@
     <meta name="description" content="@yield('description', 'Sekolah Berbasis Stimulasi for Children with Special Needs - Kindergarten & Primary School di Surabaya')">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('storage/images/logo msa1.png') }}?v=2">
-    <link rel="apple-touch-icon" href="{{ asset('storage/images/logo msa1.png') }}?v=2">
+    <link rel="icon" type="image/png" href="{{ asset('storage/images/logo msa.png') }}?v=2">
+    <link rel="apple-touch-icon" href="{{ asset('storage/images/logo msa.png') }}?v=2">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -2648,7 +2648,7 @@
 
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
                 <div class="logo-image">
-                    <img src="{{ asset('storage/images/logo msa1.png') }}" alt="MSA Logo">
+                    <img src="{{ asset('storage/images/logo msa.png') }}" alt="MSA Logo">
                 </div>
                 <div class="navbar-brand-text">
                     <h4 class="mb-0 text-white fw-bold">MULIA SPECIAL</h4>
@@ -2700,7 +2700,7 @@
                 <div class="col-lg-4 mb-4">
                     <div class="d-flex align-items-center mb-3" style="gap: 0;">
                         <div class="logo-image-footer">
-                            <img src="{{ asset('storage/images/logo msa1.png') }}" alt="MSA Logo">
+                            <img src="{{ asset('storage/images/logo msa2.png') }}" alt="MSA Logo">
                         </div>
                         <div class="footer-brand-text">
                             <h5 class="mb-0 text-primary fw-bold">MULIA SPECIAL</h5>
