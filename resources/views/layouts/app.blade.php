@@ -8,8 +8,8 @@
     <meta name="description" content="@yield('description', 'Sekolah Berbasis Stimulasi for Children with Special Needs - Kindergarten & Primary School di Surabaya')">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('storage/images/logo msa baru.png') }}?v=2">
-    <link rel="apple-touch-icon" href="{{ asset('storage/images/logo msa baru.png') }}?v=2">
+    <link rel="icon" type="image/png" href="{{ asset('storage/images/logo msa baru.png') }}?v={{ time() }}">
+    <link rel="apple-touch-icon" href="{{ asset('storage/images/logo msa baru.png') }}?v={{ time() }}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
