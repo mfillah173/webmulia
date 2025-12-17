@@ -753,7 +753,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <form action="{{ route('admin.logout') }}" method="POST" class="d-inline w-100">
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline w-100">
                             @csrf
                             <button type="submit" class="nav-link w-100 text-start" style="background: none; border: none;">
                                 <i class="fas fa-sign-out-alt"></i>
